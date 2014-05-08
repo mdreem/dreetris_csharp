@@ -20,6 +20,8 @@ namespace Dreetris
 
         ContentManager content;
         Random random = new Random();
+        RandomBlocks random_blocks;
+        Score score = new Score();
 
         Texture2D sprite;
         Rectangle draw_rectangle;
@@ -52,10 +54,10 @@ namespace Dreetris
             LoadContent(contentManager);
 
             content = contentManager;
+            random_blocks = new RandomBlocks(3);
+            //            Enum.GetValues(typeof(Tetrimino.Type));
 
-//            Enum.GetValues(typeof(Tetrimino.Type));
-
-            System.Diagnostics.Debug.WriteLine("Types: " + Enum.GetValues(typeof(Tetrimino.Type)).ToString() );
+            System.Diagnostics.Debug.WriteLine("Types: " + Enum.GetValues(typeof(Tetrimino.Type)).ToString());
         }
 
         #region Public methods
@@ -82,7 +84,7 @@ namespace Dreetris
             if (is_haste)
                 local_fall_delay = fall_delay_haste;
 
- //           System.Diagnostics.Debug.WriteLine("Speed: " + local_fall_delay.ToString());
+            //           System.Diagnostics.Debug.WriteLine("Speed: " + local_fall_delay.ToString());
 
             /* Let the Tetrimino fall until it hits something, then copy it onto the board
              * update every fall_delay ms.
@@ -95,11 +97,16 @@ namespace Dreetris
                 {
                     current_tetrimino.position.Y -= 1;
                     copy_to_board();
-                    delete_full_rows();
+                    score.rows_deleted(delete_full_rows());
                     CreateTetrimino(get_random_type());
                     is_haste = false;
                 }
             }
+        }
+
+        public int get_score()
+        {
+            return score.get_score();
         }
 
         /// <summary>
@@ -116,7 +123,7 @@ namespace Dreetris
                     draw_rectangle.X = position.X + i * Tetrimino.BLOCK_WIDTH;
                     draw_rectangle.Y = position.Y + j * Tetrimino.BLOCK_HEIGHT;
 
-                    switch (this.board[i,j])
+                    switch (this.board[i, j])
                     {
                         case Tetrimino.Type.I:
                             spriteBatch.Draw(sprite, draw_rectangle, Color.Cyan);
@@ -143,7 +150,7 @@ namespace Dreetris
                             break;
                     }
                 }
-               current_tetrimino.Draw(spriteBatch);
+            current_tetrimino.Draw(spriteBatch);
         }
 
         /// <summary>
@@ -182,8 +189,13 @@ namespace Dreetris
 
         public void haste()
         {
-            if(haste_released)
+            if (haste_released)
                 is_haste = true;
+        }
+
+        public RandomBlocks get_randomizer()
+        {
+            return random_blocks;
         }
 
         #endregion
@@ -202,7 +214,7 @@ namespace Dreetris
         /// </summary>
         private void InitializeBackground(ContentManager contentManager)
         {
-           // background_image = contentManager.Load<Texture2D>("background");
+            // background_image = contentManager.Load<Texture2D>("background");
             background_image = contentManager.Load<Texture2D>("block");
 
             background_rectangle = new Rectangle(position.X, position.Y,
@@ -236,7 +248,7 @@ namespace Dreetris
                         }
                         else
                             return true;
-                        
+
                 }
             return false;
         }
@@ -262,7 +274,7 @@ namespace Dreetris
                         {
                             // raise exeption
                         }
-                        else if(board[current_tetrimino.position.X + i, current_tetrimino.position.Y + j] != Tetrimino.Type.None)
+                        else if (board[current_tetrimino.position.X + i, current_tetrimino.position.Y + j] != Tetrimino.Type.None)
                         {
                             // raise exception
                         }
@@ -276,20 +288,12 @@ namespace Dreetris
 
         private Tetrimino.Type get_random_type()
         {
-            Array values = Enum.GetValues(typeof(Tetrimino.Type));
-            values.GetValue(random.Next(values.Length));
-            Tetrimino.Type random_type = Tetrimino.Type.None;
-
-            // Not very well implemented. Need to exclude None in a better manner.
-            while (random_type == Tetrimino.Type.None)
-                random_type = (Tetrimino.Type)values.GetValue(random.Next(values.Length));
-
-            return random_type;
+            return random_blocks.get_current_block();
         }
 
         private bool is_row_full(int row)
         {
-            for (int i = 0; i < board.GetLength(0); i++ )
+            for (int i = 0; i < board.GetLength(0); i++)
             {
                 if (board[i, row] == Tetrimino.Type.None)
                     return false;
@@ -324,13 +328,19 @@ namespace Dreetris
             clear_row(0);
         }
 
-        private void delete_full_rows()
+        private int delete_full_rows()
         {
+            int row_count = 0;
             for (int i = 0; i < board.GetLength(1); i++)
             {
                 if (is_row_full(i))
+                {
                     delete_and_move_row(i);
+                    row_count++;
+                }
             }
+
+            return row_count;
         }
 
         #endregion

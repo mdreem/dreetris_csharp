@@ -30,6 +30,8 @@ namespace Dreetris
 
         double time_since_last_step = 0;
 
+        SpriteFont Font1;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -62,7 +64,7 @@ namespace Dreetris
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            Font1 = Content.Load<SpriteFont>("SpriteFont1");
             // load sprites and build draw rectangles
             // test_sprite = Content.Load<Texture2D>("KopfDings");
         }
@@ -153,7 +155,9 @@ namespace Dreetris
             spriteBatch.Begin();
 
             board.Draw(spriteBatch);
-          
+
+            spriteBatch.DrawString(Font1, "Score: " + board.get_score().ToString(), new Vector2(500, 20), Color.White);
+         
             spriteBatch.End();
 
             base.Draw(gameTime);

@@ -119,7 +119,6 @@ namespace Dreetris
 
         #endregion
 
-
         #region Constructors
 
         /// <summary>
