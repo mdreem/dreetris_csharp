@@ -19,6 +19,9 @@ namespace Dreetris
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Texture2D background_image;
+        Rectangle background_rectangle;
+
         const int WINDOW_WIDTH = 800;
         const int WINDOW_HEIGHT = 600;
         const int KEY_PRESSED_TIME = 150;
@@ -50,7 +53,7 @@ namespace Dreetris
         /// </summary>
         protected override void Initialize()
         {
-            board = new TetrisBoard(Content, 10, 25, 20, 20);
+            board = new TetrisBoard(Content, 10, 20, 80, 100);
             board.CreateTetrimino(Tetrimino.Type.I);
             
             base.Initialize();
@@ -66,7 +69,8 @@ namespace Dreetris
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Font1 = Content.Load<SpriteFont>("SpriteFont1");
             // load sprites and build draw rectangles
-            // test_sprite = Content.Load<Texture2D>("KopfDings");
+            background_image = Content.Load<Texture2D>("background");
+            background_rectangle = new Rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
         }
 
         /// <summary>
@@ -154,8 +158,8 @@ namespace Dreetris
             // draw the board and the tetrimino
             spriteBatch.Begin();
 
+            spriteBatch.Draw(background_image, background_rectangle, Color.White);
             board.Draw(spriteBatch);
-
             spriteBatch.DrawString(Font1, "Score: " + board.get_score().ToString(), new Vector2(500, 20), Color.White);
          
             spriteBatch.End();

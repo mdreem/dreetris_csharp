@@ -26,8 +26,8 @@ namespace Dreetris
         Texture2D sprite;
         Rectangle draw_rectangle;
 
-        Texture2D background_image;
-        Rectangle background_rectangle;
+//        Texture2D background_image;
+//        Rectangle background_rectangle;
 
         Tetrimino current_tetrimino;
 
@@ -114,7 +114,7 @@ namespace Dreetris
         /// </summary>
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(background_image, background_rectangle, Color.Black);
+            //spriteBatch.Draw(background_image, background_rectangle, Color.Black);
 
             for (int i = 0; i < board.GetLength(0); i++)
                 for (int j = 0; j < board.GetLength(1); j++)
@@ -214,12 +214,12 @@ namespace Dreetris
         /// </summary>
         private void InitializeBackground(ContentManager contentManager)
         {
-            // background_image = contentManager.Load<Texture2D>("background");
-            background_image = contentManager.Load<Texture2D>("block");
-
+            //background_image = contentManager.Load<Texture2D>("background");
+            //background_image = contentManager.Load<Texture2D>("block");
+            /*
             background_rectangle = new Rectangle(position.X, position.Y,
                 position.X + Tetrimino.BLOCK_WIDTH * (this.width - 1),
-                position.Y + Tetrimino.BLOCK_HEIGHT * (this.height - 1));
+                position.Y + Tetrimino.BLOCK_HEIGHT * (this.height - 1));*/
         }
 
         /// <summary>
