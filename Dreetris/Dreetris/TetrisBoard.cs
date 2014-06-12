@@ -248,7 +248,6 @@ namespace Dreetris
                         }
                         else
                             return true;
-
                 }
             return false;
         }

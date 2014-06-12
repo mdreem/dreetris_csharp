@@ -15,12 +15,16 @@ namespace Dreetris
     /// This is the main type for your game
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
-    {
+    { 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         Texture2D background_image;
         Rectangle background_rectangle;
+
+        Texture2D test_image;
+        Rectangle test_rectangle;
+        Animation animation = new Animation();
 
         const int WINDOW_WIDTH = 800;
         const int WINDOW_HEIGHT = 600;
@@ -34,6 +38,8 @@ namespace Dreetris
         double time_since_last_step = 0;
 
         SpriteFont Font1;
+
+        Writer writer = new Writer(500);
 
         public Game1()
         {
@@ -55,7 +61,19 @@ namespace Dreetris
         {
             board = new TetrisBoard(Content, 10, 20, 80, 100);
             board.CreateTetrimino(Tetrimino.Type.I);
-            
+
+            animation.add_keyframe(new Keyframe(new Vector2(600, 200),
+                                                new Vector2(650, 250),
+                                                1000));
+
+            animation.add_keyframe(new Keyframe(new Vector2(650, 250),
+                                                new Vector2(450, 350),
+                                                2000));
+
+            animation.add_keyframe(new Keyframe(new Vector2(450, 350),
+                                                new Vector2(600, 200),
+                                                1000));
+
             base.Initialize();
         }
 
@@ -71,6 +89,9 @@ namespace Dreetris
             // load sprites and build draw rectangles
             background_image = Content.Load<Texture2D>("background");
             background_rectangle = new Rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+
+            test_image = Content.Load<Texture2D>("block");
+            test_rectangle = new Rectangle(600, 200, 20, 20);
         }
 
         /// <summary>
@@ -154,6 +175,7 @@ namespace Dreetris
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            animation.Update(gameTime);
 
             // draw the board and the tetrimino
             spriteBatch.Begin();
@@ -161,7 +183,13 @@ namespace Dreetris
             spriteBatch.Draw(background_image, background_rectangle, Color.White);
             board.Draw(spriteBatch);
             spriteBatch.DrawString(Font1, "Score: " + board.get_score().ToString(), new Vector2(500, 20), Color.White);
-         
+
+            writer.Write("***current position: ({0}|{1}); Time: {2}; Index: {3}", animation.get_x(), animation.get_y(), animation.current_frame.running_time, animation.index);
+            test_rectangle.X = animation.get_x();
+            test_rectangle.Y = animation.get_y();
+
+            spriteBatch.Draw(test_image, test_rectangle, Color.White);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
