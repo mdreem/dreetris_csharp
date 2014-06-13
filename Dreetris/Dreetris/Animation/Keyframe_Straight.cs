@@ -8,39 +8,6 @@ namespace Dreetris
 {
     class Keyframe_Straight : Keyframe
     {
-        Vector2 _start;
-        Vector2 _end;
-        Vector2 _current;
-
-        public Vector2 start
-        {
-            get { return _start; }
-        }
-
-        public Vector2 end
-        {
-            get { return _end; }
-        }
-
-        public Vector2 current
-        {
-            get { return _current; }
-        }
-
-        public double running_time
-        {
-            get { return _running_time; }
-        }
-
-        public double delay(double time)
-        {
-            _running_time += time;
-            //TODO: Update position accordingly!
-            return _running_time;
-        }
-
-        double duration = 0;
-        double _running_time = 0;
         float velocity_scalar = 0;
 
         public Keyframe_Straight(Vector2 start, Vector2 end, float duration)
@@ -56,6 +23,13 @@ namespace Dreetris
             System.Console.WriteLine("Velocity: {0}; Position: ({1}|{2}).", velocity_scalar, _current.X, _current.Y);
         }
 
+        public double delay(double time)
+        {
+            _running_time += time;
+            //TODO: Update position accordingly!
+            return _running_time;
+        }
+        
         public override void reset()
         {
             _current = start;
