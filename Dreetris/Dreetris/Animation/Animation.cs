@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Dreetris
+namespace Dreetris.Animation
 {
     class Animation
     {
-        List<Keyframe_Straight> keyframes = new List<Keyframe_Straight>();
+        List<Keyframe> keyframes = new List<Keyframe>();
         int current_frame_index = 0;
         bool _finished = false;
 
-        public Keyframe_Straight current_frame
+        public Keyframe current_frame
         {
             get
             {
@@ -25,7 +25,7 @@ namespace Dreetris
             get { return current_frame_index; }
         }
 
-        public void add_keyframe(Keyframe_Straight keyframe)
+        public void add_keyframe(Keyframe keyframe)
         {
             keyframes.Add(keyframe);
         }
@@ -62,6 +62,18 @@ namespace Dreetris
                     }
                 }
             }
+        }
+
+        public List<Vector2> get_path()
+        {
+            List<Vector2> res = new List<Vector2>();
+
+            foreach (var path in keyframes)
+            {
+                res.AddRange(path.get_path());
+            }
+
+            return res;
         }
     }
 }

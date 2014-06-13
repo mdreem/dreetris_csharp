@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Dreetris
+namespace Dreetris.Animation
 {
     public abstract class Keyframe
     {
@@ -37,5 +37,7 @@ namespace Dreetris
 
         public abstract void Update(GameTime gameTime);
         public abstract void reset();
+        public abstract double delay(double time);
+        public abstract List<Vector2> get_path();
     }
 }

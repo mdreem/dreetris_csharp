@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animation\Animation.cs" />
+    <Compile Include="Animation\Keyframe_Bezier.cs" />
     <Compile Include="BezierCurve.cs" />
     <Compile Include="Animation\Keyframe.cs" />
     <Compile Include="Animation\Keyframe_Straight.cs" />

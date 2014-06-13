@@ -6,17 +6,19 @@ using Microsoft.Xna.Framework;
 
 namespace Dreetris.Animation
 {
-    class Keyframe_Straight : Keyframe
+    class Keyframe_Bezier : Keyframe
     {
         float velocity_scalar = 0;
+        List<BezierCurve> curves = new List<BezierCurve>();
 
-        public Keyframe_Straight(Vector2 start, Vector2 end, float duration)
+        public Keyframe_Bezier(BezierCurve curve, float duration)
         {
-            _start = start;
-            _end = end;
+            curves.Add(curve);
+
+            _start = curve.start;
+            _end = curve.end;
             _current = start;
-            Vector2 diff = end - start;
-            this.velocity_scalar = diff.Length() / duration;
+            this.velocity_scalar = curve.length / duration;
             this.duration = duration;
             _running_time = duration;
 
@@ -46,19 +48,32 @@ namespace Dreetris.Animation
                 return;
             }
 
-            Vector2 diff = end - start;
-            diff.Normalize();
-            float distance = velocity_scalar * (float)time_passed;
+            float t_param = ((float)(duration - _running_time)) * velocity_scalar / curves[0].length;
 
-            _current = _current + diff * distance;
+            //TODO: multiple curves!
+            _current = curves[0].get_position(t_param);
+        }
+
+        public List<Vector2> get_hull()
+        {
+            List<Vector2> res = new List<Vector2>();
+
+            foreach(var curve in curves)
+            {
+                res.AddRange(curve.get_hull());
+            }
+
+            return res;
         }
 
         public override List<Vector2> get_path()
         {
             List<Vector2> res = new List<Vector2>();
 
-            res.Add(start);
-            res.Add(end);
+            foreach (var curve in curves)
+            {
+                res.AddRange(curve.subdivide());
+            }
 
             return res;
         }

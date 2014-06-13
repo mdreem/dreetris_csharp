@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
+using Dreetris.Animation;
+
 namespace Dreetris
 {
     /// <summary>
@@ -24,7 +26,7 @@ namespace Dreetris
 
         Texture2D test_image;
         Rectangle test_rectangle;
-        Animation animation = new Animation();
+        Dreetris.Animation.Animation animation = new Dreetris.Animation.Animation();
 
         Texture2D blank;
 
@@ -77,12 +79,14 @@ namespace Dreetris
                                                 new Vector2(600, 200),
                                                 1000));
 
-            bz = new BezierCurve(new Vector2(650, 250), new Vector2(650, 375),
+            bz = new BezierCurve(new Vector2(600, 200), new Vector2(650, 375),
                                              new Vector2(750, 250),
                                              new Vector2(750, 350)
                                               );
 
-            
+            Keyframe_Bezier kb = new Keyframe_Bezier(bz, 2000);
+
+            animation.add_keyframe(kb);
 
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });
@@ -203,8 +207,10 @@ namespace Dreetris
 
             spriteBatch.Draw(test_image, test_rectangle, Color.White);
 
-            draw_long_line(bz.subdivide(), Color.White);
-            draw_long_line(bz.get_hull(), Color.Blue);
+            draw_long_line(animation.get_path(), Color.White);
+
+            //draw_long_line(bz.subdivide(), Color.White);
+            //draw_long_line(bz.get_hull(), Color.Blue);
 
             spriteBatch.End();
 

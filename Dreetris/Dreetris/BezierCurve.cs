@@ -10,6 +10,22 @@ namespace Dreetris
     {
         Vector2 p_start, p_end;
         Vector2 control_1, control_2;
+        float _length;
+
+        public float length
+        {
+            get { return _length;  }
+        }
+
+        public Vector2 start
+        {
+            get { return p_start; }
+        }
+
+        public Vector2 end
+        {
+            get { return p_end; }
+        }
 
         public BezierCurve(Vector2 p_start, Vector2 p_end,
                            Vector2 control_1, Vector2 control_2)
@@ -19,7 +35,7 @@ namespace Dreetris
             this.control_1 = control_1;
             this.control_2 = control_2;
 
-            //_t = 0;
+            _length = compute_length();
         }
 
         public Vector2 get_position(float t)
@@ -33,6 +49,18 @@ namespace Dreetris
                         + t * t * t * p_end;
 
             return cur;
+        }
+
+        float compute_length()
+        {
+            List<Vector2> parts = subdivide();
+            float length = 0;
+            for (int i = 0; i < parts.Count - 1; i++)
+            {
+                length += (parts[i + 1] - parts[i]).Length();
+            }
+
+            return length;
         }
 
         public List<Vector2> subdivide(int n = 100)
