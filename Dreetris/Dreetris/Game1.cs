@@ -26,6 +26,8 @@ namespace Dreetris
         Rectangle test_rectangle;
         Animation animation = new Animation();
 
+        Texture2D blank;
+
         const int WINDOW_WIDTH = 800;
         const int WINDOW_HEIGHT = 600;
         const int KEY_PRESSED_TIME = 150;
@@ -40,6 +42,7 @@ namespace Dreetris
         SpriteFont Font1;
 
         Writer writer = new Writer(500);
+        BezierCurve bz;
 
         public Game1()
         {
@@ -62,17 +65,27 @@ namespace Dreetris
             board = new TetrisBoard(Content, 10, 20, 80, 100);
             board.CreateTetrimino(Tetrimino.Type.I);
 
-            animation.add_keyframe(new Keyframe(new Vector2(600, 200),
+            animation.add_keyframe(new Keyframe_Straight(new Vector2(600, 200),
                                                 new Vector2(650, 250),
                                                 1000));
 
-            animation.add_keyframe(new Keyframe(new Vector2(650, 250),
+            animation.add_keyframe(new Keyframe_Straight(new Vector2(650, 250),
                                                 new Vector2(450, 350),
                                                 2000));
 
-            animation.add_keyframe(new Keyframe(new Vector2(450, 350),
+            animation.add_keyframe(new Keyframe_Straight(new Vector2(450, 350),
                                                 new Vector2(600, 200),
                                                 1000));
+
+            bz = new BezierCurve(new Vector2(650, 250), new Vector2(650, 375),
+                                             new Vector2(750, 250),
+                                             new Vector2(750, 350)
+                                              );
+
+            
+
+            blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
+            blank.SetData(new[] { Color.White });
 
             base.Initialize();
         }
@@ -190,9 +203,28 @@ namespace Dreetris
 
             spriteBatch.Draw(test_image, test_rectangle, Color.White);
 
+            draw_long_line(bz.subdivide(), Color.White);
+            draw_long_line(bz.get_hull(), Color.Blue);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        void draw_long_line(List<Vector2> sublines, Color color)
+        {
+            for (int i = 0; i < sublines.Count - 1; i++)
+            {
+                DrawLine(1, color, sublines[i], sublines[i + 1]);
+            }
+        }
+
+        void DrawLine(float width, Color color, Vector2 point1, Vector2 point2)
+        {
+            float angle = (float)Math.Atan2(point2.Y - point1.Y, point2.X - point1.X);
+            float length = Vector2.Distance(point1, point2);
+
+            spriteBatch.Draw(blank, point1, null, color, angle, Vector2.Zero, new Vector2(length, width), SpriteEffects.None, 0);
         }
     }
 }

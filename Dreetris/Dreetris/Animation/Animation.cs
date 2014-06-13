@@ -8,11 +8,11 @@ namespace Dreetris
 {
     class Animation
     {
-        List<Keyframe> keyframes = new List<Keyframe>();
+        List<Keyframe_Straight> keyframes = new List<Keyframe_Straight>();
         int current_frame_index = 0;
         bool _finished = false;
 
-        public Keyframe current_frame
+        public Keyframe_Straight current_frame
         {
             get
             {
@@ -25,7 +25,7 @@ namespace Dreetris
             get { return current_frame_index; }
         }
 
-        public void add_keyframe(Keyframe keyframe)
+        public void add_keyframe(Keyframe_Straight keyframe)
         {
             keyframes.Add(keyframe);
         }

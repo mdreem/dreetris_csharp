@@ -6,12 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Dreetris
 {
-    enum Interpolation
-    {
-        LINE
-    }
-
-    class Keyframe
+    class Keyframe_Straight : Keyframe
     {
         Vector2 _start;
         Vector2 _end;
@@ -48,10 +43,7 @@ namespace Dreetris
         double _running_time = 0;
         float velocity_scalar = 0;
 
-        //Vector2 velocity;
-        Interpolation interpolation_type = Interpolation.LINE;
-
-        public Keyframe(Vector2 start, Vector2 end, float duration)
+        public Keyframe_Straight(Vector2 start, Vector2 end, float duration)
         {
             _start = start;
             _end = end;
@@ -64,12 +56,12 @@ namespace Dreetris
             System.Console.WriteLine("Velocity: {0}; Position: ({1}|{2}).", velocity_scalar, _current.X, _current.Y);
         }
 
-        public void reset()
+        public override void reset()
         {
             _current = start;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             double time_passed = gameTime.ElapsedGameTime.TotalMilliseconds; ;
             _running_time -= time_passed;

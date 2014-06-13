@@ -72,15 +72,17 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animation.cs" />
-    <Compile Include="Keyframe.cs" />
+    <Compile Include="Animation\Animation.cs" />
+    <Compile Include="BezierCurve.cs" />
+    <Compile Include="Animation\Keyframe.cs" />
+    <Compile Include="Animation\Keyframe_Straight.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="RandomBlocks.cs" />
-    <Compile Include="Score.cs" />
-    <Compile Include="Tetrimino.cs" />
-    <Compile Include="TetrisBoard.cs" />
+    <Compile Include="Tetris\RandomBlocks.cs" />
+    <Compile Include="Tetris\Score.cs" />
+    <Compile Include="Tetris\Tetrimino.cs" />
+    <Compile Include="Tetris\TetrisBoard.cs" />
     <Compile Include="Writer.cs" />
   </ItemGroup>
   <ItemGroup>
