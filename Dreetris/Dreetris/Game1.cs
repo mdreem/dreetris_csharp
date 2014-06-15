@@ -17,7 +17,14 @@ namespace Dreetris
     /// This is the main type for your game
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
-    { 
+    {
+        enum State
+        {
+            TITLE_SCREEN,
+            RUNNING
+        }
+
+        State gamestate = State.TITLE_SCREEN;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -127,6 +134,35 @@ namespace Dreetris
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            switch (gamestate)
+            {
+                case State.RUNNING:
+                    process_keyboard(gameTime);
+
+                    animation.Update(gameTime);
+                    board.Update(gameTime);
+                    break;
+                case State.TITLE_SCREEN:
+                    process_keyboard_title(gameTime);                    
+                    break;
+                default:
+                    break;
+            }
+            base.Update(gameTime);
+        }
+
+        private void process_keyboard_title(GameTime gameTime)
+        {
+            KeyboardState current_state = Keyboard.GetState();
+
+            if (current_state.IsKeyDown(Keys.Space))
+            {
+                gamestate = State.RUNNING;
+            }
+        }
+
+        private void process_keyboard(GameTime gameTime)
+        {
             double time = gameTime.ElapsedGameTime.TotalMilliseconds;
             KeyboardState current_state = Keyboard.GetState();
 
@@ -139,13 +175,13 @@ namespace Dreetris
             if (current_state.IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            if (is_key_pressed(Keys.Space, 3*KEY_PRESSED_TIME))
+            if (is_key_pressed(Keys.Space, 3 * KEY_PRESSED_TIME))
             {
                 board.flip_tetrimino();
                 time_since_last_step = 0;
             }
 
-            if (is_key_pressed(Keys.Up, 3*KEY_PRESSED_TIME))
+            if (is_key_pressed(Keys.Up, 3 * KEY_PRESSED_TIME))
             {
                 board.flip_tetrimino();
                 time_since_last_step = 0;
@@ -172,11 +208,8 @@ namespace Dreetris
 
             if (current_state.IsKeyUp(Keys.Down))
                 board.haste_released = true;
-           
-            last_state = current_state;
 
-            board.Update(gameTime);        
-            base.Update(gameTime);
+            last_state = current_state;
         }
 
         // TODO: Cannot hit keyboard fast this way
@@ -191,8 +224,35 @@ namespace Dreetris
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            switch (gamestate)
+            {
+                case State.RUNNING:
+                    Draw_Running(gameTime);
+                    break;
+                case State.TITLE_SCREEN:
+                    Draw_Title(gameTime);
+                    break;
+                default:
+                    break;
+            }            
+        }
+
+        private void Draw_Title(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.Black);
+            spriteBatch.Begin();
+
+            spriteBatch.DrawString(Font1, "Dreetris", new Vector2(300, 120), Color.White);
+            spriteBatch.DrawString(Font1, "Press Space to Start", new Vector2(300, 150), Color.White);
+
+            spriteBatch.End();
+
+            base.Draw(gameTime);
+        }
+
+        private void Draw_Running(GameTime gameTime)
+        {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            animation.Update(gameTime);
 
             // draw the board and the tetrimino
             spriteBatch.Begin();

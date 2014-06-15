@@ -80,10 +80,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Tetris\RandomBlocks.cs" />
-    <Compile Include="Tetris\Score.cs" />
-    <Compile Include="Tetris\Tetrimino.cs" />
-    <Compile Include="Tetris\TetrisBoard.cs" />
+    <Compile Include="Dreetris\RandomBlocks.cs" />
+    <Compile Include="Dreetris\Score.cs" />
+    <Compile Include="Dreetris\Tetrimino.cs" />
+    <Compile Include="Dreetris\TetrisBoard.cs" />
     <Compile Include="Writer.cs" />
   </ItemGroup>
   <ItemGroup>
