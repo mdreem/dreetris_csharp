@@ -9,7 +9,6 @@ namespace Dreetris
     {
         int current_score;
         int current_level = 1;
-        int base_score = 100;
 
         public Score()
         {
@@ -21,6 +20,12 @@ namespace Dreetris
             return current_score;
         }
 
+        /*
+        Single	100 x level
+        Double	300 x level
+        Triple	500 x level
+        Tetris	800 x level; difficult
+         */
         public void rows_deleted(int n)
         {
             int multiplicator = 1;
@@ -28,22 +33,21 @@ namespace Dreetris
             switch(n)
             {
                 case 1:
-                    multiplicator = 1;
+                    multiplicator = 100;
                     break;
                 case 2:
-                    multiplicator = 2;
+                    multiplicator = 300;
                     break;
                 case 3:
-                    multiplicator = 4;
+                    multiplicator = 500;
                     break;
                 case 4:
-                    multiplicator = 8;
+                    multiplicator = 800;
                     break;
                 default:
                     break;
             }
-
-            current_score += multiplicator * n * base_score;
+            current_score += current_level * multiplicator;
         }
 
         public void next_level()
@@ -54,8 +58,6 @@ namespace Dreetris
         public void set_level(int n)
         {
             current_level = n;
-            base_score = 100 * n;
         }
-
     }
 }
