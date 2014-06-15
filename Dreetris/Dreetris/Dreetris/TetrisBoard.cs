@@ -19,6 +19,14 @@ namespace Dreetris
         int width;
         int height;
 
+        int _level = 1;
+
+        public int level
+        {
+            get { return _level; }
+            set { setLevel(value); }
+        }
+
         ContentManager content;
         Random random = new Random();
         RandomBlocks random_blocks;
@@ -29,11 +37,18 @@ namespace Dreetris
 
         Tetrimino current_tetrimino;
 
+        int _cleared_lines = 0;
+
+        public int cleared_lines
+        {
+            get { return _cleared_lines; }
+        }
+
         DKeyboard keyboard;
 
         double time_since_last_step = 0;
 
-        public double fall_delay = 800;  // Delay in ms until a tetrimino changes moves one step
+        public double fall_delay;  // Delay in ms until a tetrimino changes moves one step
         bool is_haste = false;
         private double fall_delay_haste = 50;
 
@@ -57,6 +72,8 @@ namespace Dreetris
             content = contentManager;
             random_blocks = new RandomBlocks();
             //            Enum.GetValues(typeof(Tetrimino.Type));
+
+            setLevel(1);
 
             System.Diagnostics.Debug.WriteLine("Types: " + Enum.GetValues(typeof(Tetrimino.Type)).ToString());
         }
@@ -98,7 +115,10 @@ namespace Dreetris
                 {
                     current_tetrimino.position.Y -= 1;
                     copy_to_board();
-                    score.rows_deleted(delete_full_rows());
+                    int del_rows = delete_full_rows();
+                    score.rows_deleted(del_rows);
+                    _cleared_lines += del_rows;
+                    level = Gamedata.getLevel(cleared_lines);
                     CreateTetrimino(get_random_type());
                     is_haste = false;
                     keyboard.lock_key(Keys.Down);
@@ -202,6 +222,19 @@ namespace Dreetris
         public RandomBlocks get_randomizer()
         {
             return random_blocks;
+        }
+
+        public void setLevel(int level)
+        {
+            this._level = level;
+            fall_delay = Gamedata.get_falling_speed(level);
+            System.Console.WriteLine("Level: {0}", level);
+            System.Console.WriteLine("Falling speed: {0}", fall_delay);
+        }
+
+        public void next_level()
+        {
+            setLevel(_level + 1);
         }
 
         #endregion

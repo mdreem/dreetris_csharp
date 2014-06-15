@@ -294,7 +294,7 @@ namespace Dreetris
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(test_image, new Rectangle(0, 0, 800, 600), Color.Black * 0.75f);
+            spriteBatch.Draw(blank, new Rectangle(0, 0, 800, 600), Color.Black * 0.75f);
 
             spriteBatch.DrawString(Font1, "Paused", new Vector2(300, 120), Color.White);
             spriteBatch.DrawString(Font1, "Press Enter to Continue", new Vector2(300, 150), Color.White);
@@ -323,6 +323,7 @@ namespace Dreetris
             spriteBatch.Draw(background_image, background_rectangle, Color.White);
             board.Draw(spriteBatch);
             spriteBatch.DrawString(Font1, "Score: " + board.get_score().ToString(), new Vector2(500, 20), Color.White);
+            spriteBatch.DrawString(Font1, "Level: " + board.level.ToString(), new Vector2(500, 40), Color.White);
 
             //writer.Write("***current position: ({0}|{1}); Time: {2}; Index: {3}", animation.get_x(), animation.get_y(), animation.current_frame.running_time, animation.index);
             test_rectangle.X = animation.get_x();

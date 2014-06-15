@@ -62,13 +62,13 @@ namespace Dreetris
         {
             init_bag();
             shuffle(blocks);
-
+            /*
             System.Console.WriteLine("current bag:");
             foreach(var bl in blocks)
             {
                 System.Console.WriteLine("cur: {0}", bl);
             }
-
+            */
             current_pos = 0;
         }
 
