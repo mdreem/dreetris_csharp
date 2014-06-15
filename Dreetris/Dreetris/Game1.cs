@@ -279,9 +279,9 @@ namespace Dreetris
             test_rectangle.X = animation.get_x();
             test_rectangle.Y = animation.get_y();
 
-            spriteBatch.Draw(test_image, test_rectangle, Color.White);
+            //spriteBatch.Draw(test_image, test_rectangle, Color.White);
 
-            draw_long_line(animation.get_path(), Color.White);
+            //draw_long_line(animation.get_path(), Color.White);
 
             //draw_long_line(bz.subdivide(), Color.White);
             //draw_long_line(bz.get_hull(), Color.Blue);
