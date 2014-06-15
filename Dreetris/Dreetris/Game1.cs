@@ -69,7 +69,7 @@ namespace Dreetris
         /// </summary>
         protected override void Initialize()
         {
-            board = new TetrisBoard(Content, 10, 20, 80, 100);
+            board = new TetrisBoard(Content, keyboard, 10, 20, 80, 100);
             board.CreateTetrimino(Tetrimino.Type.I);
 
             animation.add_keyframe(new Keyframe_Straight(new Vector2(600, 200),

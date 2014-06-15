@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Dreetris
 {
@@ -28,9 +29,11 @@ namespace Dreetris
 
         Tetrimino current_tetrimino;
 
+        DKeyboard keyboard;
+
         double time_since_last_step = 0;
 
-        public double fall_delay = 500;  // Delay in ms until a tetrimino changes moves one step
+        public double fall_delay = 800;  // Delay in ms until a tetrimino changes moves one step
         bool is_haste = false;
         private double fall_delay_haste = 50;
 
@@ -38,12 +41,13 @@ namespace Dreetris
 
         #endregion
 
-        public TetrisBoard(ContentManager contentManager, int width, int height, int x = 0, int y = 0)
+        public TetrisBoard(ContentManager contentManager, DKeyboard keyboard, int width, int height, int x = 0, int y = 0)
         {
             board = new Tetrimino.Type[width, height];
             position = new Point(x, y);
             this.width = width;
             this.height = height;
+            this.keyboard = keyboard;
 
             draw_rectangle = new Rectangle(0, 0, Tetrimino.BLOCK_WIDTH, Tetrimino.BLOCK_HEIGHT);
 
@@ -97,6 +101,7 @@ namespace Dreetris
                     score.rows_deleted(delete_full_rows());
                     CreateTetrimino(get_random_type());
                     is_haste = false;
+                    keyboard.lock_key(Keys.Down);
                 }
             }
         }
@@ -298,7 +303,6 @@ namespace Dreetris
                 if (board[i, row] == Tetrimino.Type.None)
                     return false;
             }
-
             return true;
         }
 

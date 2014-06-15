@@ -10,9 +10,10 @@ namespace Dreetris
     public class DKeyboard
     {
         Dictionary<Keys, bool> keys_down = new Dictionary<Keys, bool>();
+        Dictionary<Keys, bool> last_keys_down = new Dictionary<Keys, bool>();        
         Dictionary<Keys, double> key_times = new Dictionary<Keys, double>();
+        Dictionary<Keys, bool> locked_keys = new Dictionary<Keys, bool>();
 
-        Dictionary<Keys, bool> last_keys_down = new Dictionary<Keys, bool>();
         int[] keys;
 
         public DKeyboard()
@@ -21,8 +22,16 @@ namespace Dreetris
             foreach (int k in keys)
             {
                 keys_down.Add((Keys)k, false);
+                last_keys_down.Add((Keys)k, false);
+                locked_keys.Add((Keys)k, false);
                 key_times.Add((Keys)k, 0);
             }
+        }
+
+        public void lock_key(Keys key)
+        {
+            locked_keys[key] = true;
+            keys_down[key] = false;
         }
 
         public bool changed(Keys key)
@@ -56,13 +65,17 @@ namespace Dreetris
                 last_keys_down[key] = keys_down[key];
                 if (current_state.IsKeyUp((Keys)key))
                 {
+                    locked_keys[key] = false;
                     keys_down[key] = false;
                     key_times[key] = 0;
                 }
                 else if (current_state.IsKeyDown((Keys)key))
                 {
-                    keys_down[key] = true;
-                    key_times[key] += gameTime.ElapsedGameTime.TotalMilliseconds;
+                    if (!locked_keys[key])
+                    {
+                        keys_down[key] = true;
+                        key_times[key] += gameTime.ElapsedGameTime.TotalMilliseconds;
+                    }
                 }
             }
         }
