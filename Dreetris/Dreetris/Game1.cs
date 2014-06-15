@@ -22,7 +22,8 @@ namespace Dreetris
         {
             TITLE_SCREEN,
             RUNNING,
-            PAUSED
+            PAUSED,
+            GAMEOVER
         }
 
         State gamestate = State.TITLE_SCREEN;
@@ -69,9 +70,6 @@ namespace Dreetris
         /// </summary>
         protected override void Initialize()
         {
-            board = new TetrisBoard(Content, keyboard, 10, 20, 80, 100);
-            board.CreateTetrimino(Tetrimino.Type.I);
-
             animation.add_keyframe(new Keyframe_Straight(new Vector2(600, 200),
                                                 new Vector2(650, 250),
                                                 1000));
@@ -97,6 +95,12 @@ namespace Dreetris
             blank.SetData(new[] { Color.White });
 
             base.Initialize();
+        }
+
+        void InitializeGame()
+        {
+            board = new TetrisBoard(Content, keyboard, 10, 20, 80, 100);
+            board.CreateTetrimino(Tetrimino.Type.I);
         }
 
         /// <summary>
@@ -141,12 +145,17 @@ namespace Dreetris
 
                     animation.Update(gameTime);
                     board.Update(gameTime);
+                    if (board.gameOver)
+                        gamestate = State.GAMEOVER;
                     break;
                 case State.TITLE_SCREEN:
                     process_keyboard_title(gameTime);
                     break;
                 case State.PAUSED:
                     process_keyboard_paused(gameTime);
+                    break;
+                case State.GAMEOVER:
+                    process_keyboard_game_over(gameTime);
                     break;
                 default:
                     break;
@@ -161,6 +170,19 @@ namespace Dreetris
             if (current_state.IsKeyDown(Keys.Space))
             {
                 gamestate = State.RUNNING;
+                InitializeGame();
+                keyboard.lock_key(Keys.Space);
+            }
+        }
+
+        private void process_keyboard_game_over(GameTime gameTime)
+        {
+            KeyboardState current_state = Keyboard.GetState();
+
+            if (current_state.IsKeyDown(Keys.Space))
+            {
+                gamestate = State.TITLE_SCREEN;
+                keyboard.lock_key(Keys.Space);
             }
         }
 
@@ -282,6 +304,9 @@ namespace Dreetris
                 case State.PAUSED:
                     Draw_Paused(gameTime);
                     break;
+                case State.GAMEOVER:
+                    DrawGameOver(gameTime);
+                    break;
                 default:
                     break;
             }
@@ -298,6 +323,21 @@ namespace Dreetris
 
             spriteBatch.DrawString(Font1, "Paused", new Vector2(300, 120), Color.White);
             spriteBatch.DrawString(Font1, "Press Enter to Continue", new Vector2(300, 150), Color.White);
+
+            spriteBatch.End();
+        }
+
+        private void DrawGameOver(GameTime gameTime)
+        {
+            Draw_Running(gameTime);
+
+            spriteBatch.Begin();
+
+            spriteBatch.Draw(blank, new Rectangle(0, 0, 800, 600), Color.Black * 0.75f);
+
+            spriteBatch.DrawString(Font1, "Game Over", new Vector2(300, 120), Color.Red);
+            spriteBatch.DrawString(Font1, String.Format("Score: {0}", board.get_score()), new Vector2(300, 150), Color.Red);
+            spriteBatch.DrawString(Font1, "Press Space to Continue", new Vector2(300, 180), Color.Red);
 
             spriteBatch.End();
         }

@@ -53,6 +53,12 @@ namespace Dreetris
         private double fall_delay_haste = 50;
 
         public bool haste_released = true;
+        bool _gameOver = false;
+
+        public bool gameOver
+        {
+            get { return _gameOver; }
+        }
 
         #endregion
 
@@ -74,7 +80,7 @@ namespace Dreetris
             //            Enum.GetValues(typeof(Tetrimino.Type));
 
             setLevel(1);
-
+            
             System.Diagnostics.Debug.WriteLine("Types: " + Enum.GetValues(typeof(Tetrimino.Type)).ToString());
         }
 
@@ -87,6 +93,9 @@ namespace Dreetris
             current_tetrimino.position.X = width / 2;
             current_tetrimino.position.Y = 0;
             current_tetrimino.board_position = position;
+
+            if (has_collided())
+                _gameOver = true;
         }
 
         /// <summary>
@@ -96,6 +105,9 @@ namespace Dreetris
         {
             double time = gameTime.ElapsedGameTime.TotalMilliseconds;
             double local_fall_delay = fall_delay;
+
+            if (gameOver)
+                return;
 
             time_since_last_step += time;
 
