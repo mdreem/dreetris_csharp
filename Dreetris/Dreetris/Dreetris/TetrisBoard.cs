@@ -51,7 +51,7 @@ namespace Dreetris
             LoadContent(contentManager);
 
             content = contentManager;
-            random_blocks = new RandomBlocks(3);
+            random_blocks = new RandomBlocks();
             //            Enum.GetValues(typeof(Tetrimino.Type));
 
             System.Diagnostics.Debug.WriteLine("Types: " + Enum.GetValues(typeof(Tetrimino.Type)).ToString());

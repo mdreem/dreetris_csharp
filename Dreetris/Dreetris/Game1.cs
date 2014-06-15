@@ -223,6 +223,9 @@ namespace Dreetris
             {
                 board.haste();
             }
+
+            if (keyboard.is_down(Keys.Escape))
+                this.Exit();
         }
 
         // TODO: Cannot hit keyboard fast this way
@@ -282,7 +285,7 @@ namespace Dreetris
             board.Draw(spriteBatch);
             spriteBatch.DrawString(Font1, "Score: " + board.get_score().ToString(), new Vector2(500, 20), Color.White);
 
-            writer.Write("***current position: ({0}|{1}); Time: {2}; Index: {3}", animation.get_x(), animation.get_y(), animation.current_frame.running_time, animation.index);
+            //writer.Write("***current position: ({0}|{1}); Time: {2}; Index: {3}", animation.get_x(), animation.get_y(), animation.current_frame.running_time, animation.index);
             test_rectangle.X = animation.get_x();
             test_rectangle.Y = animation.get_y();
 
