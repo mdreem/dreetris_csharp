@@ -21,7 +21,8 @@ namespace Dreetris
         enum State
         {
             TITLE_SCREEN,
-            RUNNING
+            RUNNING,
+            PAUSED
         }
 
         State gamestate = State.TITLE_SCREEN;
@@ -43,12 +44,7 @@ namespace Dreetris
 
         TetrisBoard board;
 
-        KeyboardState last_state;
-        KeyboardState current_state;
-
         DKeyboard keyboard = new DKeyboard();
-
-        double time_since_last_step = 0;
 
         SpriteFont Font1;
 
@@ -149,6 +145,9 @@ namespace Dreetris
                 case State.TITLE_SCREEN:
                     process_keyboard_title(gameTime);
                     break;
+                case State.PAUSED:
+                    process_keyboard_paused(gameTime);
+                    break;
                 default:
                     break;
             }
@@ -163,6 +162,27 @@ namespace Dreetris
             {
                 gamestate = State.RUNNING;
             }
+        }
+
+        private void process_keyboard_paused(GameTime gameTime)
+        {
+            KeyboardState current_state = Keyboard.GetState();
+
+            if (keyboard.is_down(Keys.Enter))
+            {
+                if (keyboard.changed(Keys.Enter))
+                {
+                    gamestate = State.RUNNING;
+                }
+                if (keyboard.is_down_time(Keys.Enter) > 3 * KEY_PRESSED_TIME)
+                {
+                    keyboard.reset_timer(Keys.Enter, 3 * KEY_PRESSED_TIME);
+                    gamestate = State.RUNNING;
+                }
+            }
+
+            if (keyboard.is_down(Keys.Escape))
+                this.Exit();
         }
 
         private void process_keyboard(GameTime gameTime)
@@ -219,6 +239,19 @@ namespace Dreetris
                 }
             }
 
+            if (keyboard.is_down(Keys.Enter))
+            {
+                if (keyboard.changed(Keys.Enter))
+                {
+                    gamestate = State.PAUSED;
+                }
+                if (keyboard.is_down_time(Keys.Enter) > 3 * KEY_PRESSED_TIME)
+                {
+                    keyboard.reset_timer(Keys.Enter, 3 * KEY_PRESSED_TIME);
+                    gamestate = State.PAUSED;
+                }
+            }
+
             if (keyboard.is_down(Keys.Down))
             {
                 board.haste();
@@ -246,9 +279,27 @@ namespace Dreetris
                 case State.TITLE_SCREEN:
                     Draw_Title(gameTime);
                     break;
+                case State.PAUSED:
+                    Draw_Paused(gameTime);
+                    break;
                 default:
                     break;
             }
+            base.Draw(gameTime);
+        }
+
+        private void Draw_Paused(GameTime gameTime)
+        {
+            Draw_Running(gameTime);
+
+            spriteBatch.Begin();
+
+            spriteBatch.Draw(test_image, new Rectangle(0, 0, 800, 600), Color.Black * 0.75f);
+
+            spriteBatch.DrawString(Font1, "Paused", new Vector2(300, 120), Color.White);
+            spriteBatch.DrawString(Font1, "Press Enter to Continue", new Vector2(300, 150), Color.White);
+
+            spriteBatch.End();
         }
 
         private void Draw_Title(GameTime gameTime)
@@ -260,8 +311,6 @@ namespace Dreetris
             spriteBatch.DrawString(Font1, "Press Space to Start", new Vector2(300, 150), Color.White);
 
             spriteBatch.End();
-
-            base.Draw(gameTime);
         }
 
         private void Draw_Running(GameTime gameTime)
@@ -287,8 +336,6 @@ namespace Dreetris
             //draw_long_line(bz.get_hull(), Color.Blue);
 
             spriteBatch.End();
-
-            base.Draw(gameTime);
         }
 
         void draw_long_line(List<Vector2> sublines, Color color)
