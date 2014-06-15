@@ -223,23 +223,13 @@ namespace Dreetris
             {
                 board.haste();
             }
+            if (!keyboard.is_down(Keys.Down))
+            {
+                board.unhaste();
+            }
 
             if (keyboard.is_down(Keys.Escape))
                 this.Exit();
-        }
-
-        // TODO: Cannot hit keyboard fast this way
-        public bool is_key_pressed(Keys key, int time_gap = 0)
-        {
-            if (last_state.IsKeyDown(key))
-            {
-
-            }
-            else if (current_state.IsKeyUp(key))
-            {
-
-            }
-            return last_state.IsKeyDown(key) && current_state.IsKeyUp(key) && time_since_last_step > time_gap;
         }
 
         /// <summary>

@@ -188,6 +188,12 @@ namespace Dreetris
                 is_haste = true;
         }
 
+        public void unhaste()
+        {
+            if (haste_released)
+                is_haste = false;
+        }
+
         public RandomBlocks get_randomizer()
         {
             return random_blocks;

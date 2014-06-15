@@ -28,7 +28,7 @@ namespace Dreetris
          */
         public void rows_deleted(int n)
         {
-            int multiplicator = 1;
+            int multiplicator = 0;
 
             switch(n)
             {
