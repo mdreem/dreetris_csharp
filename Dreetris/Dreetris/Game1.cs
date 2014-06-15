@@ -46,6 +46,8 @@ namespace Dreetris
         KeyboardState last_state;
         KeyboardState current_state;
 
+        DKeyboard keyboard = new DKeyboard();
+
         double time_since_last_step = 0;
 
         SpriteFont Font1;
@@ -134,6 +136,8 @@ namespace Dreetris
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            keyboard.process(gameTime);
+
             switch (gamestate)
             {
                 case State.RUNNING:
@@ -143,7 +147,7 @@ namespace Dreetris
                     board.Update(gameTime);
                     break;
                 case State.TITLE_SCREEN:
-                    process_keyboard_title(gameTime);                    
+                    process_keyboard_title(gameTime);
                     break;
                 default:
                     break;
@@ -163,58 +167,75 @@ namespace Dreetris
 
         private void process_keyboard(GameTime gameTime)
         {
-            double time = gameTime.ElapsedGameTime.TotalMilliseconds;
-            KeyboardState current_state = Keyboard.GetState();
-
-            time_since_last_step += time;
-
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-
-            if (current_state.IsKeyDown(Keys.Escape))
-                this.Exit();
-
-            if (is_key_pressed(Keys.Space, 3 * KEY_PRESSED_TIME))
+            if (keyboard.is_down(Keys.Space))
             {
-                board.flip_tetrimino();
-                time_since_last_step = 0;
+                if (keyboard.changed(Keys.Space))
+                {
+                    board.flip_tetrimino();
+                }
+                if (keyboard.is_down_time(Keys.Space) > 3 * KEY_PRESSED_TIME)
+                {
+                    keyboard.reset_timer(Keys.Space, 3 * KEY_PRESSED_TIME);
+                    board.flip_tetrimino();
+                }
+            }
+            //else if so that it is not checked twice. Could flip faster this way
+            else if (keyboard.is_down(Keys.Up))
+            {
+                if (keyboard.changed(Keys.Up))
+                {
+                    board.flip_tetrimino();
+                }
+                if (keyboard.is_down_time(Keys.Up) > 3 * KEY_PRESSED_TIME)
+                {
+                    keyboard.reset_timer(Keys.Up, 3 * KEY_PRESSED_TIME);
+                    board.flip_tetrimino();
+                }
             }
 
-            if (is_key_pressed(Keys.Up, 3 * KEY_PRESSED_TIME))
+            if (keyboard.is_down(Keys.Left))
             {
-                board.flip_tetrimino();
-                time_since_last_step = 0;
+                if (keyboard.changed(Keys.Left))
+                {
+                    board.move_left();
+                }
+                if (keyboard.is_down_time(Keys.Left) > KEY_PRESSED_TIME)
+                {
+                    keyboard.reset_timer(Keys.Left, KEY_PRESSED_TIME);
+                    board.move_left();
+                }
             }
 
-            if (is_key_pressed(Keys.Left, KEY_PRESSED_TIME))
+            if (keyboard.is_down(Keys.Right))
             {
-                board.move_left();
-                time_since_last_step = 0;
+                if (keyboard.changed(Keys.Right))
+                {
+                    board.move_right();
+                }
+                if (keyboard.is_down_time(Keys.Right) > KEY_PRESSED_TIME)
+                {
+                    keyboard.reset_timer(Keys.Right, KEY_PRESSED_TIME);
+                    board.move_right();
+                }
             }
 
-            if (is_key_pressed(Keys.Right, KEY_PRESSED_TIME))
-            {
-                board.move_right();
-                time_since_last_step = 0;
-            }
-
-            if (is_key_pressed(Keys.Down, KEY_PRESSED_TIME))
+            if (keyboard.is_down(Keys.Down))
             {
                 board.haste();
-                board.haste_released = false;
-                time_since_last_step = 0;
             }
-
-            if (current_state.IsKeyUp(Keys.Down))
-                board.haste_released = true;
-
-            last_state = current_state;
         }
 
         // TODO: Cannot hit keyboard fast this way
         public bool is_key_pressed(Keys key, int time_gap = 0)
         {
+            if (last_state.IsKeyDown(key))
+            {
+
+            }
+            else if (current_state.IsKeyUp(key))
+            {
+
+            }
             return last_state.IsKeyDown(key) && current_state.IsKeyUp(key) && time_since_last_step > time_gap;
         }
 
@@ -234,7 +255,7 @@ namespace Dreetris
                     break;
                 default:
                     break;
-            }            
+            }
         }
 
         private void Draw_Title(GameTime gameTime)
