@@ -165,21 +165,17 @@ namespace Dreetris
 
         private void ProcessKeyboardTitle(GameTime gameTime)
         {
-            KeyboardState current_state = Keyboard.GetState();
-
-            if (current_state.IsKeyDown(Keys.Space))
+            if (keyboard.IsDown(Keys.Space))
             {
                 gamestate = State.RUNNING;
                 InitializeGame();
-                keyboard.LockKey(Keys.Space); //TODO: still happens too fast
+                keyboard.LockKey(Keys.Space);
             }
         }
 
         private void ProcessKeyboardGameOver(GameTime gameTime)
         {
-            KeyboardState current_state = Keyboard.GetState();
-
-            if (current_state.IsKeyDown(Keys.Space))
+            if (keyboard.IsDown(Keys.Space))
             {
                 gamestate = State.TITLE_SCREEN;
                 keyboard.LockKey(Keys.Space);
