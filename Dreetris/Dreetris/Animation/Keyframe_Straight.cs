@@ -6,31 +6,31 @@ using Microsoft.Xna.Framework;
 
 namespace Dreetris.Animation
 {
-    class Keyframe_Straight : Keyframe
+    class KeyframeStraight : Keyframe
     {
-        float velocity_scalar = 0;
+        float velocityScalar = 0;
 
-        public Keyframe_Straight(Vector2 start, Vector2 end, float duration)
+        public KeyframeStraight(Vector2 start, Vector2 end, float duration)
         {
             _start = start;
             _end = end;
             _current = start;
             Vector2 diff = end - start;
-            this.velocity_scalar = diff.Length() / duration;
+            this.velocityScalar = diff.Length() / duration;
             this.duration = duration;
-            _running_time = duration;
+            _runningTime = duration;
 
-            System.Console.WriteLine("Velocity: {0}; Position: ({1}|{2}).", velocity_scalar, _current.X, _current.Y);
+            System.Console.WriteLine("Velocity: {0}; Position: ({1}|{2}).", velocityScalar, _current.X, _current.Y);
         }
 
-        public override double delay(double time)
+        public override double Delay(double time)
         {
-            _running_time += time;
+            _runningTime += time;
             //TODO: Update position accordingly!
-            return _running_time;
+            return _runningTime;
         }
 
-        public override void reset()
+        public override void Reset()
         {
             _current = start;
         }
@@ -38,9 +38,9 @@ namespace Dreetris.Animation
         public override void Update(GameTime gameTime)
         {
             double time_passed = gameTime.ElapsedGameTime.TotalMilliseconds; ;
-            _running_time -= time_passed;
+            _runningTime -= time_passed;
 
-            if (running_time < 0)
+            if (runningTime < 0)
             {
                 _current = end;
                 return;
@@ -48,12 +48,12 @@ namespace Dreetris.Animation
 
             Vector2 diff = end - start;
             diff.Normalize();
-            float distance = velocity_scalar * (float)time_passed;
+            float distance = velocityScalar * (float)time_passed;
 
             _current = _current + diff * distance;
         }
 
-        public override List<Vector2> get_path()
+        public override List<Vector2> GetPath()
         {
             List<Vector2> res = new List<Vector2>();
 

@@ -24,35 +24,35 @@ namespace Dreetris
         public int level
         {
             get { return _level; }
-            set { setLevel(value); }
+            set { SetLevel(value); }
         }
 
         ContentManager content;
         Random random = new Random();
-        RandomBlocks random_blocks;
+        RandomBlocks randomBlocks;
         Score score = new Score();
 
         Texture2D sprite;
-        Rectangle draw_rectangle;
+        Rectangle drawRectangle;
 
-        Tetrimino current_tetrimino;
+        Tetrimino currentTetrimino;
 
-        int _cleared_lines = 0;
+        int _clearedLines = 0;
 
-        public int cleared_lines
+        public int clearedLines
         {
-            get { return _cleared_lines; }
+            get { return _clearedLines; }
         }
 
         DKeyboard keyboard;
 
-        double time_since_last_step = 0;
+        double timeSinceLastStep = 0;
 
-        public double fall_delay;  // Delay in ms until a tetrimino changes moves one step
-        bool is_haste = false;
-        private double fall_delay_haste = 50;
+        public double fallDelay;  // Delay in ms until a tetrimino changes moves one step
+        bool isHaste = false;
+        private double fallDelayHaste = 50;
 
-        public bool haste_released = true;
+        public bool hasteReleased = true;
         bool _gameOver = false;
 
         public bool gameOver
@@ -70,16 +70,16 @@ namespace Dreetris
             this.height = height;
             this.keyboard = keyboard;
 
-            draw_rectangle = new Rectangle(0, 0, Tetrimino.BLOCK_WIDTH, Tetrimino.BLOCK_HEIGHT);
+            drawRectangle = new Rectangle(0, 0, Tetrimino.BLOCK_WIDTH, Tetrimino.BLOCK_HEIGHT);
 
             InitializeBackground(contentManager);
             LoadContent(contentManager);
 
             content = contentManager;
-            random_blocks = new RandomBlocks();
+            randomBlocks = new RandomBlocks();
             //            Enum.GetValues(typeof(Tetrimino.Type));
 
-            setLevel(1);
+            SetLevel(1);
             
             System.Diagnostics.Debug.WriteLine("Types: " + Enum.GetValues(typeof(Tetrimino.Type)).ToString());
         }
@@ -89,12 +89,12 @@ namespace Dreetris
         public void CreateTetrimino(Tetrimino.Type type)
         {
             System.Diagnostics.Debug.WriteLine("New Tetrimino: " + type.ToString());
-            current_tetrimino = new Tetrimino(content, type);
-            current_tetrimino.position.X = width / 2;
-            current_tetrimino.position.Y = 0;
-            current_tetrimino.board_position = position;
+            currentTetrimino = new Tetrimino(content, type);
+            currentTetrimino.position.X = width / 2;
+            currentTetrimino.position.Y = 0;
+            currentTetrimino.boardPosition = position;
 
-            if (has_collided())
+            if (HasCollided())
                 _gameOver = true;
         }
 
@@ -104,43 +104,43 @@ namespace Dreetris
         public void Update(GameTime gameTime)
         {
             double time = gameTime.ElapsedGameTime.TotalMilliseconds;
-            double local_fall_delay = fall_delay;
+            double local_fall_delay = fallDelay;
 
             if (gameOver)
                 return;
 
-            time_since_last_step += time;
+            timeSinceLastStep += time;
 
-            if (is_haste)
-                local_fall_delay = fall_delay_haste;
+            if (isHaste)
+                local_fall_delay = fallDelayHaste;
 
             //           System.Diagnostics.Debug.WriteLine("Speed: " + local_fall_delay.ToString());
 
             /* Let the Tetrimino fall until it hits something, then copy it onto the board
              * update every fall_delay ms.
              * */
-            if (time_since_last_step > local_fall_delay) // IMPORTANT: may carry over... check if it may by n times over last step
+            if (timeSinceLastStep > local_fall_delay) // IMPORTANT: may carry over... check if it may by n times over last step
             {
-                time_since_last_step = time_since_last_step - local_fall_delay;
-                current_tetrimino.position.Y += 1;
-                if (has_collided())
+                timeSinceLastStep = timeSinceLastStep - local_fall_delay;
+                currentTetrimino.position.Y += 1;
+                if (HasCollided())
                 {
-                    current_tetrimino.position.Y -= 1;
-                    copy_to_board();
-                    int del_rows = delete_full_rows();
-                    score.rows_deleted(del_rows);
-                    _cleared_lines += del_rows;
-                    level = Gamedata.getLevel(cleared_lines);
-                    CreateTetrimino(get_random_type());
-                    is_haste = false;
-                    keyboard.lock_key(Keys.Down);
+                    currentTetrimino.position.Y -= 1;
+                    CopyToBoard();
+                    int del_rows = DeleteFullRows();
+                    score.RowsDeleted(del_rows);
+                    _clearedLines += del_rows;
+                    level = Gamedata.GetLevel(clearedLines);
+                    CreateTetrimino(GetRandomType());
+                    isHaste = false;
+                    keyboard.LockKey(Keys.Down);
                 }
             }
         }
 
-        public int get_score()
+        public int GetScore()
         {
-            return score.get_score();
+            return score.score;
         }
 
         /// <summary>
@@ -152,101 +152,101 @@ namespace Dreetris
                 for (int j = 0; j < board.GetLength(1); j++)
                 {
                     // Construct pixel coordinates from Positions and Tetrimino-Data
-                    draw_rectangle.X = position.X + i * Tetrimino.BLOCK_WIDTH;
-                    draw_rectangle.Y = position.Y + j * Tetrimino.BLOCK_HEIGHT;
+                    drawRectangle.X = position.X + i * Tetrimino.BLOCK_WIDTH;
+                    drawRectangle.Y = position.Y + j * Tetrimino.BLOCK_HEIGHT;
 
                     switch (this.board[i, j])
                     {
                         case Tetrimino.Type.I:
-                            spriteBatch.Draw(sprite, draw_rectangle, Color.Cyan);
+                            spriteBatch.Draw(sprite, drawRectangle, Color.Cyan);
                             break;
                         case Tetrimino.Type.J:
-                            spriteBatch.Draw(sprite, draw_rectangle, Color.DarkBlue);
+                            spriteBatch.Draw(sprite, drawRectangle, Color.DarkBlue);
                             break;
                         case Tetrimino.Type.L:
-                            spriteBatch.Draw(sprite, draw_rectangle, Color.Orange);
+                            spriteBatch.Draw(sprite, drawRectangle, Color.Orange);
                             break;
                         case Tetrimino.Type.O:
-                            spriteBatch.Draw(sprite, draw_rectangle, Color.Yellow);
+                            spriteBatch.Draw(sprite, drawRectangle, Color.Yellow);
                             break;
                         case Tetrimino.Type.S:
-                            spriteBatch.Draw(sprite, draw_rectangle, Color.Green);
+                            spriteBatch.Draw(sprite, drawRectangle, Color.Green);
                             break;
                         case Tetrimino.Type.T:
-                            spriteBatch.Draw(sprite, draw_rectangle, Color.Purple);
+                            spriteBatch.Draw(sprite, drawRectangle, Color.Purple);
                             break;
                         case Tetrimino.Type.Z:
-                            spriteBatch.Draw(sprite, draw_rectangle, Color.Red);
+                            spriteBatch.Draw(sprite, drawRectangle, Color.Red);
                             break;
                         default:
                             break;
                     }
                 }
-            current_tetrimino.Draw(spriteBatch);
+            currentTetrimino.Draw(spriteBatch);
         }
 
         /// <summary>
         /// Flips the Tetrimino.
         /// </summary>
-        public void flip_tetrimino()
+        public void FlipTetrimino()
         {
-            current_tetrimino.flip();
-            if (has_collided())
-                current_tetrimino.unflip();
+            currentTetrimino.Flip();
+            if (HasCollided())
+                currentTetrimino.Unflip();
         }
 
         /// <summary>
         /// Moves the Tetrimino to the left.
         /// </summary>
-        public void move_left()
+        public void MoveLeft()
         {
-            current_tetrimino.position.X -= 1;
-            if (has_collided())
+            currentTetrimino.position.X -= 1;
+            if (HasCollided())
             {
-                current_tetrimino.position.X += 1;
+                currentTetrimino.position.X += 1;
             }
         }
 
         /// <summary>
         /// Moves the Tetrimino to the right.
         /// </summary>
-        public void move_right()
+        public void MoveRight()
         {
-            current_tetrimino.position.X += 1;
-            if (has_collided())
+            currentTetrimino.position.X += 1;
+            if (HasCollided())
             {
-                current_tetrimino.position.X -= 1;
+                currentTetrimino.position.X -= 1;
             }
         }
 
-        public void haste()
+        public void Haste()
         {
-            if (haste_released)
-                is_haste = true;
+            if (hasteReleased)
+                isHaste = true;
         }
 
-        public void unhaste()
+        public void Unhaste()
         {
-            if (haste_released)
-                is_haste = false;
+            if (hasteReleased)
+                isHaste = false;
         }
 
-        public RandomBlocks get_randomizer()
+        public RandomBlocks GetRandomizer()
         {
-            return random_blocks;
+            return randomBlocks;
         }
 
-        public void setLevel(int level)
+        public void SetLevel(int level)
         {
             this._level = level;
-            fall_delay = Gamedata.get_falling_speed(level);
+            fallDelay = Gamedata.GetFallingSpeed(level);
             System.Console.WriteLine("Level: {0}", level);
-            System.Console.WriteLine("Falling speed: {0}", fall_delay);
+            System.Console.WriteLine("Falling speed: {0}", fallDelay);
         }
 
-        public void next_level()
+        public void NextLevel()
         {
-            setLevel(_level + 1);
+            SetLevel(_level + 1);
         }
 
         #endregion
@@ -257,7 +257,7 @@ namespace Dreetris
         {
             // load content and set remainder of draw rectangle
             sprite = contentManager.Load<Texture2D>("block");
-            draw_rectangle = new Rectangle(0, 0, 20, 20);
+            drawRectangle = new Rectangle(0, 0, 20, 20);
         }
 
         /// <summary>
@@ -276,25 +276,25 @@ namespace Dreetris
         /// <summary>
         /// Check for a collision of the Tetrimino with elements on the board or the board's borders.
         /// </summary>
-        private bool has_collided()
+        private bool HasCollided()
         {
             // for every element in the current tetrimino
-            int[,] current_shape = current_tetrimino.getCurrentShape();
+            int[,] currentShape = currentTetrimino.GetCurrentShape();
 
             //i -> X axis
             //j -> Y axis
-            for (int i = 0; i < current_shape.GetLength(0); i++)
-                for (int j = 0; j < current_shape.GetLength(1); j++)
+            for (int i = 0; i < currentShape.GetLength(0); i++)
+                for (int j = 0; j < currentShape.GetLength(1); j++)
                 {
                     // Check if the block is inside the boundaries of the board return collision if not
-                    if (current_shape[i, j] == 1)
-                        if (0 <= current_tetrimino.position.X + i &&
-                            current_tetrimino.position.X + i < width &&
-                            0 <= current_tetrimino.position.Y + j &&
-                            current_tetrimino.position.Y + j < height)
+                    if (currentShape[i, j] == 1)
+                        if (0 <= currentTetrimino.position.X + i &&
+                            currentTetrimino.position.X + i < width &&
+                            0 <= currentTetrimino.position.Y + j &&
+                            currentTetrimino.position.Y + j < height)
                         {
                             // Check for collisions agains Blocks already on the board
-                            if (board[current_tetrimino.position.X + i, current_tetrimino.position.Y + j] != Tetrimino.Type.None)
+                            if (board[currentTetrimino.position.X + i, currentTetrimino.position.Y + j] != Tetrimino.Type.None)
                                 return true;
                         }
                         else
@@ -306,42 +306,42 @@ namespace Dreetris
         /// <summary>
         /// Copy the current Tetrimino to the board.
         /// </summary>
-        private void copy_to_board()
+        private void CopyToBoard()
         {
             // for every element in the current tetrimino
-            int[,] current_shape = current_tetrimino.getCurrentShape();
+            int[,] currentShape = currentTetrimino.GetCurrentShape();
 
-            for (int i = 0; i < current_shape.GetLength(0); i++)
-                for (int j = 0; j < current_shape.GetLength(1); j++)
+            for (int i = 0; i < currentShape.GetLength(0); i++)
+                for (int j = 0; j < currentShape.GetLength(1); j++)
                 {
-                    if (current_shape[i, j] == 1)
+                    if (currentShape[i, j] == 1)
                     {
                         // Check if the block is inside the boundaries of the board before copying.
-                        if (!(0 <= current_tetrimino.position.X + i &&
-                            current_tetrimino.position.X + i < width &&
-                            0 <= current_tetrimino.position.Y + j &&
-                            current_tetrimino.position.Y + j < height))
+                        if (!(0 <= currentTetrimino.position.X + i &&
+                            currentTetrimino.position.X + i < width &&
+                            0 <= currentTetrimino.position.Y + j &&
+                            currentTetrimino.position.Y + j < height))
                         {
                             // raise exeption
                         }
-                        else if (board[current_tetrimino.position.X + i, current_tetrimino.position.Y + j] != Tetrimino.Type.None)
+                        else if (board[currentTetrimino.position.X + i, currentTetrimino.position.Y + j] != Tetrimino.Type.None)
                         {
                             // raise exception
                         }
                         else
                         {
-                            board[current_tetrimino.position.X + i, current_tetrimino.position.Y + j] = current_tetrimino.get_type();
+                            board[currentTetrimino.position.X + i, currentTetrimino.position.Y + j] = currentTetrimino.GetType();
                         }
                     }
                 }
         }
 
-        private Tetrimino.Type get_random_type()
+        private Tetrimino.Type GetRandomType()
         {
-            return random_blocks.get_current_block();
+            return randomBlocks.GetCurrentBlock();
         }
 
-        private bool is_row_full(int row)
+        private bool IsRowFull(int row)
         {
             for (int i = 0; i < board.GetLength(0); i++)
             {
@@ -351,15 +351,15 @@ namespace Dreetris
             return true;
         }
 
-        private void copy_row(int from_row, int to_row)
+        private void CopyRow(int fromRow, int toRow)
         {
             for (int i = 0; i < board.GetLength(0); i++)
             {
-                board[i, to_row] = board[i, from_row];
+                board[i, toRow] = board[i, fromRow];
             }
         }
 
-        private void clear_row(int row)
+        private void ClearRow(int row)
         {
             for (int i = 0; i < board.GetLength(0); i++)
             {
@@ -367,28 +367,28 @@ namespace Dreetris
             }
         }
 
-        private void delete_and_move_row(int row)
+        private void DeleteAndMoveRow(int row)
         {
             //TODO: Check if row exists!!
             for (int i = row; i > 0; i--)
             {
-                copy_row(i - 1, i);
+                CopyRow(i - 1, i);
             }
-            clear_row(0);
+            ClearRow(0);
         }
 
-        private int delete_full_rows()
+        private int DeleteFullRows()
         {
-            int row_count = 0;
+            int rowCount = 0;
             for (int i = 0; i < board.GetLength(1); i++)
             {
-                if (is_row_full(i))
+                if (IsRowFull(i))
                 {
-                    delete_and_move_row(i);
-                    row_count++;
+                    DeleteAndMoveRow(i);
+                    rowCount++;
                 }
             }
-            return row_count;
+            return rowCount;
         }
 
         #endregion

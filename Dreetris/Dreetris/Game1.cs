@@ -30,8 +30,8 @@ namespace Dreetris
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Texture2D background_image;
-        Rectangle background_rectangle;
+        Texture2D backgroundImage;
+        Rectangle backgroundRectangle;
 
         Texture2D test_image;
         Rectangle test_rectangle;
@@ -70,15 +70,15 @@ namespace Dreetris
         /// </summary>
         protected override void Initialize()
         {
-            animation.add_keyframe(new Keyframe_Straight(new Vector2(600, 200),
+            animation.addKeyframe(new KeyframeStraight(new Vector2(600, 200),
                                                 new Vector2(650, 250),
                                                 1000));
 
-            animation.add_keyframe(new Keyframe_Straight(new Vector2(650, 250),
+            animation.addKeyframe(new KeyframeStraight(new Vector2(650, 250),
                                                 new Vector2(450, 350),
                                                 2000));
 
-            animation.add_keyframe(new Keyframe_Straight(new Vector2(450, 350),
+            animation.addKeyframe(new KeyframeStraight(new Vector2(450, 350),
                                                 new Vector2(600, 200),
                                                 1000));
 
@@ -89,7 +89,7 @@ namespace Dreetris
 
             Keyframe_Bezier kb = new Keyframe_Bezier(bz, 2000);
 
-            animation.add_keyframe(kb);
+            animation.addKeyframe(kb);
 
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });
@@ -113,8 +113,8 @@ namespace Dreetris
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Font1 = Content.Load<SpriteFont>("SpriteFont1");
             // load sprites and build draw rectangles
-            background_image = Content.Load<Texture2D>("background");
-            background_rectangle = new Rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+            backgroundImage = Content.Load<Texture2D>("background");
+            backgroundRectangle = new Rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
             test_image = Content.Load<Texture2D>("block");
             test_rectangle = new Rectangle(600, 200, 20, 20);
@@ -136,12 +136,12 @@ namespace Dreetris
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            keyboard.process(gameTime);
+            keyboard.Process(gameTime);
 
             switch (gamestate)
             {
                 case State.RUNNING:
-                    process_keyboard(gameTime);
+                    ProcessKeyboard(gameTime);
 
                     animation.Update(gameTime);
                     board.Update(gameTime);
@@ -152,10 +152,10 @@ namespace Dreetris
                     process_keyboard_title(gameTime);
                     break;
                 case State.PAUSED:
-                    process_keyboard_paused(gameTime);
+                    ProcessKeyboardPaused(gameTime);
                     break;
                 case State.GAMEOVER:
-                    process_keyboard_game_over(gameTime);
+                    ProcessKeyboardGameOver(gameTime);
                     break;
                 default:
                     break;
@@ -171,119 +171,119 @@ namespace Dreetris
             {
                 gamestate = State.RUNNING;
                 InitializeGame();
-                keyboard.lock_key(Keys.Space);
+                keyboard.LockKey(Keys.Space); //TODO: still happens too fast
             }
         }
 
-        private void process_keyboard_game_over(GameTime gameTime)
+        private void ProcessKeyboardGameOver(GameTime gameTime)
         {
             KeyboardState current_state = Keyboard.GetState();
 
             if (current_state.IsKeyDown(Keys.Space))
             {
                 gamestate = State.TITLE_SCREEN;
-                keyboard.lock_key(Keys.Space);
+                keyboard.LockKey(Keys.Space);
             }
         }
 
-        private void process_keyboard_paused(GameTime gameTime)
+        private void ProcessKeyboardPaused(GameTime gameTime)
         {
             KeyboardState current_state = Keyboard.GetState();
 
-            if (keyboard.is_down(Keys.Enter))
+            if (keyboard.IsDown(Keys.Enter))
             {
-                if (keyboard.changed(Keys.Enter))
+                if (keyboard.Changed(Keys.Enter))
                 {
                     gamestate = State.RUNNING;
                 }
-                if (keyboard.is_down_time(Keys.Enter) > 3 * KEY_PRESSED_TIME)
+                if (keyboard.IsDownTime(Keys.Enter) > 3 * KEY_PRESSED_TIME)
                 {
-                    keyboard.reset_timer(Keys.Enter, 3 * KEY_PRESSED_TIME);
+                    keyboard.ResetTimer(Keys.Enter, 3 * KEY_PRESSED_TIME);
                     gamestate = State.RUNNING;
                 }
             }
 
-            if (keyboard.is_down(Keys.Escape))
+            if (keyboard.IsDown(Keys.Escape))
                 this.Exit();
         }
 
-        private void process_keyboard(GameTime gameTime)
+        private void ProcessKeyboard(GameTime gameTime)
         {
-            if (keyboard.is_down(Keys.Space))
+            if (keyboard.IsDown(Keys.Space))
             {
-                if (keyboard.changed(Keys.Space))
+                if (keyboard.Changed(Keys.Space))
                 {
-                    board.flip_tetrimino();
+                    board.FlipTetrimino();
                 }
-                if (keyboard.is_down_time(Keys.Space) > 3 * KEY_PRESSED_TIME)
+                if (keyboard.IsDownTime(Keys.Space) > 3 * KEY_PRESSED_TIME)
                 {
-                    keyboard.reset_timer(Keys.Space, 3 * KEY_PRESSED_TIME);
-                    board.flip_tetrimino();
+                    keyboard.ResetTimer(Keys.Space, 3 * KEY_PRESSED_TIME);
+                    board.FlipTetrimino();
                 }
             }
             //else if so that it is not checked twice. Could flip faster this way
-            else if (keyboard.is_down(Keys.Up))
+            else if (keyboard.IsDown(Keys.Up))
             {
-                if (keyboard.changed(Keys.Up))
+                if (keyboard.Changed(Keys.Up))
                 {
-                    board.flip_tetrimino();
+                    board.FlipTetrimino();
                 }
-                if (keyboard.is_down_time(Keys.Up) > 3 * KEY_PRESSED_TIME)
+                if (keyboard.IsDownTime(Keys.Up) > 3 * KEY_PRESSED_TIME)
                 {
-                    keyboard.reset_timer(Keys.Up, 3 * KEY_PRESSED_TIME);
-                    board.flip_tetrimino();
+                    keyboard.ResetTimer(Keys.Up, 3 * KEY_PRESSED_TIME);
+                    board.FlipTetrimino();
                 }
             }
 
-            if (keyboard.is_down(Keys.Left))
+            if (keyboard.IsDown(Keys.Left))
             {
-                if (keyboard.changed(Keys.Left))
+                if (keyboard.Changed(Keys.Left))
                 {
-                    board.move_left();
+                    board.MoveLeft();
                 }
-                if (keyboard.is_down_time(Keys.Left) > KEY_PRESSED_TIME)
+                if (keyboard.IsDownTime(Keys.Left) > KEY_PRESSED_TIME)
                 {
-                    keyboard.reset_timer(Keys.Left, KEY_PRESSED_TIME);
-                    board.move_left();
+                    keyboard.ResetTimer(Keys.Left, KEY_PRESSED_TIME);
+                    board.MoveLeft();
                 }
             }
 
-            if (keyboard.is_down(Keys.Right))
+            if (keyboard.IsDown(Keys.Right))
             {
-                if (keyboard.changed(Keys.Right))
+                if (keyboard.Changed(Keys.Right))
                 {
-                    board.move_right();
+                    board.MoveRight();
                 }
-                if (keyboard.is_down_time(Keys.Right) > KEY_PRESSED_TIME)
+                if (keyboard.IsDownTime(Keys.Right) > KEY_PRESSED_TIME)
                 {
-                    keyboard.reset_timer(Keys.Right, KEY_PRESSED_TIME);
-                    board.move_right();
+                    keyboard.ResetTimer(Keys.Right, KEY_PRESSED_TIME);
+                    board.MoveRight();
                 }
             }
 
-            if (keyboard.is_down(Keys.Enter))
+            if (keyboard.IsDown(Keys.Enter))
             {
-                if (keyboard.changed(Keys.Enter))
+                if (keyboard.Changed(Keys.Enter))
                 {
                     gamestate = State.PAUSED;
                 }
-                if (keyboard.is_down_time(Keys.Enter) > 3 * KEY_PRESSED_TIME)
+                if (keyboard.IsDownTime(Keys.Enter) > 3 * KEY_PRESSED_TIME)
                 {
-                    keyboard.reset_timer(Keys.Enter, 3 * KEY_PRESSED_TIME);
+                    keyboard.ResetTimer(Keys.Enter, 3 * KEY_PRESSED_TIME);
                     gamestate = State.PAUSED;
                 }
             }
 
-            if (keyboard.is_down(Keys.Down))
+            if (keyboard.IsDown(Keys.Down))
             {
-                board.haste();
+                board.Haste();
             }
-            if (!keyboard.is_down(Keys.Down))
+            if (!keyboard.IsDown(Keys.Down))
             {
-                board.unhaste();
+                board.Unhaste();
             }
 
-            if (keyboard.is_down(Keys.Escape))
+            if (keyboard.IsDown(Keys.Escape))
                 this.Exit();
         }
 
@@ -296,13 +296,13 @@ namespace Dreetris
             switch (gamestate)
             {
                 case State.RUNNING:
-                    Draw_Running(gameTime);
+                    DrawRunning(gameTime);
                     break;
                 case State.TITLE_SCREEN:
-                    Draw_Title(gameTime);
+                    DrawTitle(gameTime);
                     break;
                 case State.PAUSED:
-                    Draw_Paused(gameTime);
+                    DrawPaused(gameTime);
                     break;
                 case State.GAMEOVER:
                     DrawGameOver(gameTime);
@@ -313,9 +313,9 @@ namespace Dreetris
             base.Draw(gameTime);
         }
 
-        private void Draw_Paused(GameTime gameTime)
+        private void DrawPaused(GameTime gameTime)
         {
-            Draw_Running(gameTime);
+            DrawRunning(gameTime);
 
             spriteBatch.Begin();
 
@@ -329,20 +329,20 @@ namespace Dreetris
 
         private void DrawGameOver(GameTime gameTime)
         {
-            Draw_Running(gameTime);
+            DrawRunning(gameTime);
 
             spriteBatch.Begin();
 
             spriteBatch.Draw(blank, new Rectangle(0, 0, 800, 600), Color.Black * 0.75f);
 
             spriteBatch.DrawString(Font1, "Game Over", new Vector2(300, 120), Color.Red);
-            spriteBatch.DrawString(Font1, String.Format("Score: {0}", board.get_score()), new Vector2(300, 150), Color.Red);
+            spriteBatch.DrawString(Font1, String.Format("Score: {0}", board.GetScore()), new Vector2(300, 150), Color.Red);
             spriteBatch.DrawString(Font1, "Press Space to Continue", new Vector2(300, 180), Color.Red);
 
             spriteBatch.End();
         }
 
-        private void Draw_Title(GameTime gameTime)
+        private void DrawTitle(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
@@ -353,21 +353,21 @@ namespace Dreetris
             spriteBatch.End();
         }
 
-        private void Draw_Running(GameTime gameTime)
+        private void DrawRunning(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // draw the board and the tetrimino
             spriteBatch.Begin();
 
-            spriteBatch.Draw(background_image, background_rectangle, Color.White);
+            spriteBatch.Draw(backgroundImage, backgroundRectangle, Color.White);
             board.Draw(spriteBatch);
-            spriteBatch.DrawString(Font1, "Score: " + board.get_score().ToString(), new Vector2(500, 20), Color.White);
+            spriteBatch.DrawString(Font1, "Score: " + board.GetScore().ToString(), new Vector2(500, 20), Color.White);
             spriteBatch.DrawString(Font1, "Level: " + board.level.ToString(), new Vector2(500, 40), Color.White);
 
             //writer.Write("***current position: ({0}|{1}); Time: {2}; Index: {3}", animation.get_x(), animation.get_y(), animation.current_frame.running_time, animation.index);
-            test_rectangle.X = animation.get_x();
-            test_rectangle.Y = animation.get_y();
+            test_rectangle.X = animation.getX();
+            test_rectangle.Y = animation.getY();
 
             //spriteBatch.Draw(test_image, test_rectangle, Color.White);
 
@@ -379,7 +379,7 @@ namespace Dreetris
             spriteBatch.End();
         }
 
-        void draw_long_line(List<Vector2> sublines, Color color)
+        void DrawLongLine(List<Vector2> sublines, Color color)
         {
             for (int i = 0; i < sublines.Count - 1; i++)
             {

@@ -13,7 +13,7 @@ namespace Dreetris.Animation
         protected Vector2 _current;
 
         protected double duration = 0;
-        protected double _running_time = 0;
+        protected double _runningTime = 0;
 
         public Vector2 start
         {
@@ -30,14 +30,14 @@ namespace Dreetris.Animation
             get { return _current; }
         }
 
-        public double running_time
+        public double runningTime
         {
-            get { return _running_time; }
+            get { return _runningTime; }
         }
 
         public abstract void Update(GameTime gameTime);
-        public abstract void reset();
-        public abstract double delay(double time);
-        public abstract List<Vector2> get_path();
+        public abstract void Reset();
+        public abstract double Delay(double time);
+        public abstract List<Vector2> GetPath();
     }
 }

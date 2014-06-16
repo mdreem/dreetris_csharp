@@ -9,10 +9,10 @@ namespace Dreetris
 {
     public class DKeyboard
     {
-        Dictionary<Keys, bool> keys_down = new Dictionary<Keys, bool>();
-        Dictionary<Keys, bool> last_keys_down = new Dictionary<Keys, bool>();        
-        Dictionary<Keys, double> key_times = new Dictionary<Keys, double>();
-        Dictionary<Keys, bool> locked_keys = new Dictionary<Keys, bool>();
+        Dictionary<Keys, bool> keysDown = new Dictionary<Keys, bool>();
+        Dictionary<Keys, bool> lastKeysDown = new Dictionary<Keys, bool>();        
+        Dictionary<Keys, double> keyTimes = new Dictionary<Keys, double>();
+        Dictionary<Keys, bool> lockedKeys = new Dictionary<Keys, bool>();
 
         int[] keys;
 
@@ -21,60 +21,89 @@ namespace Dreetris
             keys = Enum.GetValues(typeof(Keys)) as int[];
             foreach (int k in keys)
             {
-                keys_down.Add((Keys)k, false);
-                last_keys_down.Add((Keys)k, false);
-                locked_keys.Add((Keys)k, false);
-                key_times.Add((Keys)k, 0);
+                keysDown.Add((Keys)k, false);
+                lastKeysDown.Add((Keys)k, false);
+                lockedKeys.Add((Keys)k, false);
+                keyTimes.Add((Keys)k, 0);
             }
         }
 
-        public void lock_key(Keys key)
+        /// <summary>
+        /// Locks a key so that it has to be released once in order to be consider down once more.
+        /// </summary>
+        /// <param name="key">key to lock</param>
+        public void LockKey(Keys key)
         {
-            locked_keys[key] = true;
-            keys_down[key] = false;
+            lockedKeys[key] = true;
+            keysDown[key] = false;
         }
 
-        public bool changed(Keys key)
+        /// <summary>
+        /// Check if the status of a key changed since the last call of Process
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public bool Changed(Keys key)
         {
-            return !(last_keys_down[key] == keys_down[key]);
+            return !(lastKeysDown[key] == keysDown[key]);
         }
 
-        public bool is_down(Keys key)
+        /// <summary>
+        /// Check if key is pressed right now.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public bool IsDown(Keys key)
         {
-            return keys_down[key];
+            return keysDown[key];
         }
 
-        public double is_down_time(Keys key)
+        /// <summary>
+        /// Check since how long key is pressed.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns>duration of the keypress</returns>
+        public double IsDownTime(Keys key)
         {
-            return key_times[key];
+            return keyTimes[key];
         }
 
-        public void reset_timer(Keys key, double time)
+        /// <summary>
+        /// Changes the times of the keypress. It substracts the time and sets the value to
+        /// zero if the time becomes negative.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="time"></param>
+        public void ResetTimer(Keys key, double time)
         {
-            key_times[key] -= time;
-            if (key_times[key] < 0)
-                key_times[key] = 0;
+            keyTimes[key] -= time;
+            if (keyTimes[key] < 0)
+                keyTimes[key] = 0;
         }
 
-        public void process(GameTime gameTime)
+        /// <summary>
+        /// Processes the keyboard state.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        public void Process(GameTime gameTime)
         {
-            KeyboardState current_state = Keyboard.GetState();
+            KeyboardState currentState = Keyboard.GetState();
 
             foreach (Keys key in keys)            
             {
-                last_keys_down[key] = keys_down[key];
-                if (current_state.IsKeyUp((Keys)key))
+                lastKeysDown[key] = keysDown[key];
+                if (currentState.IsKeyUp((Keys)key))
                 {
-                    locked_keys[key] = false;
-                    keys_down[key] = false;
-                    key_times[key] = 0;
+                    lockedKeys[key] = false;
+                    keysDown[key] = false;
+                    keyTimes[key] = 0;
                 }
-                else if (current_state.IsKeyDown((Keys)key))
+                else if (currentState.IsKeyDown((Keys)key))
                 {
-                    if (!locked_keys[key])
+                    if (!lockedKeys[key])
                     {
-                        keys_down[key] = true;
-                        key_times[key] += gameTime.ElapsedGameTime.TotalMilliseconds;
+                        keysDown[key] = true;
+                        keyTimes[key] += gameTime.ElapsedGameTime.TotalMilliseconds;
                     }
                 }
             }

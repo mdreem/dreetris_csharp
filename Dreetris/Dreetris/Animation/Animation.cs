@@ -9,70 +9,69 @@ namespace Dreetris.Animation
     class Animation
     {
         List<Keyframe> keyframes = new List<Keyframe>();
-        int current_frame_index = 0;
+        int currentFrameIndex = 0;
         bool _finished = false;
 
-        public Keyframe current_frame
+        public Keyframe currentFrame
         {
             get
             {
-                return keyframes[current_frame_index];
+                return keyframes[currentFrameIndex];
             }
         }
 
         public int index
         {
-            get { return current_frame_index; }
+            get { return currentFrameIndex; }
         }
 
-        public void add_keyframe(Keyframe keyframe)
+        public void addKeyframe(Keyframe keyframe)
         {
             keyframes.Add(keyframe);
         }
 
-        public int get_x()
+        public int getX()
         {
-            return (int)current_frame.current.X;
+            return (int)currentFrame.current.X;
         }
 
-        public int get_y()
+        public int getY()
         {
-            return (int)current_frame.current.Y;
+            return (int)currentFrame.current.Y;
         }
 
         public void Update(GameTime gameTime)
         {
             if (!_finished)
             {
-                current_frame.Update(gameTime);
-                var time = current_frame.running_time;
+                currentFrame.Update(gameTime);
+                var time = currentFrame.runningTime;
                 if (time <= 0)
                 {
-                    current_frame_index++;
-                    if (current_frame_index >= keyframes.Count)
+                    currentFrameIndex++;
+                    if (currentFrameIndex >= keyframes.Count)
                     {
                         _finished = true;
-                        current_frame_index = 0;
-                        current_frame.reset();
+                        currentFrameIndex = 0;
+                        currentFrame.Reset();
                     }
                     else
                     {
                         //current_frame.init(gameTime);
-                        current_frame.delay(time); //TODO: As long as necessary. Maybe more than one keyframe has to be skipped
+                        currentFrame.Delay(time); //TODO: As long as necessary. Maybe more than one keyframe has to be skipped
                     }
                 }
             }
         }
 
-        public List<Vector2> get_path()
+        public List<Vector2> GetPath()
         {
             List<Vector2> res = new List<Vector2>();
 
             foreach (var path in keyframes)
             {
-                res.AddRange(path.get_path());
+                res.AddRange(path.GetPath());
             }
-
             return res;
         }
     }

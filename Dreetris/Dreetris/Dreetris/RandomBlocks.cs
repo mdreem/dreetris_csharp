@@ -6,14 +6,14 @@ namespace Dreetris
     {
         Random random = new Random();
         Tetrimino.Type[] blocks;
-        int current_pos = 0;
+        int currentPos = 0;
 
         public RandomBlocks()
         {
-            randomize();
+            Randomize();
         }
 
-        public void init_bag()
+        public void InitBag()
         {
             blocks = new Tetrimino.Type[7];
             blocks[0] = Tetrimino.Type.I;
@@ -29,7 +29,7 @@ namespace Dreetris
         /// Returns a block at position n in the queue.
         /// <param name="n">position in the queue</param>
         /// </summary>
-        public Tetrimino.Type get_block(int n)
+        public Tetrimino.Type GetBlock(int n)
         {
             if (blocks.Length <= n)
                 return Tetrimino.Type.None;
@@ -42,14 +42,14 @@ namespace Dreetris
         /// <summary>
         /// Returns the block that is scheduled to be used next and randomize.
         /// </summary>
-        public Tetrimino.Type get_current_block()
+        public Tetrimino.Type GetCurrentBlock()
         {
             Tetrimino.Type block;
-            block = blocks[current_pos];
-            current_pos++;
-            if (current_pos >= blocks.Length)
+            block = blocks[currentPos];
+            currentPos++;
+            if (currentPos >= blocks.Length)
             {
-                randomize();
+                Randomize();
             }
 
             return block;
@@ -58,10 +58,10 @@ namespace Dreetris
         /// <summary>
         /// Deletes the first block, shifts the others up and creates a new one in the queue.
         /// </summary>
-        public void randomize()
+        public void Randomize()
         {
-            init_bag();
-            shuffle(blocks);
+            InitBag();
+            Shuffle(blocks);
             /*
             System.Console.WriteLine("current bag:");
             foreach(var bl in blocks)
@@ -69,10 +69,10 @@ namespace Dreetris
                 System.Console.WriteLine("cur: {0}", bl);
             }
             */
-            current_pos = 0;
+            currentPos = 0;
         }
 
-        private Tetrimino.Type get_random_type()
+        private Tetrimino.Type GetRandomType()
         {
             Array values = Enum.GetValues(typeof(Tetrimino.Type));
             values.GetValue(random.Next(values.Length));
@@ -88,7 +88,7 @@ namespace Dreetris
         /// <summary>
         /// Knuth / Fisher-Yates shuffle
         /// </summary>        
-        private void shuffle(Tetrimino.Type[] array)
+        private void Shuffle(Tetrimino.Type[] array)
         {
             Random random = new Random();
             int n = array.Length;

@@ -5,19 +5,32 @@ using System.Text;
 
 namespace Dreetris
 {
+    /// <summary>
+    /// Used for holding the current score and computing the correct changes depending on what happened
+    /// </summary>
     class Score
     {
-        int current_score;
-        int current_level = 1;
+        int currentScore;
+        int currentLevel = 1;
+
+        public int score
+        {
+            get { return currentScore; }
+        }
+
+        public int level
+        {
+            get { return currentLevel; }
+        }
 
         public Score()
         {
             
         }
 
-        public int get_score()
+        public int GetScore()
         {
-            return current_score;
+            return currentScore;
         }
 
         /*
@@ -26,7 +39,11 @@ namespace Dreetris
         Triple	500 x level
         Tetris	800 x level; difficult
          */
-        public void rows_deleted(int n)
+        /// <summary>
+        /// Adding the correct value to the current score dependent on the amount of rows deleted.
+        /// </summary>
+        /// <param name="n">number of deleted rows</param>
+        public void RowsDeleted(int n)
         {
             int multiplicator = 0;
 
@@ -47,17 +64,17 @@ namespace Dreetris
                 default:
                     break;
             }
-            current_score += current_level * multiplicator;
+            currentScore += currentLevel * multiplicator;
         }
 
-        public void next_level()
+        public void NextLevel()
         {
-            set_level(current_level + 1);
+            SetLevel(currentLevel + 1);
         }
 
-        public void set_level(int n)
+        public void SetLevel(int n)
         {
-            current_level = n;
+            currentLevel = n;
         }
     }
 }

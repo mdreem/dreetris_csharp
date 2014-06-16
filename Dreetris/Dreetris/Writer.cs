@@ -10,32 +10,32 @@ namespace Dreetris
     {
         Stopwatch stopwatch = new Stopwatch();
         long interval;
-        long last_tick;
+        long lastTick;
 
         public Writer(long interval)
         {
             stopwatch.Start();
             this.interval = interval;
-            last_tick = stopwatch.ElapsedMilliseconds;
+            lastTick = stopwatch.ElapsedMilliseconds;
         }
 
-        bool elapsed()
+        bool Elapsed()
         {
             long now = stopwatch.ElapsedMilliseconds;
-            return (now - last_tick) < interval;
+            return (now - lastTick) < interval;
         }
 
-        void next_tick()
+        void NextTick()
         {
-            last_tick = stopwatch.ElapsedMilliseconds;
+            lastTick = stopwatch.ElapsedMilliseconds;
         }
 
         public void Write(string format, params object[] values)
         {
-            if (!elapsed())
+            if (!Elapsed())
             {
                 System.Console.WriteLine(format, values);
-                next_tick();
+                NextTick();
             }
         }
     }

@@ -13,7 +13,7 @@ namespace Dreetris
     {
         #region Shape definitions
 
-        static int[,,] I_shape = {{{1,0,0,0},
+        static int[,,] Ishape = {{{1,0,0,0},
                                    {1,0,0,0},
                                    {1,0,0,0},
                                    {1,0,0,0}},
@@ -22,7 +22,7 @@ namespace Dreetris
                                    {0,0,0,0},
                                    {0,0,0,0}}};
 
-        static int[, ,] J_shape = {{{0,1,0,0},
+        static int[, ,] Jshape = {{{0,1,0,0},
                                     {0,1,0,0},
                                     {1,1,0,0},
                                     {0,0,0,0}},
@@ -39,7 +39,7 @@ namespace Dreetris
                                    {0,0,0,0},
                                    {0,0,0,0}}};
 
-        static int[, ,] L_shape = {{{0,1,0,0},
+        static int[, ,] Lshape = {{{0,1,0,0},
                                     {0,1,0,0},
                                     {0,1,1,0},
                                     {0,0,0,0}},
@@ -56,13 +56,13 @@ namespace Dreetris
                                    {1,0,0,0},
                                    {0,0,0,0}}};
 
-        static int[, ,] O_shape = {{{1,1,0,0},
+        static int[, ,] Oshape = {{{1,1,0,0},
                                     {1,1,0,0},
                                     {0,0,0,0},
                                     {0,0,0,0}},
                                    };
 
-        static int[, ,] S_shape = {{{0,1,1,0},
+        static int[, ,] Sshape = {{{0,1,1,0},
                                     {1,1,0,0},
                                     {0,0,0,0},
                                     {0,0,0,0}},
@@ -71,7 +71,7 @@ namespace Dreetris
                                    {0,0,1,0},
                                    {0,0,0,0}}};
 
-        static int[, ,] T_shape = {{{0,1,0,0},
+        static int[, ,] Tshape = {{{0,1,0,0},
                                     {1,1,1,0},
                                     {0,0,0,0},
                                     {0,0,0,0}},
@@ -88,7 +88,7 @@ namespace Dreetris
                                    {0,1,0,0},
                                    {0,0,0,0}}};
 
-        static int[, ,] Z_shape = {{{1,1,0,0},
+        static int[, ,] Zshape = {{{1,1,0,0},
                                     {0,1,1,0},
                                     {0,0,0,0},
                                     {0,0,0,0}},
@@ -101,20 +101,20 @@ namespace Dreetris
         #region Fields
 
         public enum Type { None, I, J, L, O, S, T, Z };
-        int[,] current_shape = new int[4,4];
+        int[,] currentShape = new int[4,4];
 
         public static int BLOCK_WIDTH = 20;
         public static int BLOCK_HEIGHT = 20;
 
-        int flip_state;
-        int num_states;
+        int flipState;
+        int numStates;
 
         Texture2D sprite;
-        Rectangle draw_rectangle;
+        Rectangle drawRectangle;
         Tetrimino.Type type;
 
         private Point coordinates; // coordinates on the screen
-        public Point board_position; // coordinates of the board on the screen
+        public Point boardPosition; // coordinates of the board on the screen
         public Point position; // position on the board
 
         #endregion
@@ -132,32 +132,32 @@ namespace Dreetris
             LoadContent(contentManager);
             this.type = type;
             coordinates = new Point();
-            board_position = new Point();
+            boardPosition = new Point();
             position = new Point();
-            flip_state = 0;
+            flipState = 0;
 
             switch (type)
             {
                 case Type.I:
-                    num_states = I_shape.GetLength(0);
+                    numStates = Ishape.GetLength(0);
                     break;
                 case Type.J:
-                    num_states = J_shape.GetLength(0);
+                    numStates = Jshape.GetLength(0);
                     break;
                 case Type.L:
-                    num_states = L_shape.GetLength(0);
+                    numStates = Lshape.GetLength(0);
                     break;
                 case Type.O:
-                    num_states = O_shape.GetLength(0);
+                    numStates = Oshape.GetLength(0);
                     break;
                 case Type.S:
-                    num_states = S_shape.GetLength(0);
+                    numStates = Sshape.GetLength(0);
                     break;
                 case Type.T:
-                    num_states = T_shape.GetLength(0);
+                    numStates = Tshape.GetLength(0);
                     break;
                 case Type.Z:
-                    num_states = Z_shape.GetLength(0);
+                    numStates = Zshape.GetLength(0);
                     break;
                 default:
                     break;
@@ -186,25 +186,25 @@ namespace Dreetris
             switch (type)
             {
                 case Type.I:
-                    set_current_shape(I_shape);
+                    SetCurrentShape(Ishape);
                     break;
                 case Type.J:
-                    set_current_shape(J_shape);
+                    SetCurrentShape(Jshape);
                     break;
                 case Type.L:
-                    set_current_shape(L_shape);
+                    SetCurrentShape(Lshape);
                     break;
                 case Type.O:
-                    set_current_shape(O_shape);
+                    SetCurrentShape(Oshape);
                     break;
                 case Type.S:
-                    set_current_shape(S_shape);
+                    SetCurrentShape(Sshape);
                     break;
                 case Type.T:
-                    set_current_shape(T_shape);
+                    SetCurrentShape(Tshape);
                     break;
                 case Type.Z:
-                    set_current_shape(Z_shape);
+                    SetCurrentShape(Zshape);
                     break;
                 default:
                     break;
@@ -217,8 +217,8 @@ namespace Dreetris
         /// <param name="spriteBatch">the sprite batch to use</param>
         public void Draw(SpriteBatch spriteBatch)
         {
-            coordinates.X = board_position.X + BLOCK_WIDTH * position.X;
-            coordinates.Y = board_position.Y + BLOCK_HEIGHT * position.Y;
+            coordinates.X = boardPosition.X + BLOCK_WIDTH * position.X;
+            coordinates.Y = boardPosition.Y + BLOCK_HEIGHT * position.Y;
             Color current_color;
 
             switch (type)
@@ -249,39 +249,39 @@ namespace Dreetris
                     break;
             }
 
-            for (int i = 0; i < current_shape.GetLength(0); i++)
-                for (int j = 0; j < current_shape.GetLength(1); j++)
+            for (int i = 0; i < currentShape.GetLength(0); i++)
+                for (int j = 0; j < currentShape.GetLength(1); j++)
                 {
-                    if (current_shape[i, j] == 1)
+                    if (currentShape[i, j] == 1)
                     {
-                        draw_rectangle.X = coordinates.X + i * draw_rectangle.Height;
-                        draw_rectangle.Y = coordinates.Y + j * draw_rectangle.Width;
-                        spriteBatch.Draw(sprite, draw_rectangle, current_color);
+                        drawRectangle.X = coordinates.X + i * drawRectangle.Height;
+                        drawRectangle.Y = coordinates.Y + j * drawRectangle.Width;
+                        spriteBatch.Draw(sprite, drawRectangle, current_color);
                     }
                 }
         }
 
-        public Tetrimino.Type get_type()
+        public Tetrimino.Type GetType()
         {
             return type;
         }
 
-        public void flip()
+        public void Flip()
         {
-            flip_state = (flip_state + 1) % num_states;
+            flipState = (flipState + 1) % numStates;
             UpdateShape();
         }
 
-        public void unflip()
+        public void Unflip()
         {
             // Flip back, but stay at positive values
-            flip_state = (flip_state + num_states - 1) % num_states;
+            flipState = (flipState + numStates - 1) % numStates;
             UpdateShape();
         }
 
-        public int[,] getCurrentShape()
+        public int[,] GetCurrentShape()
         {
-            return current_shape;
+            return currentShape;
         }
 
         #endregion
@@ -292,18 +292,18 @@ namespace Dreetris
         {
             // load content and set remainder of draw rectangle
             sprite = contentManager.Load<Texture2D>("block");
-            draw_rectangle = new Rectangle(0, 0, BLOCK_WIDTH, BLOCK_HEIGHT);
+            drawRectangle = new Rectangle(0, 0, BLOCK_WIDTH, BLOCK_HEIGHT);
             //draw_rectangle = new Rectangle(x, y, sprite.Width, sprite.Height);
         }
 
-        private void set_current_shape(int[,,] shape)
+        private void SetCurrentShape(int[,,] shape)
         {
             for (int i = 0; i < shape.GetLength(1); i++)
                 for (int j = 0; j < shape.GetLength(2); j++)
                 {
                     //System.Diagnostics.Debug.WriteLine("Flip: " + flip_state.ToString());
                     // i,j flipped?
-                    current_shape[i, j] = shape[flip_state, j, i];
+                    currentShape[i, j] = shape[flipState, j, i];
                 }
         }
 
