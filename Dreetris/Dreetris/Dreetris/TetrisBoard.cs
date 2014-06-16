@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Dreetris
 {
@@ -20,6 +21,8 @@ namespace Dreetris
         int height;
 
         TetriminoPreview preview;
+
+        SoundEffect flip;
 
         int _level = 1;
 
@@ -198,6 +201,8 @@ namespace Dreetris
             currentTetrimino.Flip();
             if (HasCollided())
                 currentTetrimino.Unflip();
+            else
+                flip.Play();
         }
 
         /// <summary>
@@ -263,6 +268,8 @@ namespace Dreetris
             // load content and set remainder of draw rectangle
             sprite = contentManager.Load<Texture2D>("block");
             drawRectangle = new Rectangle(0, 0, 20, 20);
+
+            flip = contentManager.Load<SoundEffect>("flip");
         }
 
         /// <summary>

@@ -57,7 +57,6 @@ namespace Dreetris.Animation
                     }
                     else
                     {
-                        //current_frame.init(gameTime);
                         currentFrame.Delay(time); //TODO: As long as necessary. Maybe more than one keyframe has to be skipped
                     }
                 }

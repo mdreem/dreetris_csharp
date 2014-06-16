@@ -147,8 +147,6 @@ namespace Dreetris
             position = new Point();
             flipState = 0;
 
-            System.Console.WriteLine("W|H: {0}|{1}", blockWidth, blockHeight);
-
             switch (type)
             {
                 case Type.I:

@@ -171,6 +171,8 @@ namespace Dreetris
                 InitializeGame();
                 keyboard.LockKey(Keys.Space);
             }
+            if (keyboard.IsDown(Keys.Escape))
+                this.Exit();
         }
 
         private void ProcessKeyboardGameOver(GameTime gameTime)
@@ -180,6 +182,8 @@ namespace Dreetris
                 gamestate = State.TITLE_SCREEN;
                 keyboard.LockKey(Keys.Space);
             }
+            if (keyboard.IsDown(Keys.Escape))
+                this.Exit();
         }
 
         private void ProcessKeyboardPaused(GameTime gameTime)
