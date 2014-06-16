@@ -9,11 +9,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Dreetris
 {
-    class Tetrimino
+    public class Tetrimino
     {
         #region Shape definitions
 
-        static int[,,] Ishape = {{{1,0,0,0},
+        static int[, ,] Ishape = {{{1,0,0,0},
                                    {1,0,0,0},
                                    {1,0,0,0},
                                    {1,0,0,0}},
@@ -101,7 +101,7 @@ namespace Dreetris
         #region Fields
 
         public enum Type { None, I, J, L, O, S, T, Z };
-        int[,] currentShape = new int[4,4];
+        int[,] currentShape = new int[4, 4];
 
         public static int BLOCK_WIDTH = 20;
         public static int BLOCK_HEIGHT = 20;
@@ -111,7 +111,12 @@ namespace Dreetris
 
         Texture2D sprite;
         Rectangle drawRectangle;
-        Tetrimino.Type type;
+        Tetrimino.Type _type;
+
+        public Tetrimino.Type type
+        {
+            get { return _type; }
+        }
 
         private Point coordinates; // coordinates on the screen
         public Point boardPosition; // coordinates of the board on the screen
@@ -130,7 +135,7 @@ namespace Dreetris
         {
             //System.Diagnostics.Debug.WriteLine("Yay!");
             LoadContent(contentManager);
-            this.type = type;
+            this._type = type;
             coordinates = new Point();
             boardPosition = new Point();
             position = new Point();
@@ -161,7 +166,7 @@ namespace Dreetris
                     break;
                 default:
                     break;
-            }    
+            }
 
             UpdateShape();
         }
@@ -175,7 +180,7 @@ namespace Dreetris
         /// </summary>
         public void Update(GameTime gameTime)
         {
-            UpdateShape();     
+            UpdateShape();
         }
 
         /// <summary>
@@ -183,7 +188,7 @@ namespace Dreetris
         /// </summary>
         public void UpdateShape()
         {
-            switch (type)
+            switch (_type)
             {
                 case Type.I:
                     SetCurrentShape(Ishape);
@@ -221,7 +226,7 @@ namespace Dreetris
             coordinates.Y = boardPosition.Y + BLOCK_HEIGHT * position.Y;
             Color current_color;
 
-            switch (type)
+            switch (_type)
             {
                 case Tetrimino.Type.I:
                     current_color = Color.Cyan;
@@ -261,11 +266,6 @@ namespace Dreetris
                 }
         }
 
-        public Tetrimino.Type GetType()
-        {
-            return type;
-        }
-
         public void Flip()
         {
             flipState = (flipState + 1) % numStates;
@@ -296,7 +296,7 @@ namespace Dreetris
             //draw_rectangle = new Rectangle(x, y, sprite.Width, sprite.Height);
         }
 
-        private void SetCurrentShape(int[,,] shape)
+        private void SetCurrentShape(int[, ,] shape)
         {
             for (int i = 0; i < shape.GetLength(1); i++)
                 for (int j = 0; j < shape.GetLength(2); j++)

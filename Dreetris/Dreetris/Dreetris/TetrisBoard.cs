@@ -19,6 +19,8 @@ namespace Dreetris
         int width;
         int height;
 
+        TetriminoPreview preview;
+
         int _level = 1;
 
         public int level
@@ -78,6 +80,8 @@ namespace Dreetris
             content = contentManager;
             randomBlocks = new RandomBlocks();
             //            Enum.GetValues(typeof(Tetrimino.Type));
+
+            preview = new TetriminoPreview(randomBlocks, contentManager, new Point(x + (width + 3)*Tetrimino.BLOCK_WIDTH, y));
 
             SetLevel(1);
             
@@ -183,6 +187,7 @@ namespace Dreetris
                     }
                 }
             currentTetrimino.Draw(spriteBatch);
+            preview.Draw(spriteBatch);
         }
 
         /// <summary>
@@ -265,12 +270,6 @@ namespace Dreetris
         /// </summary>
         private void InitializeBackground(ContentManager contentManager)
         {
-            //background_image = contentManager.Load<Texture2D>("background");
-            //background_image = contentManager.Load<Texture2D>("block");
-            /*
-            background_rectangle = new Rectangle(position.X, position.Y,
-                position.X + Tetrimino.BLOCK_WIDTH * (this.width - 1),
-                position.Y + Tetrimino.BLOCK_HEIGHT * (this.height - 1));*/
         }
 
         /// <summary>
@@ -330,7 +329,7 @@ namespace Dreetris
                         }
                         else
                         {
-                            board[currentTetrimino.position.X + i, currentTetrimino.position.Y + j] = currentTetrimino.GetType();
+                            board[currentTetrimino.position.X + i, currentTetrimino.position.Y + j] = currentTetrimino.type;
                         }
                     }
                 }

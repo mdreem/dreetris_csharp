@@ -2,27 +2,39 @@
 
 namespace Dreetris
 {
-    class RandomBlocks
+    public class RandomBlocks
     {
         Random random = new Random();
         Tetrimino.Type[] blocks;
+        Tetrimino.Type[] nextBlocks;
         int currentPos = 0;
 
         public RandomBlocks()
         {
+            blocks = InitBlocks();
+            nextBlocks = InitBlocks();
+            Shuffle(nextBlocks);
             Randomize();
+        }
+
+        private Tetrimino.Type[] InitBlocks()
+        {
+            Tetrimino.Type[] array = new Tetrimino.Type[7];
+            array[0] = Tetrimino.Type.I;
+            array[1] = Tetrimino.Type.J;
+            array[2] = Tetrimino.Type.L;
+            array[3] = Tetrimino.Type.O;
+            array[4] = Tetrimino.Type.S;
+            array[5] = Tetrimino.Type.T;
+            array[6] = Tetrimino.Type.Z;
+
+            return array;
         }
 
         public void InitBag()
         {
-            blocks = new Tetrimino.Type[7];
-            blocks[0] = Tetrimino.Type.I;
-            blocks[1] = Tetrimino.Type.J;
-            blocks[2] = Tetrimino.Type.L;
-            blocks[3] = Tetrimino.Type.O;
-            blocks[4] = Tetrimino.Type.S;
-            blocks[5] = Tetrimino.Type.T;
-            blocks[6] = Tetrimino.Type.Z;
+            blocks = nextBlocks;
+            nextBlocks = InitBlocks();
         }
 
         /// <summary>
@@ -31,11 +43,20 @@ namespace Dreetris
         /// </summary>
         public Tetrimino.Type GetBlock(int n)
         {
-            if (blocks.Length <= n)
-                return Tetrimino.Type.None;
+            int pos = currentPos + n;
+
+            if(pos >= blocks.Length && pos < blocks.Length + nextBlocks.Length)
+            {
+                return nextBlocks[pos - blocks.Length];
+            }
+            else if (pos < blocks.Length)
+            {
+                return blocks[pos];
+            }
             else
             {
-                return blocks[n];
+                //TODO: Exception?
+                return Tetrimino.Type.None;
             }
         }
 
@@ -61,14 +82,7 @@ namespace Dreetris
         public void Randomize()
         {
             InitBag();
-            Shuffle(blocks);
-            /*
-            System.Console.WriteLine("current bag:");
-            foreach(var bl in blocks)
-            {
-                System.Console.WriteLine("cur: {0}", bl);
-            }
-            */
+            Shuffle(nextBlocks);
             currentPos = 0;
         }
 
