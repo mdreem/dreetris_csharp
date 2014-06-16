@@ -25,26 +25,30 @@ namespace Dreetris
         public void Draw(SpriteBatch spriteBatch)
         {
             Tetrimino current = new Tetrimino(contentManager, randomBlocks.GetBlock(0));
-            Tetrimino next1 = new Tetrimino(contentManager, randomBlocks.GetBlock(1));
-            Tetrimino next2 = new Tetrimino(contentManager, randomBlocks.GetBlock(2));
-            Tetrimino next3 = new Tetrimino(contentManager, randomBlocks.GetBlock(3));
+            Tetrimino next1 = new Tetrimino(contentManager, randomBlocks.GetBlock(1), 0.7f);
+            Tetrimino next2 = new Tetrimino(contentManager, randomBlocks.GetBlock(2), 0.7f);
+            Tetrimino next3 = new Tetrimino(contentManager, randomBlocks.GetBlock(3), 0.7f);
+
+            Point position2 = new Point();
+            position2.X = position.X;
+            position2.Y = position.Y + Tetrimino.BLOCK_HEIGHT * 5;
 
             current.boardPosition = position;
-            next1.boardPosition = position;
-            next2.boardPosition = position;
-            next3.boardPosition = position;
+            next1.boardPosition = position2;
+            next2.boardPosition = position2;
+            next3.boardPosition = position2;
 
             current.position.X = 0;
             current.position.Y = 0;
 
             next1.position.X = 0;
-            next1.position.Y = 5;
+            next1.position.Y = 0;
 
             next2.position.X = 0;
-            next2.position.Y = 10;
+            next2.position.Y = 5;
 
             next3.position.X = 0;
-            next3.position.Y = 15;
+            next3.position.Y = 10;
 
             current.Draw(spriteBatch);
             next1.Draw(spriteBatch);

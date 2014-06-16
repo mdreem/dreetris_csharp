@@ -106,6 +106,9 @@ namespace Dreetris
         public static int BLOCK_WIDTH = 20;
         public static int BLOCK_HEIGHT = 20;
 
+        public int blockWidth;
+        public int blockHeight;
+
         int flipState;
         int numStates;
 
@@ -131,8 +134,11 @@ namespace Dreetris
         /// </summary>
         /// <param name="contentManager">the content manager for loading content</param>
         /// <param name="type">the tetrimino type</param>
-        public Tetrimino(ContentManager contentManager, Tetrimino.Type type)
+        public Tetrimino(ContentManager contentManager, Tetrimino.Type type, float scale = 1.0f)
         {
+            blockWidth = (int)((float)BLOCK_WIDTH * scale);
+            blockHeight = (int)((float)BLOCK_HEIGHT * scale);
+
             //System.Diagnostics.Debug.WriteLine("Yay!");
             LoadContent(contentManager);
             this._type = type;
@@ -140,6 +146,8 @@ namespace Dreetris
             boardPosition = new Point();
             position = new Point();
             flipState = 0;
+
+            System.Console.WriteLine("W|H: {0}|{1}", blockWidth, blockHeight);
 
             switch (type)
             {
@@ -222,8 +230,8 @@ namespace Dreetris
         /// <param name="spriteBatch">the sprite batch to use</param>
         public void Draw(SpriteBatch spriteBatch)
         {
-            coordinates.X = boardPosition.X + BLOCK_WIDTH * position.X;
-            coordinates.Y = boardPosition.Y + BLOCK_HEIGHT * position.Y;
+            coordinates.X = boardPosition.X + blockWidth * position.X;
+            coordinates.Y = boardPosition.Y + blockHeight * position.Y;
             Color current_color;
 
             switch (_type)
@@ -261,6 +269,7 @@ namespace Dreetris
                     {
                         drawRectangle.X = coordinates.X + i * drawRectangle.Height;
                         drawRectangle.Y = coordinates.Y + j * drawRectangle.Width;
+
                         spriteBatch.Draw(sprite, drawRectangle, current_color);
                     }
                 }
@@ -292,8 +301,7 @@ namespace Dreetris
         {
             // load content and set remainder of draw rectangle
             sprite = contentManager.Load<Texture2D>("block");
-            drawRectangle = new Rectangle(0, 0, BLOCK_WIDTH, BLOCK_HEIGHT);
-            //draw_rectangle = new Rectangle(x, y, sprite.Width, sprite.Height);
+            drawRectangle = new Rectangle(0, 0, blockWidth, blockHeight);
         }
 
         private void SetCurrentShape(int[, ,] shape)
