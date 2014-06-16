@@ -149,7 +149,7 @@ namespace Dreetris
                         gamestate = State.GAMEOVER;
                     break;
                 case State.TITLE_SCREEN:
-                    process_keyboard_title(gameTime);
+                    ProcessKeyboardTitle(gameTime);
                     break;
                 case State.PAUSED:
                     ProcessKeyboardPaused(gameTime);
@@ -163,7 +163,7 @@ namespace Dreetris
             base.Update(gameTime);
         }
 
-        private void process_keyboard_title(GameTime gameTime)
+        private void ProcessKeyboardTitle(GameTime gameTime)
         {
             KeyboardState current_state = Keyboard.GetState();
 
