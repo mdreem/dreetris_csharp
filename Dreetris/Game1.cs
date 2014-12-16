@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 using Dreetris.Animation;
+using Dreetris.Screens;
 
 namespace Dreetris
 {
@@ -52,6 +53,8 @@ namespace Dreetris
         Writer writer = new Writer(500);
         BezierCurve bz;
 
+        ScreenManager screenManager;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -60,6 +63,8 @@ namespace Dreetris
             // Change resolution
             graphics.PreferredBackBufferWidth = WINDOW_WIDTH;
             graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
+
+            screenManager = new ScreenManager(this);
         }
 
         /// <summary>
@@ -70,6 +75,7 @@ namespace Dreetris
         /// </summary>
         protected override void Initialize()
         {
+            /*
             animation.addKeyframe(new KeyframeStraight(new Vector2(600, 200),
                                                 new Vector2(650, 250),
                                                 1000));
@@ -93,6 +99,16 @@ namespace Dreetris
 
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });
+            */
+
+            GameScreen gs = new GameScreen(this, screenManager);
+            gs.Initialize();
+
+            TitleScreen ts = new TitleScreen(this, screenManager);
+            ts.Initialize();
+
+            screenManager.push(gs);
+            screenManager.push(ts);
 
             base.Initialize();
         }
@@ -136,30 +152,34 @@ namespace Dreetris
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            keyboard.Process(gameTime);
+            screenManager.Update(gameTime);
+            //keyboard.Process(gameTime);
 
-            switch (gamestate)
-            {
-                case State.RUNNING:
-                    ProcessKeyboard(gameTime);
+            ////lastKeyboardState = keyboardState;
+            ////keyboardState = Keyboard.GetState();
 
-                    animation.Update(gameTime);
-                    board.Update(gameTime);
-                    if (board.gameOver)
-                        gamestate = State.GAMEOVER;
-                    break;
-                case State.TITLE_SCREEN:
-                    ProcessKeyboardTitle(gameTime);
-                    break;
-                case State.PAUSED:
-                    ProcessKeyboardPaused(gameTime);
-                    break;
-                case State.GAMEOVER:
-                    ProcessKeyboardGameOver(gameTime);
-                    break;
-                default:
-                    break;
-            }
+            //switch (gamestate)
+            //{
+            //    case State.RUNNING:
+            //        ProcessKeyboard(gameTime);
+
+            //        animation.Update(gameTime);
+            //        board.Update(gameTime);
+            //        if (board.gameOver)
+            //            gamestate = State.GAMEOVER;
+            //        break;
+            //    case State.TITLE_SCREEN:
+            //        ProcessKeyboardTitle(gameTime);
+            //        break;
+            //    case State.PAUSED:
+            //        ProcessKeyboardPaused(gameTime);
+            //        break;
+            //    case State.GAMEOVER:
+            //        ProcessKeyboardGameOver(gameTime);
+            //        break;
+            //    default:
+            //        break;
+            //}
             base.Update(gameTime);
         }
 
@@ -293,23 +313,24 @@ namespace Dreetris
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            switch (gamestate)
-            {
-                case State.RUNNING:
-                    DrawRunning(gameTime);
-                    break;
-                case State.TITLE_SCREEN:
-                    DrawTitle(gameTime);
-                    break;
-                case State.PAUSED:
-                    DrawPaused(gameTime);
-                    break;
-                case State.GAMEOVER:
-                    DrawGameOver(gameTime);
-                    break;
-                default:
-                    break;
-            }
+            screenManager.Draw(gameTime);
+            //switch (gamestate)
+            //{
+            //    case State.RUNNING:
+            //        DrawRunning(gameTime);
+            //        break;
+            //    case State.TITLE_SCREEN:
+            //        DrawTitle(gameTime);
+            //        break;
+            //    case State.PAUSED:
+            //        DrawPaused(gameTime);
+            //        break;
+            //    case State.GAMEOVER:
+            //        DrawGameOver(gameTime);
+            //        break;
+            //    default:
+            //        break;
+            //}
             base.Draw(gameTime);
         }
 
