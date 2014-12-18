@@ -8,10 +8,11 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using Dreetris.Animation;
 
 namespace Dreetris
 {
-    class TetrisBoard
+    public class TetrisBoard
     {
         #region Fields
 
@@ -32,15 +33,21 @@ namespace Dreetris
             set { SetLevel(value); }
         }
 
-        ContentManager content;
         Random random = new Random();
         RandomBlocks randomBlocks;
         Score score = new Score();
 
-        Texture2D sprite;
+        Sprite block_I, block_J, block_L, block_O,
+               block_S, block_T, block_Z;
+
+        List<Sprite> blocks = new List<Sprite>();
+
+        //Texture2D sprite;
         Rectangle drawRectangle;
 
         Tetrimino currentTetrimino;
+
+        AssetManager assetManager;
 
         int _clearedLines = 0;
 
@@ -67,27 +74,28 @@ namespace Dreetris
 
         #endregion
 
-        public TetrisBoard(ContentManager contentManager, DKeyboard keyboard, int width, int height, int x = 0, int y = 0)
+        public TetrisBoard(AssetManager am, DKeyboard keyboard, int width, int height, int x = 0, int y = 0)
         {
             board = new Tetrimino.Type[width, height];
             position = new Point(x, y);
             this.width = width;
             this.height = height;
             this.keyboard = keyboard;
+            assetManager = am;
 
             drawRectangle = new Rectangle(0, 0, Tetrimino.BLOCK_WIDTH, Tetrimino.BLOCK_HEIGHT);
 
-            InitializeBackground(contentManager);
-            LoadContent(contentManager);
+            //InitializeBackground(contentManager);
+            //LoadContent(contentManager);
 
-            content = contentManager;
             randomBlocks = new RandomBlocks();
-            //            Enum.GetValues(typeof(Tetrimino.Type));
 
-            preview = new TetriminoPreview(randomBlocks, contentManager, new Point(x + (width + 3)*Tetrimino.BLOCK_WIDTH, y));
+            preview = new TetriminoPreview(am, randomBlocks, new Point(x + (width + 3) * Tetrimino.BLOCK_WIDTH, y));
 
             SetLevel(1);
-            
+
+            CreateTetrimino(randomBlocks.GetCurrentBlock());
+
             System.Diagnostics.Debug.WriteLine("Types: " + Enum.GetValues(typeof(Tetrimino.Type)).ToString());
         }
 
@@ -96,7 +104,8 @@ namespace Dreetris
         public void CreateTetrimino(Tetrimino.Type type)
         {
             System.Diagnostics.Debug.WriteLine("New Tetrimino: " + type.ToString());
-            currentTetrimino = new Tetrimino(content, type);
+
+            currentTetrimino = new Tetrimino(assetManager, type);
             currentTetrimino.position.X = width / 2;
             currentTetrimino.position.Y = 0;
             currentTetrimino.boardPosition = position;
@@ -155,7 +164,11 @@ namespace Dreetris
         /// </summary>
         public void Draw(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < board.GetLength(0); i++)
+            foreach(var b in blocks)
+            {
+                b.draw(spriteBatch);
+            }
+          /*  for (int i = 0; i < board.GetLength(0); i++)
                 for (int j = 0; j < board.GetLength(1); j++)
                 {
                     // Construct pixel coordinates from Positions and Tetrimino-Data
@@ -188,7 +201,8 @@ namespace Dreetris
                         default:
                             break;
                     }
-                }
+                }*/
+
             currentTetrimino.Draw(spriteBatch);
             preview.Draw(spriteBatch);
         }
@@ -261,16 +275,31 @@ namespace Dreetris
 
         #endregion
 
-        #region Private methods
+        public void Initialize()
+        {
+            LoadContent();
+        }
 
-        private void LoadContent(ContentManager contentManager)
+        protected void LoadContent()
         {
             // load content and set remainder of draw rectangle
-            sprite = contentManager.Load<Texture2D>("block");
+            //sprite = content.Load<Texture2D>("block");
+
+            block_I = assetManager.getSprite("block_I");
+            block_J = assetManager.getSprite("block_J");
+            block_L = assetManager.getSprite("block_L");
+            block_O = assetManager.getSprite("block_O");
+            block_S = assetManager.getSprite("block_S");
+            block_T = assetManager.getSprite("block_T");
+            block_Z = assetManager.getSprite("block_Z");
+
             drawRectangle = new Rectangle(0, 0, 20, 20);
 
-            flip = contentManager.Load<SoundEffect>("flip");
+            //flip = content.Load<SoundEffect>("flip");
+            flip = assetManager.getSoundEffect("flip");
         }
+
+        #region Private methods
 
         /// <summary>
         /// Initialization of the board's background.
@@ -309,6 +338,62 @@ namespace Dreetris
             return false;
         }
 
+        private void generateSpriteList()
+        {
+            Console.WriteLine("Generate Spritelist");
+            blocks.Clear();
+
+            for (int i = 0; i < board.GetLength(0); i++)
+                for (int j = 0; j < board.GetLength(1); j++)
+                {
+                    int x = position.X + i * Tetrimino.BLOCK_WIDTH;
+                    int y = position.Y + j * Tetrimino.BLOCK_HEIGHT;
+
+                    Sprite tmp;
+
+                    switch (this.board[i, j])
+                    {
+                        case Tetrimino.Type.I:
+                            tmp = block_I.Clone();
+                            tmp.position = new Vector2(x, y);
+                            blocks.Add(tmp);
+                            break;
+                        case Tetrimino.Type.J:
+                            tmp = block_J.Clone();
+                            tmp.position = new Vector2(x, y);
+                            blocks.Add(tmp);
+                            break;
+                        case Tetrimino.Type.L:
+                            tmp = block_L.Clone();
+                            tmp.position = new Vector2(x, y);
+                            blocks.Add(tmp);
+                            break;
+                        case Tetrimino.Type.O:
+                            tmp = block_O.Clone();
+                            tmp.position = new Vector2(x, y);
+                            blocks.Add(tmp);
+                            break;
+                        case Tetrimino.Type.S:
+                            tmp = block_S.Clone();
+                            tmp.position = new Vector2(x, y);
+                            blocks.Add(tmp);
+                            break;
+                        case Tetrimino.Type.T:
+                            tmp = block_T.Clone();
+                            tmp.position = new Vector2(x, y);
+                            blocks.Add(tmp);
+                            break;
+                        case Tetrimino.Type.Z:
+                            tmp = block_Z.Clone();
+                            tmp.position = new Vector2(x, y);
+                            blocks.Add(tmp);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+        }
+
         /// <summary>
         /// Copy the current Tetrimino to the board.
         /// </summary>
@@ -340,6 +425,8 @@ namespace Dreetris
                         }
                     }
                 }
+
+            generateSpriteList();
         }
 
         private Tetrimino.Type GetRandomType()
@@ -363,6 +450,8 @@ namespace Dreetris
             {
                 board[i, toRow] = board[i, fromRow];
             }
+
+            generateSpriteList();
         }
 
         private void ClearRow(int row)
@@ -371,6 +460,8 @@ namespace Dreetris
             {
                 board[i, row] = Tetrimino.Type.None;
             }
+
+            generateSpriteList();
         }
 
         private void DeleteAndMoveRow(int row)

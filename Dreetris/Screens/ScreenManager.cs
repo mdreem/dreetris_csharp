@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Dreetris.Animation;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +12,50 @@ namespace Dreetris.Screens
     /// </summary>
     public class ScreenManager : DrawableGameComponent
     {
+        public enum Type
+        {
+            GameOver,
+            Game,
+            Pause,
+            Title
+        }
         private List<Screen> screens = new List<Screen>();
 
         DKeyboard _keyboard = new DKeyboard();
         public DKeyboard keyboard { get { return _keyboard; } }
+        AssetManager assetManager;
 
-        public ScreenManager(Game game)
+        public ScreenManager(Game game, AssetManager assetManager)
             : base(game)
-        { }
+        {
+            this.assetManager = assetManager;
+        }
+        /*
+        public Screen getScreen(Type type)
+        {
+            Screen screen = null;
 
+            switch (type)
+            {
+                case Type.Game:
+                    screen = new GameScreen(Game, this, assetManager);
+                    break;
+                case Type.GameOver:
+                    screen = new GameoverScreen(Game, this);
+                    break;
+                case Type.Pause:
+                    screen = new PauseScreen(Game, this);
+                    break;
+                case Type.Title:
+                    screen = new TitleScreen(Game, this);
+                    break;
+                default:
+                    break;
+            }
+
+            return screen;
+        }
+        */
         public void push(Screen screen)
         {
             Console.WriteLine(string.Format("Push: {0}", screens.Count));

@@ -20,7 +20,7 @@ namespace Dreetris
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch;
 
         Texture2D backgroundImage;
         Rectangle backgroundRectangle;
@@ -41,6 +41,7 @@ namespace Dreetris
         BezierCurve bz;
 
         ScreenManager screenManager;
+        AssetManager assetManager;
         private Texture2D blank;
 
         public Game1()
@@ -52,7 +53,6 @@ namespace Dreetris
             graphics.PreferredBackBufferWidth = WINDOW_WIDTH;
             graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
 
-            screenManager = new ScreenManager(this);
         }
 
         /// <summary>
@@ -88,8 +88,10 @@ namespace Dreetris
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });
             */
+            assetManager = new AssetManager(this.Content);
+            screenManager = new ScreenManager(this, assetManager);
 
-            GameScreen gs = new GameScreen(this, screenManager);
+            GameScreen gs = new GameScreen(this, screenManager, assetManager);
             gs.Initialize();
 
             TitleScreen ts = new TitleScreen(this, screenManager);
@@ -111,6 +113,8 @@ namespace Dreetris
 
             test_image = Content.Load<Texture2D>("block");
             test_rectangle = new Rectangle(600, 200, 20, 20);
+
+            //assetManager.getSprite("block");
 
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });

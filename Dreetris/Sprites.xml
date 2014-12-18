@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sprites>
+  <Sprite>
+    <name>block_I</name>
+    <texture>block_I</texture>
+  </Sprite>
+
+  <Sprite>
+    <name>block_J</name>
+    <texture>block_J</texture>
+  </Sprite>
+
+  <Sprite>
+    <name>block_L</name>
+    <texture>block_L</texture>
+  </Sprite>
+
+  <Sprite>
+    <name>block_O</name>
+    <texture>block_O</texture>
+  </Sprite>
+
+  <Sprite>
+    <name>block_S</name>
+    <texture>block_S</texture>
+  </Sprite>
+
+  <Sprite>
+    <name>block_T</name>
+    <texture>block_T</texture>
+  </Sprite>
+
+  <Sprite>
+    <name>block_Z</name>
+    <texture>block_Z</texture>
+  </Sprite>
+</Sprites>

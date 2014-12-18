@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Dreetris.Animation;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,11 +17,13 @@ namespace Dreetris.Screens
         Texture2D blank;
 
         TetrisBoard board;
+        AssetManager assetManager;
 
-        public GameoverScreen(Game game, ScreenManager screenManager, TetrisBoard board)
+        public GameoverScreen(Game game, ScreenManager screenManager, TetrisBoard board, AssetManager assetManager)
             : base(game, screenManager)
         {
             this.board = board;
+            this.assetManager = assetManager;
         }
         /*
         public override void Initialize()
@@ -59,7 +62,7 @@ namespace Dreetris.Screens
                 screenManager.pop();    // pop game over-screen
                 screenManager.pop();    // pop game screen
 
-                GameScreen gs = new GameScreen(Game, screenManager);
+                GameScreen gs = new GameScreen(Game, screenManager, assetManager);
                 gs.Initialize();
 
                 TitleScreen ts = new TitleScreen(Game, screenManager);

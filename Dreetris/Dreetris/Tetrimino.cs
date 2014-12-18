@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Dreetris.Animation;
 
 namespace Dreetris
 {
@@ -112,9 +113,11 @@ namespace Dreetris
         int flipState;
         int numStates;
 
-        Texture2D sprite;
-        Rectangle drawRectangle;
+        //Texture2D sprite;
+        //Rectangle drawRectangle;
         Tetrimino.Type _type;
+
+        Sprite block;
 
         public Tetrimino.Type type
         {
@@ -134,13 +137,15 @@ namespace Dreetris
         /// </summary>
         /// <param name="contentManager">the content manager for loading content</param>
         /// <param name="type">the tetrimino type</param>
-        public Tetrimino(ContentManager contentManager, Tetrimino.Type type, float scale = 1.0f)
+        public Tetrimino(AssetManager am, Tetrimino.Type type, float scale = 1.0f)
         {
+            this.block = am.getSprite("block_" + type.ToString());
+
             blockWidth = (int)((float)BLOCK_WIDTH * scale);
             blockHeight = (int)((float)BLOCK_HEIGHT * scale);
 
             //System.Diagnostics.Debug.WriteLine("Yay!");
-            LoadContent(contentManager);
+            //LoadContent(contentManager);
             this._type = type;
             coordinates = new Point();
             boardPosition = new Point();
@@ -184,7 +189,7 @@ namespace Dreetris
         /// <summary>
         /// ...
         /// </summary>
-        public void Update(GameTime gameTime)
+        public void Update()
         {
             UpdateShape();
         }
@@ -230,8 +235,8 @@ namespace Dreetris
         {
             coordinates.X = boardPosition.X + blockWidth * position.X;
             coordinates.Y = boardPosition.Y + blockHeight * position.Y;
-            Color current_color;
-
+            //Color current_color;
+            /*
             switch (_type)
             {
                 case Tetrimino.Type.I:
@@ -258,17 +263,22 @@ namespace Dreetris
                 default:
                     current_color = Color.Black;
                     break;
-            }
+            }*/
 
             for (int i = 0; i < currentShape.GetLength(0); i++)
                 for (int j = 0; j < currentShape.GetLength(1); j++)
                 {
                     if (currentShape[i, j] == 1)
                     {
-                        drawRectangle.X = coordinates.X + i * drawRectangle.Height;
-                        drawRectangle.Y = coordinates.Y + j * drawRectangle.Width;
+                        //drawRectangle.X = coordinates.X + i * drawRectangle.Height;
+                        //drawRectangle.Y = coordinates.Y + j * drawRectangle.Width;
+                        int X = coordinates.X + i * block.height;
+                        int Y = coordinates.Y + j * block.width;
 
-                        spriteBatch.Draw(sprite, drawRectangle, current_color);
+                        Sprite cur = block.Clone();
+                        cur.position = new Vector2(X, Y);
+                        cur.draw(spriteBatch);
+                        //spriteBatch.Draw(sprite, drawRectangle, current_color);
                     }
                 }
         }
@@ -292,15 +302,16 @@ namespace Dreetris
         }
 
         #endregion
-
-        #region Private methods
-
-        private void LoadContent(ContentManager contentManager)
+/*
+        protected void LoadContent()
         {
+            ContentManager contentManager = Game.Content;
             // load content and set remainder of draw rectangle
             sprite = contentManager.Load<Texture2D>("block");
             drawRectangle = new Rectangle(0, 0, blockWidth, blockHeight);
         }
+  */      
+        #region Private methods
 
         private void SetCurrentShape(int[, ,] shape)
         {

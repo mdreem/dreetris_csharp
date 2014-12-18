@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Dreetris.Animation;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -22,8 +23,12 @@ namespace Dreetris.Screens
         const int KEY_PRESSED_TIME = 150;
 
         TetrisBoard board;
+        AssetManager assetManager;
 
-        public GameScreen(Game game, ScreenManager screenManager) : base(game, screenManager) { }
+        public GameScreen(Game game, ScreenManager screenManager, AssetManager assetManager) : base(game, screenManager) 
+        {
+            this.assetManager = assetManager;
+        }
 
         protected override void LoadContent()
         {
@@ -44,8 +49,8 @@ namespace Dreetris.Screens
         {
             ContentManager content = Game.Content;
 
-            board = new TetrisBoard(content, screenManager.keyboard, 10, 20, 80, 100);
-            board.CreateTetrimino(Tetrimino.Type.I);
+            board = new TetrisBoard(assetManager, screenManager.keyboard, 10, 20, 80, 100);
+            board.Initialize();
 
             base.Initialize();
         }
@@ -59,7 +64,7 @@ namespace Dreetris.Screens
             board.Update(gameTime);
             if (board.gameOver)
             {
-                GameoverScreen gos = new GameoverScreen(Game, screenManager, board);
+                GameoverScreen gos = new GameoverScreen(Game, screenManager, board, assetManager);
                 gos.Initialize();
                 screenManager.push(gos);
             }
