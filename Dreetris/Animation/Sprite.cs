@@ -10,18 +10,20 @@ namespace Dreetris.Animation
 {
     public class Sprite
     {
-        Texture2D texture;
+        protected Texture2D texture;
         public Vector2 position;
-        Nullable<Rectangle> sourceRectangle = null;
-        Color color = Color.White;
-        float rotation = 0;
-        Vector2 origin = new Vector2(0, 0);
-        Vector2 scale = new Vector2(1, 1);
-        SpriteEffects effects = SpriteEffects.None;
-        float layerDepth = 0;
+        protected Nullable<Rectangle> sourceRectangle = null;
+        protected Color color = Color.White;
+        protected float rotation = 0;
+        protected Vector2 origin = new Vector2(0, 0);
+        protected Vector2 _scale = new Vector2(1, 1);
+        protected Vector2 scale_original = new Vector2(1, 1);
 
-        int _width;
-        int _height;
+        protected SpriteEffects effects = SpriteEffects.None;
+        protected float layerDepth = 0;
+
+        protected int _width;
+        protected int _height;
 
         public int width { get { return _width; } }
         public int height { get { return _height; } }
@@ -33,9 +35,16 @@ namespace Dreetris.Animation
             _width = texture.Bounds.Width;
         }
 
+        public void scale(float scalefactor = 1.0f)
+        {
+            _scale = scale_original * scalefactor;
+        }
+
+        public virtual void update(GameTime gameTime) { }
+
         public virtual void draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, sourceRectangle, color, rotation, origin, scale, effects, layerDepth);
+            spriteBatch.Draw(texture, position, sourceRectangle, color, rotation, origin, _scale, effects, layerDepth);
         }
 
         public Sprite Clone()

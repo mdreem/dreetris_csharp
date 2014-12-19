@@ -16,7 +16,7 @@ namespace Dreetris
         Point position;
         AssetManager assetManager;
 
-        Sprite block_I, block_J, block_L, block_O,
+        Tetrimino block_I, block_J, block_L, block_O,
                block_S, block_T, block_Z;
 
         public TetriminoPreview(AssetManager assetManager, RandomBlocks randomBlocks, Point position)
@@ -24,6 +24,8 @@ namespace Dreetris
             this.assetManager = assetManager;
             this.randomBlocks = randomBlocks;
             this.position = position;
+
+            LoadContent();
         }
 
         protected void LoadContent()
@@ -31,21 +33,56 @@ namespace Dreetris
             // load content and set remainder of draw rectangle
             //sprite = content.Load<Texture2D>("block");
 
-            block_I = assetManager.getSprite("block_I");
-            block_J = assetManager.getSprite("block_J");
-            block_L = assetManager.getSprite("block_L");
-            block_O = assetManager.getSprite("block_O");
-            block_S = assetManager.getSprite("block_S");
-            block_T = assetManager.getSprite("block_T");
-            block_Z = assetManager.getSprite("block_Z");
+            block_I = new Tetrimino(assetManager, Tetrimino.Type.I);
+            block_J = new Tetrimino(assetManager, Tetrimino.Type.J);
+            block_L = new Tetrimino(assetManager, Tetrimino.Type.L);
+            block_O = new Tetrimino(assetManager, Tetrimino.Type.O);
+            block_S = new Tetrimino(assetManager, Tetrimino.Type.S);
+            block_T = new Tetrimino(assetManager, Tetrimino.Type.T);
+            block_Z = new Tetrimino(assetManager, Tetrimino.Type.Z);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {/*
-            Tetrimino current = new Tetrimino(am, randomBlocks.GetBlock(0));
-            Tetrimino next1 = new Tetrimino(am, randomBlocks.GetBlock(1), 0.7f);
-            Tetrimino next2 = new Tetrimino(am, randomBlocks.GetBlock(2), 0.7f);
-            Tetrimino next3 = new Tetrimino(am, randomBlocks.GetBlock(3), 0.7f);
+        protected Tetrimino getTetrimino(Tetrimino.Type type)
+        {
+            switch (type)
+            {
+                case Tetrimino.Type.I:
+                    return block_I;
+                case Tetrimino.Type.J:
+                    return block_J;
+                case Tetrimino.Type.L:
+                    return block_L;
+                case Tetrimino.Type.O:
+                    return block_O;
+                case Tetrimino.Type.S:
+                    return block_S;
+                case Tetrimino.Type.T:
+                    return block_T;
+                case Tetrimino.Type.Z:
+                    return block_Z;
+                default:
+                    return null;
+            }
+
+        }
+
+        public void update(GameTime gameTime)
+        {
+            block_I.update(gameTime);
+            block_J.update(gameTime);
+            block_L.update(gameTime);
+            block_O.update(gameTime);
+            block_S.update(gameTime);
+            block_T.update(gameTime);
+            block_Z.update(gameTime);
+        }
+
+        public void draw(SpriteBatch spriteBatch)
+        {
+            Tetrimino current = getTetrimino(randomBlocks.GetBlock(0));
+            Tetrimino next1 = getTetrimino(randomBlocks.GetBlock(1));
+            Tetrimino next2 = getTetrimino(randomBlocks.GetBlock(2));
+            Tetrimino next3 = getTetrimino(randomBlocks.GetBlock(3));
 
             Point position2 = new Point();
             position2.X = position.X;
@@ -59,6 +96,13 @@ namespace Dreetris
             current.position.X = 0;
             current.position.Y = 0;
 
+            current.scale();
+            current.draw(spriteBatch);
+
+            next1.scale(0.75f);
+            next2.scale(0.75f);
+            next3.scale(0.75f);
+
             next1.position.X = 0;
             next1.position.Y = 0;
 
@@ -68,10 +112,9 @@ namespace Dreetris
             next3.position.X = 0;
             next3.position.Y = 10;
 
-            current.Draw(spriteBatch);
-            next1.Draw(spriteBatch);
-            next2.Draw(spriteBatch);
-            next3.Draw(spriteBatch);*/
+            next1.draw(spriteBatch);
+            next2.draw(spriteBatch);
+            next3.draw(spriteBatch);
         }
     }
 }

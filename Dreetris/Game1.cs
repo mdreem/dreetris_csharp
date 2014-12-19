@@ -91,6 +91,8 @@ namespace Dreetris
             assetManager = new AssetManager(this.Content);
             screenManager = new ScreenManager(this, assetManager);
 
+            assetManager.getSprite("testanim");
+
             GameScreen gs = new GameScreen(this, screenManager, assetManager);
             gs.Initialize();
 

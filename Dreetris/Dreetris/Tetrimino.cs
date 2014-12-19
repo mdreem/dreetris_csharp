@@ -113,11 +113,10 @@ namespace Dreetris
         int flipState;
         int numStates;
 
-        //Texture2D sprite;
-        //Rectangle drawRectangle;
         Tetrimino.Type _type;
 
         Sprite block;
+        List<Sprite> blocks = new List<Sprite>();
 
         public Tetrimino.Type type
         {
@@ -137,15 +136,13 @@ namespace Dreetris
         /// </summary>
         /// <param name="contentManager">the content manager for loading content</param>
         /// <param name="type">the tetrimino type</param>
-        public Tetrimino(AssetManager am, Tetrimino.Type type, float scale = 1.0f)
+        public Tetrimino(AssetManager am, Tetrimino.Type type)
         {
             this.block = am.getSprite("block_" + type.ToString());
 
-            blockWidth = (int)((float)BLOCK_WIDTH * scale);
-            blockHeight = (int)((float)BLOCK_HEIGHT * scale);
+            blockWidth = BLOCK_WIDTH;
+            blockHeight = BLOCK_HEIGHT;
 
-            //System.Diagnostics.Debug.WriteLine("Yay!");
-            //LoadContent(contentManager);
             this._type = type;
             coordinates = new Point();
             boardPosition = new Point();
@@ -186,12 +183,21 @@ namespace Dreetris
 
         #region Public methods
 
-        /// <summary>
-        /// ...
-        /// </summary>
-        public void Update()
+        public void scale(float scale = 1.0f)
         {
-            UpdateShape();
+            blockWidth = (int)((float)BLOCK_WIDTH * scale);
+            blockHeight = (int)((float)BLOCK_HEIGHT * scale);
+
+            block.scale(scale);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void update(GameTime gameTime)
+        {
+            // complete Tetromino will be build out of this. Hence the updated state carries over.
+            block.update(gameTime);
         }
 
         /// <summary>
@@ -231,54 +237,22 @@ namespace Dreetris
         /// Draws the tetrimino
         /// </summary>
         /// <param name="spriteBatch">the sprite batch to use</param>
-        public void Draw(SpriteBatch spriteBatch)
+        public void draw(SpriteBatch spriteBatch)
         {
             coordinates.X = boardPosition.X + blockWidth * position.X;
             coordinates.Y = boardPosition.Y + blockHeight * position.Y;
-            //Color current_color;
-            /*
-            switch (_type)
-            {
-                case Tetrimino.Type.I:
-                    current_color = Color.Cyan;
-                    break;
-                case Tetrimino.Type.J:
-                    current_color = Color.DarkBlue;
-                    break;
-                case Tetrimino.Type.L:
-                    current_color = Color.Orange;
-                    break;
-                case Tetrimino.Type.O:
-                    current_color = Color.Yellow;
-                    break;
-                case Tetrimino.Type.S:
-                    current_color = Color.Green;
-                    break;
-                case Tetrimino.Type.T:
-                    current_color = Color.Purple;
-                    break;
-                case Tetrimino.Type.Z:
-                    current_color = Color.Red;
-                    break;
-                default:
-                    current_color = Color.Black;
-                    break;
-            }*/
 
             for (int i = 0; i < currentShape.GetLength(0); i++)
                 for (int j = 0; j < currentShape.GetLength(1); j++)
                 {
                     if (currentShape[i, j] == 1)
                     {
-                        //drawRectangle.X = coordinates.X + i * drawRectangle.Height;
-                        //drawRectangle.Y = coordinates.Y + j * drawRectangle.Width;
                         int X = coordinates.X + i * block.height;
                         int Y = coordinates.Y + j * block.width;
 
                         Sprite cur = block.Clone();
                         cur.position = new Vector2(X, Y);
                         cur.draw(spriteBatch);
-                        //spriteBatch.Draw(sprite, drawRectangle, current_color);
                     }
                 }
         }
@@ -302,15 +276,7 @@ namespace Dreetris
         }
 
         #endregion
-/*
-        protected void LoadContent()
-        {
-            ContentManager contentManager = Game.Content;
-            // load content and set remainder of draw rectangle
-            sprite = contentManager.Load<Texture2D>("block");
-            drawRectangle = new Rectangle(0, 0, blockWidth, blockHeight);
-        }
-  */      
+
         #region Private methods
 
         private void SetCurrentShape(int[, ,] shape)

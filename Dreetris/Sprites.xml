@@ -34,4 +34,30 @@
     <name>block_Z</name>
     <texture>block_Z</texture>
   </Sprite>
+
+  <Sprite>
+    <type>animation</type>
+    <name>testanim</name>
+    <texture>testtexture</texture>
+    <frame>
+      <x>0</x>
+      <y>0</y>
+      <width>40</width>
+      <height>40</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>0</y>
+      <width>40</width>
+      <height>40</height>
+    </frame>
+
+    <frame>
+      <x>80</x>
+      <y>0</y>
+      <width>40</width>
+      <height>40</height>
+    </frame>
+  </Sprite>
 </Sprites>

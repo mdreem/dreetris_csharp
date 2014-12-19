@@ -130,12 +130,17 @@ namespace Dreetris
             if (isHaste)
                 local_fall_delay = fallDelayHaste;
 
+            foreach (var b in blocks)
+            {
+                b.update(gameTime);
+            }
+
             //           System.Diagnostics.Debug.WriteLine("Speed: " + local_fall_delay.ToString());
 
             /* Let the Tetrimino fall until it hits something, then copy it onto the board
              * update every fall_delay ms.
              * */
-            if (timeSinceLastStep > local_fall_delay) // IMPORTANT: may carry over... check if it may by n times over last step
+            if (timeSinceLastStep > local_fall_delay) // TODO: IMPORTANT: may carry over... check if it may by n times over last step
             {
                 timeSinceLastStep = timeSinceLastStep - local_fall_delay;
                 currentTetrimino.position.Y += 1;
@@ -203,8 +208,8 @@ namespace Dreetris
                     }
                 }*/
 
-            currentTetrimino.Draw(spriteBatch);
-            preview.Draw(spriteBatch);
+            currentTetrimino.draw(spriteBatch);
+            preview.draw(spriteBatch);
         }
 
         /// <summary>
