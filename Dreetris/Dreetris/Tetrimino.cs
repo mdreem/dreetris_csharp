@@ -250,9 +250,8 @@ namespace Dreetris
                         int X = coordinates.X + i * block.height;
                         int Y = coordinates.Y + j * block.width;
 
-                        Sprite cur = block.Clone();
-                        cur.position = new Vector2(X, Y);
-                        cur.draw(spriteBatch);
+                        block.position = new Vector2(X, Y);
+                        block.draw(spriteBatch);
                     }
                 }
         }

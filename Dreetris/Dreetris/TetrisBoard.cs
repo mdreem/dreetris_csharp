@@ -130,10 +130,17 @@ namespace Dreetris
             if (isHaste)
                 local_fall_delay = fallDelayHaste;
 
+            //Update the blocks on the field
             foreach (var b in blocks)
             {
                 b.update(gameTime);
             }
+
+            //update the current Tetrimino
+            currentTetrimino.update(gameTime);
+
+            //update the preview-element
+            preview.update(gameTime);
 
             //           System.Diagnostics.Debug.WriteLine("Speed: " + local_fall_delay.ToString());
 
@@ -288,7 +295,6 @@ namespace Dreetris
         protected void LoadContent()
         {
             // load content and set remainder of draw rectangle
-            //sprite = content.Load<Texture2D>("block");
 
             block_I = assetManager.getSprite("block_I");
             block_J = assetManager.getSprite("block_J");
@@ -300,7 +306,6 @@ namespace Dreetris
 
             drawRectangle = new Rectangle(0, 0, 20, 20);
 
-            //flip = content.Load<SoundEffect>("flip");
             flip = assetManager.getSoundEffect("flip");
         }
 

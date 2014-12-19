@@ -28,6 +28,26 @@ namespace Dreetris.Animation
         public int width { get { return _width; } }
         public int height { get { return _height; } }
 
+        public Sprite() { }
+
+        public Sprite(Sprite copySprite)
+        {
+            texture = copySprite.texture;
+            position = copySprite.position;
+            sourceRectangle = copySprite.sourceRectangle;
+            color = copySprite.color;
+            rotation = copySprite.rotation;
+            origin = copySprite.origin;
+            _scale = copySprite._scale;
+            scale_original = copySprite.scale_original;
+
+            effects = copySprite.effects;
+            layerDepth = copySprite.layerDepth;
+
+            _width = copySprite._width;
+            _height = copySprite._height;
+        }
+
         public virtual void initialize(ContentManager cm, string name)
         {
             texture = cm.Load<Texture2D>(name);
@@ -47,9 +67,9 @@ namespace Dreetris.Animation
             spriteBatch.Draw(texture, position, sourceRectangle, color, rotation, origin, _scale, effects, layerDepth);
         }
 
-        public Sprite Clone()
+        public virtual Sprite Clone()
         {
-            return (Sprite)this.MemberwiseClone();
+            return new Sprite(this);
         }
     }
 }

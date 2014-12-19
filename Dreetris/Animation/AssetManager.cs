@@ -44,9 +44,9 @@ namespace Dreetris.Animation
                     sprite = getSpriteAnimationFromData(data);
             }
             else
+            {
                 sprite = getSpriteFromData(data);
-                Console.WriteLine("Type: nix");
-
+            }
             return sprite;
         }
 
@@ -60,7 +60,26 @@ namespace Dreetris.Animation
 
         protected SpriteAnimation getSpriteAnimationFromData(XElement data)
         {
-            return null;
+            Console.WriteLine("Build animation: ");
+            List<Rectangle> rectangles = new List<Rectangle>();
+            string textureName = data.Element("texture").Value;;
+            int fps = int.Parse(data.Element("fps").Value);
+
+            foreach (var frame in data.Elements("frame"))
+            {
+                int x = int.Parse(frame.Element("x").Value);
+                int y = int.Parse(frame.Element("y").Value);
+                int width = int.Parse(frame.Element("width").Value);
+                int height = int.Parse(frame.Element("height").Value);
+
+                rectangles.Add(new Rectangle(x, y, width, height));
+                Console.WriteLine("Frame: {0}, {1}, {2}, {3}", x, y, width, height);
+            }
+
+            SpriteAnimation spriteAnimation = new SpriteAnimation();
+            spriteAnimation.initialize(contentManager, textureName, rectangles.ToArray(), fps, rectangles.Count);
+
+            return spriteAnimation;
         }
 
         public SoundEffect getSoundEffect(string name)

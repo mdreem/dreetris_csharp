@@ -88,10 +88,11 @@ namespace Dreetris
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });
             */
+
+            SoundEffect.MasterVolume = 0.025f;
+
             assetManager = new AssetManager(this.Content);
             screenManager = new ScreenManager(this, assetManager);
-
-            assetManager.getSprite("testanim");
 
             GameScreen gs = new GameScreen(this, screenManager, assetManager);
             gs.Initialize();

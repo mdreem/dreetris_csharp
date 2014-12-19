@@ -5,11 +5,12 @@
     <texture>block_I</texture>
   </Sprite>
 
+  <!--
   <Sprite>
     <name>block_J</name>
     <texture>block_J</texture>
   </Sprite>
-
+-->
   <Sprite>
     <name>block_L</name>
     <texture>block_L</texture>
@@ -37,27 +38,213 @@
 
   <Sprite>
     <type>animation</type>
-    <name>testanim</name>
-    <texture>testtexture</texture>
+    <name>block_J</name>
+    <texture>block_sheet_J</texture>
+    <fps>9</fps>
+    
     <frame>
       <x>0</x>
       <y>0</y>
-      <width>40</width>
-      <height>40</height>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>20</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
     </frame>
 
     <frame>
       <x>40</x>
       <y>0</y>
-      <width>40</width>
-      <height>40</height>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>60</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
     </frame>
 
     <frame>
       <x>80</x>
       <y>0</y>
-      <width>40</width>
-      <height>40</height>
+      <width>20</width>
+      <height>20</height>
     </frame>
+
+    <frame>
+      <x>100</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>120</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>140</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>160</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <!-- and back -->
+
+    <frame>
+      <x>140</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+
+    <frame>
+      <x>100</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+
+    <frame>
+      <x>60</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+
+    <frame>
+      <x>20</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+
+  </Sprite>
+
+
+
+  <Sprite>
+    <type>animation</type>
+    <name>testanim</name>
+    <texture>block_sheet_J</texture>
+    <fps>9</fps>
+
+    <frame>
+      <x>0</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>20</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>60</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>80</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>100</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>120</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>140</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>160</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <!-- and back -->
+
+    <frame>
+      <x>140</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+
+    <frame>
+      <x>100</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+
+    <frame>
+      <x>60</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+
+    <frame>
+      <x>20</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+
   </Sprite>
 </Sprites>
