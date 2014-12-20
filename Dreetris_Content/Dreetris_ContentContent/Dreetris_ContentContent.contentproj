@@ -55,7 +55,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="block.png">
+    <Compile Include="old\block.png">
       <Name>block</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -77,37 +77,37 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="block_I.png">
+    <Compile Include="old\block_I.png">
       <Name>block_I</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="block_J.png">
+    <Compile Include="old\block_J.png">
       <Name>block_J</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="block_L.png">
+    <Compile Include="old\block_L.png">
       <Name>block_L</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="block_O.png">
+    <Compile Include="old\block_O.png">
       <Name>block_O</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="block_S.png">
+    <Compile Include="old\block_S.png">
       <Name>block_S</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="block_T.png">
+    <Compile Include="old\block_T.png">
       <Name>block_T</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="block_Z.png">
+    <Compile Include="old\block_Z.png">
       <Name>block_Z</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
