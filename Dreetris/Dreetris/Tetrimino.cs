@@ -123,9 +123,9 @@ namespace Dreetris
             get { return _type; }
         }
 
-        private Point coordinates; // coordinates on the screen
-        public Point boardPosition; // coordinates of the board on the screen
-        public Point position; // position on the board
+        private Point coordinates; // coordinates on the screen om terms of pixels
+        public Point boardPosition; // coordinates of the board on the screen in terms of pixel
+        public Point position; // position on the board in terms of blocks
 
         #endregion
 
@@ -239,6 +239,7 @@ namespace Dreetris
         /// <param name="spriteBatch">the sprite batch to use</param>
         public void draw(SpriteBatch spriteBatch)
         {
+            // origin of the Tetrimino
             coordinates.X = boardPosition.X + blockWidth * position.X;
             coordinates.Y = boardPosition.Y + blockHeight * position.Y;
 
@@ -247,6 +248,7 @@ namespace Dreetris
                 {
                     if (currentShape[i, j] == 1)
                     {
+                        // TODO: maybe it is better to use blockWidth instead of block.width etc.
                         int X = coordinates.X + i * block.height;
                         int Y = coordinates.Y + j * block.width;
 

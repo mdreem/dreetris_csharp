@@ -114,11 +114,6 @@ namespace Dreetris
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            test_image = Content.Load<Texture2D>("block");
-            test_rectangle = new Rectangle(600, 200, 20, 20);
-
-            //assetManager.getSprite("block");
-
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });
         }

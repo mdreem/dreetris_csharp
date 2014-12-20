@@ -16,6 +16,8 @@ namespace Dreetris
         Point position;
         AssetManager assetManager;
 
+        // has a copy of all Tetriminos loaded and moves them to the right part
+        // of the screen when draw(...) is called.
         Tetrimino block_I, block_J, block_L, block_O,
                block_S, block_T, block_Z;
 
@@ -31,7 +33,6 @@ namespace Dreetris
         protected void LoadContent()
         {
             // load content and set remainder of draw rectangle
-            //sprite = content.Load<Texture2D>("block");
 
             block_I = new Tetrimino(assetManager, Tetrimino.Type.I);
             block_J = new Tetrimino(assetManager, Tetrimino.Type.J);
@@ -63,11 +64,11 @@ namespace Dreetris
                 default:
                     return null;
             }
-
         }
 
         public void update(GameTime gameTime)
         {
+            //needed for animating the blocks
             block_I.update(gameTime);
             block_J.update(gameTime);
             block_L.update(gameTime);

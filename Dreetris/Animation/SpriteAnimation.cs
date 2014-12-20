@@ -57,6 +57,13 @@ namespace Dreetris.Animation
             _height = sheets[frame].Height;   
         }
 
+        public override void scale(float scalefactor = 1.0f)
+        {
+            _scale = scale_original * scalefactor;
+            _height = (int)(sheets[currentFrame].Height * scalefactor);
+            _width = (int)(sheets[currentFrame].Width * scalefactor);
+        }
+
         public override void update(GameTime gameTime)
         {
             double time = gameTime.ElapsedGameTime.TotalMilliseconds;

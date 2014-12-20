@@ -55,9 +55,11 @@ namespace Dreetris.Animation
             _width = texture.Bounds.Width;
         }
 
-        public void scale(float scalefactor = 1.0f)
+        public virtual void scale(float scalefactor = 1.0f)
         {
             _scale = scale_original * scalefactor;
+            _height = (int) (texture.Bounds.Height * scalefactor);
+            _width = (int) (texture.Bounds.Width * scalefactor);
         }
 
         public virtual void update(GameTime gameTime) { }
