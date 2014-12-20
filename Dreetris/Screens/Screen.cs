@@ -8,6 +8,9 @@ namespace Dreetris.Screens
 {
     public abstract class Screen : DrawableGameComponent
     {
+        protected bool _isActive = false;
+        public bool isActive { get { return _isActive; } }
+
         public enum ScreenState
         {
         }
@@ -23,10 +26,14 @@ namespace Dreetris.Screens
         }
 
         public virtual void activate()
-        { }
+        {
+            _isActive = true;
+        }
 
         public virtual void deactivate()
-        { }
+        {
+            _isActive = false;
+        }
         /*
         public virtual void Update(GameTime gameTime)
         {

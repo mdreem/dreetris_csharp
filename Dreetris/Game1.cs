@@ -97,10 +97,14 @@ namespace Dreetris
             GameScreen gs = new GameScreen(this, screenManager, assetManager);
             gs.Initialize();
 
+            FadeScreen fs = new FadeScreen(this, screenManager, FadeScreen.Type.FADE_IN);
+            fs.Initialize();
+
             TitleScreen ts = new TitleScreen(this, screenManager);
             ts.Initialize();
 
             screenManager.push(gs);
+            screenManager.push(fs);
             screenManager.push(ts);
 
             base.Initialize();

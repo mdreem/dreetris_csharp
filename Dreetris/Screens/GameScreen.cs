@@ -24,9 +24,11 @@ namespace Dreetris.Screens
 
         TetrisBoard board;
         AssetManager assetManager;
-        private Sprite testAnim; //TMP
 
-        public GameScreen(Game game, ScreenManager screenManager, AssetManager assetManager) : base(game, screenManager) 
+        private Texture2D blank;
+
+        public GameScreen(Game game, ScreenManager screenManager, AssetManager assetManager)
+            : base(game, screenManager)
         {
             this.assetManager = assetManager;
         }
@@ -50,6 +52,9 @@ namespace Dreetris.Screens
         {
             ContentManager content = Game.Content;
 
+            blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
+            blank.SetData(new[] { Color.White });
+
             board = new TetrisBoard(assetManager, screenManager.keyboard, 10, 20, 80, 100);
             board.Initialize();
 
@@ -61,7 +66,6 @@ namespace Dreetris.Screens
             screenManager.keyboard.Process(gameTime);
             ProcessKeyboard(gameTime);
 
-            //animation.Update(gameTime);
             board.Update(gameTime);
             if (board.gameOver)
             {
@@ -74,11 +78,9 @@ namespace Dreetris.Screens
 
         public override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // draw the board and the tetrimino
             spriteBatch.Begin();
 
+            // draw the board and the tetrimino
             spriteBatch.Draw(backgroundImage, backgroundRectangle, Color.White);
             board.Draw(spriteBatch);
             spriteBatch.DrawString(Font1, "Score: " + board.GetScore().ToString(), new Vector2(500, 20), Color.White);
@@ -147,16 +149,12 @@ namespace Dreetris.Screens
             {
                 if (screenManager.keyboard.Changed(Keys.Enter))
                 {
-                    PauseScreen ps = new PauseScreen(Game, screenManager);
-                    ps.Initialize();
-                    screenManager.push(ps);
+                    pushPauseScreen();
                 }
                 if (screenManager.keyboard.IsDownTime(Keys.Enter) > 3 * KEY_PRESSED_TIME)
                 {
                     screenManager.keyboard.ResetTimer(Keys.Enter, 3 * KEY_PRESSED_TIME);
-                    PauseScreen ps = new PauseScreen(Game, screenManager);
-                    ps.Initialize();
-                    screenManager.push(ps);
+                    pushPauseScreen();
                 }
             }
 
@@ -171,6 +169,18 @@ namespace Dreetris.Screens
 
             if (screenManager.keyboard.IsDown(Keys.Escape))
                 Game.Exit();
+        }
+
+        private void pushPauseScreen()
+        {
+            PauseScreen ps = new PauseScreen(Game, screenManager);
+            ps.Initialize();
+
+            FadeScreen fs = new FadeScreen(Game, screenManager, FadeScreen.Type.FADE_OUT, 0.75f, 250);
+            fs.Initialize();
+
+            screenManager.push(ps);
+            screenManager.push(fs);
         }
     }
 }

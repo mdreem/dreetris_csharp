@@ -16,7 +16,7 @@ namespace Dreetris.Screens
         SpriteBatch spriteBatch;
         SpriteFont Font1;
         Texture2D blank;
-
+        
         public PauseScreen(Game game, ScreenManager screenManager) : base(game, screenManager) { }
 
         protected override void LoadContent()
@@ -31,12 +31,6 @@ namespace Dreetris.Screens
 
             base.LoadContent();
         }
-        /*
-        public override void Initialize()
-        {
-
-            base.Initialize();
-        }*/
 
         public override void Update(GameTime gameTime)
         {
@@ -48,6 +42,9 @@ namespace Dreetris.Screens
 
         public override void Draw(GameTime gameTime)
         {
+            if (!isActive)
+                return;
+
             spriteBatch.Begin();
 
             spriteBatch.Draw(blank, new Rectangle(0, 0, 800, 600), Color.Black * 0.75f);
@@ -64,18 +61,27 @@ namespace Dreetris.Screens
             {
                 if (screenManager.keyboard.Changed(Keys.Enter))
                 {
-                    screenManager.pop();
+                    unpauseScreen();
                 }
 
                 if (screenManager.keyboard.IsDownTime(Keys.Enter) > 3 * KEY_PRESSED_TIME)
                 {
                     screenManager.keyboard.ResetTimer(Keys.Enter, 3 * KEY_PRESSED_TIME);
-                    screenManager.pop();
+                    unpauseScreen();
                 }
             }
 
             if (screenManager.keyboard.IsDown(Keys.Escape))
                 Game.Exit();
+        }
+
+        private void unpauseScreen()
+        {
+            FadeScreen fs = new FadeScreen(Game, screenManager, FadeScreen.Type.FADE_IN, 0.75f, 250);
+            fs.Initialize();
+
+            screenManager.pop();
+            screenManager.push(fs);
         }
     }
 }

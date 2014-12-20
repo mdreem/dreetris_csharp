@@ -12,6 +12,7 @@ namespace Dreetris.Screens
     /// </summary>
     public class ScreenManager : DrawableGameComponent
     {
+        /*
         public enum Type
         {
             GameOver,
@@ -19,6 +20,8 @@ namespace Dreetris.Screens
             Pause,
             Title
         }
+        */
+
         private List<Screen> screens = new List<Screen>();
 
         DKeyboard _keyboard = new DKeyboard();
@@ -117,6 +120,15 @@ namespace Dreetris.Screens
             screens.Last().Update(gameTime);
 
             base.Update(gameTime);
+        }
+
+        public void printStack()
+        {
+            Console.WriteLine("ScreenManager: ");
+            foreach (var e in screens)
+            {
+                Console.WriteLine("{0}", e.ToString());
+            }
         }
     }
 }
