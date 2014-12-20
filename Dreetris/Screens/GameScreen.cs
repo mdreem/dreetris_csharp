@@ -53,9 +53,6 @@ namespace Dreetris.Screens
             board = new TetrisBoard(assetManager, screenManager.keyboard, 10, 20, 80, 100);
             board.Initialize();
 
-            testAnim = assetManager.getSprite("testanim");
-            testAnim.position = new Vector2(40,40);
-
             base.Initialize();
         }
 
@@ -63,8 +60,6 @@ namespace Dreetris.Screens
         {
             screenManager.keyboard.Process(gameTime);
             ProcessKeyboard(gameTime);
-
-            testAnim.update(gameTime);
 
             //animation.Update(gameTime);
             board.Update(gameTime);
@@ -88,8 +83,6 @@ namespace Dreetris.Screens
             board.Draw(spriteBatch);
             spriteBatch.DrawString(Font1, "Score: " + board.GetScore().ToString(), new Vector2(500, 20), Color.White);
             spriteBatch.DrawString(Font1, "Level: " + board.level.ToString(), new Vector2(500, 40), Color.White);
-
-            testAnim.draw(spriteBatch);
 
             spriteBatch.End();
 

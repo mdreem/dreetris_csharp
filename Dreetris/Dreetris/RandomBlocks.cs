@@ -17,6 +17,10 @@ namespace Dreetris
             Randomize();
         }
 
+        /// <summary>
+        /// Constructs an array with all Tetriminos
+        /// </summary>
+        /// <returns></returns>
         private Tetrimino.Type[] InitBlocks()
         {
             Tetrimino.Type[] array = new Tetrimino.Type[7];

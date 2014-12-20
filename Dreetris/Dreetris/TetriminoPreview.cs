@@ -80,25 +80,30 @@ namespace Dreetris
 
         public void draw(SpriteBatch spriteBatch)
         {
+            // the next four Tetriminos
             Tetrimino current = getTetrimino(randomBlocks.GetBlock(0));
             Tetrimino next1 = getTetrimino(randomBlocks.GetBlock(1));
             Tetrimino next2 = getTetrimino(randomBlocks.GetBlock(2));
             Tetrimino next3 = getTetrimino(randomBlocks.GetBlock(3));
 
-            Point position2 = new Point();
-            position2.X = position.X;
-            position2.Y = position.Y + Tetrimino.BLOCK_HEIGHT * 5;
-
             current.boardPosition = position;
-            next1.boardPosition = position2;
-            next2.boardPosition = position2;
-            next3.boardPosition = position2;
 
             current.position.X = 0;
             current.position.Y = 0;
 
             current.scale();
             current.draw(spriteBatch);
+
+            Point position2 = new Point();
+            position2.X = position.X;
+            position2.Y = position.Y + Tetrimino.BLOCK_HEIGHT * 5;
+
+            // relative position of the scaled Tetriminos
+            next1.boardPosition = position2;
+            next2.boardPosition = position2;
+            next3.boardPosition = position2;
+
+            // draw the scaled Tritriminos onto the screen
 
             next1.scale(0.75f);
             next2.scale(0.75f);
