@@ -55,7 +55,7 @@ namespace Dreetris.Screens
                 GameScreen gs = new GameScreen(Game, screenManager, assetManager);
                 gs.Initialize();
 
-                TitleScreen ts = new TitleScreen(Game, screenManager);
+                TitleScreen ts = new TitleScreen(Game, screenManager, assetManager);
                 ts.Initialize();
 
                 screenManager.push(gs);

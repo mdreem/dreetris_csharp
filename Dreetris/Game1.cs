@@ -100,7 +100,7 @@ namespace Dreetris
             FadeScreen fs = new FadeScreen(this, screenManager, FadeScreen.Type.FADE_IN);
             fs.Initialize();
 
-            TitleScreen ts = new TitleScreen(this, screenManager);
+            TitleScreen ts = new TitleScreen(this, screenManager, assetManager);
             ts.Initialize();
 
             screenManager.push(gs);

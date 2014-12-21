@@ -323,7 +323,7 @@ namespace Dreetris
             double time = gameTime.ElapsedGameTime.TotalMilliseconds;
             double local_fall_delay = fallDelay;
 
-            generateSpriteListDeletingRows();
+            generateSpriteListDeletingRows(); // TODO: not very efficient
 
             timeSinceLastStep += time;
 

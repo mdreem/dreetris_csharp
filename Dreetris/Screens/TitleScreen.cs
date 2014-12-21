@@ -3,15 +3,22 @@ using Microsoft.Xna.Framework.Content;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Dreetris.Animation;
 
 namespace Dreetris.Screens
 {
     public class TitleScreen : Screen
     {
+        AssetManager assetManager;
+
         SpriteBatch spriteBatch;
         SpriteFont Font1;
+        Sprite intro;
 
-        public TitleScreen(Game game, ScreenManager screenManager) : base(game, screenManager) { }
+        public TitleScreen(Game game, ScreenManager screenManager, AssetManager assetManager) : base(game, screenManager) 
+        {
+            this.assetManager = assetManager;
+        }
 
         protected override void LoadContent()
         {
@@ -20,6 +27,8 @@ namespace Dreetris.Screens
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Font1 = content.Load<SpriteFont>("SpriteFont1");
+
+            intro = assetManager.getSprite("intro");
 
             base.LoadContent();
         }
@@ -35,12 +44,8 @@ namespace Dreetris.Screens
 
         public override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-
-            spriteBatch.DrawString(Font1, "Dreetris", new Vector2(300, 120), Color.White);
-            spriteBatch.DrawString(Font1, "Press Space to Start", new Vector2(300, 150), Color.White);
-
+            intro.draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

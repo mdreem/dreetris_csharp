@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Sprites>
+
+  <Sprite>
+    <name>intro</name>
+    <texture>intro</texture>
+  </Sprite>
+  
   <Sprite>
     <type>animation</type>
     <name>block_I</name>

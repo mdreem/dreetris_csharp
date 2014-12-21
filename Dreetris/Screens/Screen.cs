@@ -13,6 +13,7 @@ namespace Dreetris.Screens
         }
 
         public ScreenManager screenManager { get; set;}
+
         public Boolean visible { get; set; }
 
         public Screen(Game game, ScreenManager screenManager)
@@ -31,15 +32,5 @@ namespace Dreetris.Screens
         {
             _isActive = false;
         }
-        /*
-        public virtual void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-        }
-        
-        public virtual void Draw(GameTime gameTime)
-        {
-            base.Draw(gameTime);
-        }*/
     }
 }
