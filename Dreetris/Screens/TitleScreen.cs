@@ -55,7 +55,9 @@ namespace Dreetris.Screens
         {
             if (screenManager.keyboard.IsDown(Keys.Space))
             {
-                screenManager.pop();
+                FadeScreen fs = new FadeScreen(Game, screenManager, FadeScreen.Type.FADE_OUT_POP);
+                fs.Initialize();
+                screenManager.push(fs);
                 screenManager.keyboard.LockKey(Keys.Space);
             }
             if (screenManager.keyboard.IsDown(Keys.Escape))

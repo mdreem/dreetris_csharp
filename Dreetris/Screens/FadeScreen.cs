@@ -11,7 +11,8 @@ namespace Dreetris.Screens
         public enum Type
         {
             FADE_IN,
-            FADE_OUT
+            FADE_OUT,
+            FADE_OUT_POP    //do not only pop the FadeScreen but also the Screen below it
         }
 
         Type transitionType;
@@ -70,6 +71,10 @@ namespace Dreetris.Screens
             {
                 transitionPercentange = 1.0f;
                 screenManager.pop();
+
+                //pop not only the fade out, but also the screen which we want to fade out of
+                if (transitionType == Type.FADE_OUT_POP)
+                    screenManager.pop();
             }
             else
             {
@@ -92,6 +97,7 @@ namespace Dreetris.Screens
                     spriteBatch.Draw(blank, backgroundRectangle, overlayCol);
                     break;
                 case Type.FADE_OUT:
+                case Type.FADE_OUT_POP:
                     overlayCol = new Color(new Vector4(0, 0, 0, transitionPercentange * maxFade));
                     spriteBatch.Draw(blank, backgroundRectangle, overlayCol);
                     break;
