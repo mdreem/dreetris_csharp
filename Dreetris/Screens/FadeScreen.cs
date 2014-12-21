@@ -1,12 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Dreetris.Screens
 {
+    /// <summary>
+    /// This class is used for transitioning between two Screens via a simple fade in or fade out
+    /// </summary>
     public class FadeScreen : Screen
     {
         public enum Type
@@ -31,8 +30,19 @@ namespace Dreetris.Screens
         SpriteBatch spriteBatch;
         private float maxFade;
 
-
-        public FadeScreen(Game game, ScreenManager screenManager, Type transitionType, float maxFade = 1.0f, float fadeDuration = 1000)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="screenManager"></param>
+        /// <param name="transitionType"></param>
+        /// <param name="maxFade">maximum transparency value for the fade</param>
+        /// <param name="fadeDuration">duration of the transition in milliseconds</param>
+        public FadeScreen(Game game,
+                ScreenManager screenManager,
+                Type transitionType,
+                float maxFade = 1.0f,
+                float fadeDuration = 1000)
             : base(game, screenManager)
         {
             this.maxFade = maxFade;
@@ -63,6 +73,7 @@ namespace Dreetris.Screens
             }
             else
             {
+                // compute the portion of the transition that already has passed as a percentage.
                 transitionPercentange = (float)(transitionDuration / fadeDuration);
             }
 

@@ -4,9 +4,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Dreetris.Screens
 {
@@ -25,13 +22,6 @@ namespace Dreetris.Screens
             this.board = board;
             this.assetManager = assetManager;
         }
-        /*
-        public override void Initialize()
-        {
-
-
-            base.Initialize();
-        }*/
 
         protected override void LoadContent()
         {
@@ -77,11 +67,8 @@ namespace Dreetris.Screens
                 Game.Exit();
         }
 
-
         public override void Draw(GameTime gameTime)
         {
-            //DrawRunning(gameTime);
-
             spriteBatch.Begin();
 
             spriteBatch.Draw(blank, new Rectangle(0, 0, 800, 600), Color.Black * 0.75f);
@@ -94,6 +81,5 @@ namespace Dreetris.Screens
 
             base.Draw(gameTime);
         }
-
     }
 }

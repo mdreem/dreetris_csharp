@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -20,36 +18,13 @@ namespace Dreetris
         Point position;
         int width;
         int height;
-
-        TetriminoPreview preview;
-
-        SoundEffect flip;
-
         int _level = 1;
-
+ 
         public int level
         {
             get { return _level; }
             set { SetLevel(value); }
         }
-
-        public bool showGhostTetrimino = true;
-
-        Random random = new Random();
-        RandomBlocks randomBlocks;
-        Score score = new Score();
-
-        Sprite block_I, block_J, block_L, block_O,
-               block_S, block_T, block_Z;
-
-        List<Sprite> blocks = new List<Sprite>();
-
-        //Texture2D sprite;
-        Rectangle drawRectangle;
-
-        Tetrimino currentTetrimino;
-
-        AssetManager assetManager;
 
         int _clearedLines = 0;
 
@@ -57,8 +32,6 @@ namespace Dreetris
         {
             get { return _clearedLines; }
         }
-
-        DKeyboard keyboard;
 
         double timeSinceLastStep = 0;
 
@@ -73,6 +46,25 @@ namespace Dreetris
         {
             get { return _gameOver; }
         }
+
+        public bool showGhostTetrimino = true;
+
+        TetriminoPreview preview;
+        Tetrimino currentTetrimino;
+
+        AssetManager assetManager;
+        SoundEffect flip;
+
+        Sprite block_I, block_J, block_L, block_O, block_S, block_T, block_Z;
+        List<Sprite> blocks = new List<Sprite>();
+
+        Rectangle drawRectangle;
+
+        Random random = new Random();
+        RandomBlocks randomBlocks;
+        Score score = new Score();
+
+        DKeyboard keyboard;      
 
         #endregion
 

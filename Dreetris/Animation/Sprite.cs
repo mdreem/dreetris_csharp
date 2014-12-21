@@ -2,14 +2,16 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Dreetris.Animation
 {
+    /// <summary>
+    /// Encapsulates all the properties used by SpriteBatch.Draw 
+    /// </summary>
     public class Sprite
     {
+        #region fields and properties
+
         protected Texture2D texture;
         public Vector2 position;
         protected Nullable<Rectangle> sourceRectangle = null;
@@ -29,6 +31,10 @@ namespace Dreetris.Animation
 
         public int width { get { return _width; } }
         public int height { get { return _height; } }
+
+        #endregion
+
+        #region constructors
 
         public Sprite() { }
 
@@ -52,6 +58,10 @@ namespace Dreetris.Animation
             transparency = copySprite.transparency;
         }
 
+        #endregion
+
+        #region public methods
+
         public void setTransparency(float transparency = 1.0f)
         {
             this.transparency = transparency;
@@ -68,8 +78,8 @@ namespace Dreetris.Animation
         public virtual void scale(float scalefactor = 1.0f)
         {
             _scale = scale_original * scalefactor;
-            _height = (int) (texture.Bounds.Height * scalefactor);
-            _width = (int) (texture.Bounds.Width * scalefactor);
+            _height = (int)(texture.Bounds.Height * scalefactor);
+            _width = (int)(texture.Bounds.Width * scalefactor);
         }
 
         public virtual void update(GameTime gameTime) { }
@@ -83,5 +93,7 @@ namespace Dreetris.Animation
         {
             return new Sprite(this);
         }
+
+        #endregion
     }
 }

@@ -3,15 +3,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Dreetris.Screens
 {
     class GameScreen : Screen
     {
+        #region fields 
         SpriteBatch spriteBatch;
         SpriteFont Font1;
 
@@ -27,26 +24,15 @@ namespace Dreetris.Screens
 
         private Texture2D blank;
 
+        #endregion
+
         public GameScreen(Game game, ScreenManager screenManager, AssetManager assetManager)
             : base(game, screenManager)
         {
             this.assetManager = assetManager;
         }
 
-        protected override void LoadContent()
-        {
-            ContentManager content = Game.Content;
-
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            Font1 = content.Load<SpriteFont>("SpriteFont1");
-
-            // load sprites and build draw rectangles
-            backgroundImage = content.Load<Texture2D>("background");
-            backgroundRectangle = new Rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-
-            base.LoadContent();
-        }
+        #region public methods
 
         public override void Initialize()
         {
@@ -89,6 +75,25 @@ namespace Dreetris.Screens
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        #endregion
+
+        #region private and protected methods
+
+        protected override void LoadContent()
+        {
+            ContentManager content = Game.Content;
+
+            // Create a new SpriteBatch, which can be used to draw textures.
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            Font1 = content.Load<SpriteFont>("SpriteFont1");
+
+            // load sprites and build draw rectangles
+            backgroundImage = content.Load<Texture2D>("background");
+            backgroundRectangle = new Rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+
+            base.LoadContent();
         }
 
         private void ProcessKeyboard(GameTime gameTime)
@@ -182,5 +187,7 @@ namespace Dreetris.Screens
             screenManager.push(ps);
             screenManager.push(fs);
         }
+
+        #endregion
     }
 }

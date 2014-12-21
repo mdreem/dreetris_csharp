@@ -2,20 +2,23 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Dreetris.Animation
 {
     public class SpriteAnimation : Sprite
     {
+        #region fields and properties
+
         int fps;
         double timePerFrame;
         private double timeSinceLastStep = 0;
         private int frameCount;
         private int currentFrame;
         private Rectangle[] sheets;
+
+        #endregion
+
+        #region constructors
 
         public SpriteAnimation() { }
 
@@ -30,6 +33,10 @@ namespace Dreetris.Animation
             sheets = copySpriteAnimation.sheets;
         }
 
+        #endregion
+
+        #region public methods
+
         public void initialize(ContentManager cm, string name, Rectangle[] sheets, int fps, int frameCount)
         {
             texture = cm.Load<Texture2D>(name);
@@ -38,7 +45,7 @@ namespace Dreetris.Animation
             this.frameCount = frameCount;
             this.sheets = sheets;
 
-            setSourceRectangle(0); 
+            setSourceRectangle(0);
 
             Console.WriteLine("Animation.FPS: {0} -> {1}", fps, timePerFrame);
         }
@@ -46,7 +53,7 @@ namespace Dreetris.Animation
         public void nextFrame()
         {
             currentFrame = (currentFrame + 1) % frameCount;
-            setSourceRectangle(currentFrame);  
+            setSourceRectangle(currentFrame);
         }
 
         private void setSourceRectangle(int frame)
@@ -54,7 +61,7 @@ namespace Dreetris.Animation
             sourceRectangle = sheets[frame];
 
             _width = sheets[frame].Width;
-            _height = sheets[frame].Height;   
+            _height = sheets[frame].Height;
         }
 
         public override void scale(float scalefactor = 1.0f)
@@ -86,5 +93,7 @@ namespace Dreetris.Animation
         {
             return new SpriteAnimation(this);
         }
+
+        #endregion
     }
 }
