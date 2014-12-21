@@ -110,6 +110,8 @@ namespace Dreetris
         public int blockWidth;
         public int blockHeight;
 
+        float transparency = 1.0f;
+
         int flipState;
         int numStates;
 
@@ -183,6 +185,11 @@ namespace Dreetris
 
         #region Public methods
 
+        public void setTransparency(float transparency = 1.0f)
+        {
+            this.transparency = transparency;
+        }
+
         public void scale(float scale = 1.0f)
         {
             blockWidth = (int)((float)BLOCK_WIDTH * scale);
@@ -252,6 +259,7 @@ namespace Dreetris
                         int X = coordinates.X + i * block.height;
                         int Y = coordinates.Y + j * block.width;
 
+                        block.setTransparency(transparency);
                         block.position = new Vector2(X, Y);
                         block.draw(spriteBatch);
                     }
@@ -274,6 +282,11 @@ namespace Dreetris
         public int[,] GetCurrentShape()
         {
             return currentShape;
+        }
+
+        public Tetrimino clone()
+        {
+            return (Tetrimino)this.MemberwiseClone();
         }
 
         #endregion

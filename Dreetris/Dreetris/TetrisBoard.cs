@@ -33,6 +33,8 @@ namespace Dreetris
             set { SetLevel(value); }
         }
 
+        public bool showGhostTetrimino = true;
+
         Random random = new Random();
         RandomBlocks randomBlocks;
         Score score = new Score();
@@ -180,40 +182,13 @@ namespace Dreetris
             {
                 b.draw(spriteBatch);
             }
-          /*  for (int i = 0; i < board.GetLength(0); i++)
-                for (int j = 0; j < board.GetLength(1); j++)
-                {
-                    // Construct pixel coordinates from Positions and Tetrimino-Data
-                    drawRectangle.X = position.X + i * Tetrimino.BLOCK_WIDTH;
-                    drawRectangle.Y = position.Y + j * Tetrimino.BLOCK_HEIGHT;
 
-                    switch (this.board[i, j])
-                    {
-                        case Tetrimino.Type.I:
-                            spriteBatch.Draw(sprite, drawRectangle, Color.Cyan);
-                            break;
-                        case Tetrimino.Type.J:
-                            spriteBatch.Draw(sprite, drawRectangle, Color.DarkBlue);
-                            break;
-                        case Tetrimino.Type.L:
-                            spriteBatch.Draw(sprite, drawRectangle, Color.Orange);
-                            break;
-                        case Tetrimino.Type.O:
-                            spriteBatch.Draw(sprite, drawRectangle, Color.Yellow);
-                            break;
-                        case Tetrimino.Type.S:
-                            spriteBatch.Draw(sprite, drawRectangle, Color.Green);
-                            break;
-                        case Tetrimino.Type.T:
-                            spriteBatch.Draw(sprite, drawRectangle, Color.Purple);
-                            break;
-                        case Tetrimino.Type.Z:
-                            spriteBatch.Draw(sprite, drawRectangle, Color.Red);
-                            break;
-                        default:
-                            break;
-                    }
-                }*/
+            if (showGhostTetrimino)
+            {
+                Tetrimino ghost = getGhost();
+                ghost.setTransparency(0.4f);
+                ghost.draw(spriteBatch);
+            }
 
             currentTetrimino.draw(spriteBatch);
             preview.draw(spriteBatch);
@@ -318,6 +293,24 @@ namespace Dreetris
         {
         }
 
+        private Tetrimino getGhost()
+        {
+            Tetrimino ghost = currentTetrimino.clone();
+            int oldY = currentTetrimino.position.Y;
+
+            while (!HasCollided())
+            {
+                currentTetrimino.position.Y++;
+            }
+            currentTetrimino.position.Y--;
+
+            Point pos = new Point(currentTetrimino.position.X, currentTetrimino.position.Y);
+            currentTetrimino.position.Y = oldY;
+
+            ghost.position = pos;
+
+            return ghost;
+        }
         /// <summary>
         /// Check for a collision of the Tetrimino with elements on the board or the board's borders.
         /// </summary>

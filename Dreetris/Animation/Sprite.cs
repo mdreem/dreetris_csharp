@@ -14,6 +14,7 @@ namespace Dreetris.Animation
         public Vector2 position;
         protected Nullable<Rectangle> sourceRectangle = null;
         protected Color color = Color.White;
+        protected Color originalColor = Color.White;
         protected float rotation = 0;
         protected Vector2 origin = new Vector2(0, 0);
         protected Vector2 _scale = new Vector2(1, 1);
@@ -24,6 +25,7 @@ namespace Dreetris.Animation
 
         protected int _width;
         protected int _height;
+        private float transparency = 1.0f;
 
         public int width { get { return _width; } }
         public int height { get { return _height; } }
@@ -36,6 +38,7 @@ namespace Dreetris.Animation
             position = copySprite.position;
             sourceRectangle = copySprite.sourceRectangle;
             color = copySprite.color;
+            originalColor = copySprite.originalColor;
             rotation = copySprite.rotation;
             origin = copySprite.origin;
             _scale = copySprite._scale;
@@ -46,6 +49,13 @@ namespace Dreetris.Animation
 
             _width = copySprite._width;
             _height = copySprite._height;
+            transparency = copySprite.transparency;
+        }
+
+        public void setTransparency(float transparency = 1.0f)
+        {
+            this.transparency = transparency;
+            color = originalColor * transparency;
         }
 
         public virtual void initialize(ContentManager cm, string name)
