@@ -9,7 +9,7 @@
   <Sprite>
     <type>animation</type>
     <name>block_I</name>
-    <texture>block_sheet_I</texture>
+    <texture>block</texture>
     <fps>9</fps>
 
     <frame>
@@ -46,376 +46,173 @@
       <width>20</width>
       <height>20</height>
     </frame>
+  </Sprite>
+
+  <Sprite>
+    <type>animation</type>
+    <name>block_J</name>
+    <texture>block</texture>
+    <fps>9</fps>
 
     <frame>
-      <x>100</x>
-      <y>0</y>
+      <x>0</x>
+      <y>20</y>
       <width>20</width>
       <height>20</height>
     </frame>
-
-    <frame>
-      <x>120</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>140</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>160</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <!-- and back -->
-
-    <frame>
-      <x>140</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>100</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>60</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
 
     <frame>
       <x>20</x>
-      <y>0</y>
+      <y>20</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
+    <frame>
+      <x>40</x>
+      <y>20</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>60</x>
+      <y>20</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>80</x>
+      <y>20</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+    
   </Sprite>
 
   <Sprite>
     <type>animation</type>
     <name>block_L</name>
-    <texture>block_sheet_L</texture>
+    <texture>block</texture>
     <fps>9</fps>
 
     <frame>
       <x>0</x>
-      <y>0</y>
+      <y>40</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>20</x>
-      <y>0</y>
+      <y>40</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>40</x>
-      <y>0</y>
+      <y>40</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>60</x>
-      <y>0</y>
+      <y>40</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>80</x>
-      <y>0</y>
+      <y>40</y>
       <width>20</width>
       <height>20</height>
     </frame>
-
-    <frame>
-      <x>100</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>120</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>140</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>160</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <!-- and back -->
-
-    <frame>
-      <x>140</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>100</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>60</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>20</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
   </Sprite>
 
   <Sprite>
     <type>animation</type>
     <name>block_O</name>
-    <texture>block_sheet_O</texture>
+    <texture>block</texture>
     <fps>9</fps>
 
     <frame>
       <x>0</x>
-      <y>0</y>
+      <y>60</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>20</x>
-      <y>0</y>
+      <y>60</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>40</x>
-      <y>0</y>
+      <y>60</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>60</x>
-      <y>0</y>
+      <y>60</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>80</x>
-      <y>0</y>
+      <y>60</y>
       <width>20</width>
       <height>20</height>
     </frame>
-
-    <frame>
-      <x>100</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>120</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>140</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>160</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <!-- and back -->
-
-    <frame>
-      <x>140</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>100</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>60</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>20</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
+    
   </Sprite>
 
   <Sprite>
     <type>animation</type>
     <name>block_S</name>
-    <texture>block_sheet_S</texture>
+    <texture>block</texture>
     <fps>9</fps>
 
     <frame>
       <x>0</x>
-      <y>0</y>
+      <y>80</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>20</x>
-      <y>0</y>
+      <y>80</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>40</x>
-      <y>0</y>
+      <y>80</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>60</x>
-      <y>0</y>
+      <y>80</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>80</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>100</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>120</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>140</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>160</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <!-- and back -->
-
-    <frame>
-      <x>140</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>100</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>60</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>20</x>
-      <y>0</y>
+      <y>80</y>
       <width>20</width>
       <height>20</height>
     </frame>
@@ -425,315 +222,89 @@
   <Sprite>
     <type>animation</type>
     <name>block_T</name>
-    <texture>block_sheet_T</texture>
+    <texture>block</texture>
     <fps>9</fps>
 
     <frame>
       <x>0</x>
-      <y>0</y>
+      <y>100</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>20</x>
-      <y>0</y>
+      <y>100</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>40</x>
-      <y>0</y>
+      <y>100</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>60</x>
-      <y>0</y>
+      <y>100</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>80</x>
-      <y>0</y>
+      <y>100</y>
       <width>20</width>
       <height>20</height>
     </frame>
-
-    <frame>
-      <x>100</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>120</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>140</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>160</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <!-- and back -->
-
-    <frame>
-      <x>140</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>100</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>60</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>20</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
+    
   </Sprite>
 
   <Sprite>
     <type>animation</type>
     <name>block_Z</name>
-    <texture>block_sheet_Z</texture>
+    <texture>block</texture>
     <fps>9</fps>
 
     <frame>
       <x>0</x>
-      <y>0</y>
+      <y>120</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>20</x>
-      <y>0</y>
+      <y>120</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>40</x>
-      <y>0</y>
+      <y>120</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>60</x>
-      <y>0</y>
+      <y>120</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
     <frame>
       <x>80</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>100</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>120</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>140</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>160</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <!-- and back -->
-
-    <frame>
-      <x>140</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>100</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>60</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>20</x>
-      <y>0</y>
+      <y>120</y>
       <width>20</width>
       <height>20</height>
     </frame>
 
   </Sprite>
   
-  <Sprite>
-    <type>animation</type>
-    <name>block_J</name>
-    <texture>block_sheet_J</texture>
-    <fps>9</fps>
-    
-    <frame>
-      <x>0</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>20</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>40</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>60</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>80</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>100</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>120</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>140</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <frame>
-      <x>160</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-    <!-- and back -->
-
-    <frame>
-      <x>140</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>100</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>60</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-
-    <frame>
-      <x>20</x>
-      <y>0</y>
-      <width>20</width>
-      <height>20</height>
-    </frame>
-
-  </Sprite>
-
   <Sprite>
     <type>animation</type>
     <name>testanim</name>
