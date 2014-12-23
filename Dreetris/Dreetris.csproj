@@ -79,7 +79,7 @@
     <Compile Include="Dreetris\TetriminoPreview.cs" />
     <Compile Include="Dreetris\TetrisBoard.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Particles\DissolveSprite.cs" />
+    <Compile Include="Particles\DissolvingSprite.cs" />
     <Compile Include="Particles\Particle.cs" />
     <Compile Include="Particles\ParticleSystem.cs" />
     <Compile Include="Program.cs" />
@@ -91,6 +91,7 @@
     <Compile Include="Screens\Screen.cs" />
     <Compile Include="Screens\ScreenManager.cs" />
     <Compile Include="Screens\TitleScreen.cs" />
+    <Compile Include="SingleRandom.cs" />
     <Compile Include="Writer.cs" />
   </ItemGroup>
   <ItemGroup>

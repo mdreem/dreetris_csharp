@@ -66,7 +66,7 @@ namespace Dreetris
 
         Sprite block_I, block_J, block_L, block_O, block_S, block_T, block_Z;
         List<Sprite> blocks = new List<Sprite>();
-        List<DissolveSprite> dissolvingBlocks = new List<DissolveSprite>();
+        List<DissolvingSprite> dissolvingBlocks = new List<DissolvingSprite>();
 
         Rectangle drawRectangle;
 
@@ -115,7 +115,7 @@ namespace Dreetris
             currentTetrimino.position.Y = 0;
             currentTetrimino.boardPosition = position;
 
-            if (HasCollided())
+            if (didCollide())
                 _gameOver = true;
         }
 
@@ -166,7 +166,7 @@ namespace Dreetris
         public void FlipTetrimino()
         {
             currentTetrimino.Flip();
-            if (HasCollided())
+            if (didCollide())
                 currentTetrimino.Unflip();
             else
                 flip.Play();
@@ -178,7 +178,7 @@ namespace Dreetris
         public void MoveLeft()
         {
             currentTetrimino.position.X -= 1;
-            if (HasCollided())
+            if (didCollide())
             {
                 currentTetrimino.position.X += 1;
             }
@@ -190,7 +190,7 @@ namespace Dreetris
         public void MoveRight()
         {
             currentTetrimino.position.X += 1;
-            if (HasCollided())
+            if (didCollide())
             {
                 currentTetrimino.position.X -= 1;
             }
@@ -302,7 +302,7 @@ namespace Dreetris
             {
                 timeSinceLastStep = timeSinceLastStep - local_fall_delay;
                 currentTetrimino.position.Y += 1;
-                if (HasCollided())
+                if (didCollide())
                 {
                     currentTetrimino.position.Y -= 1;
                     CopyToBoard();
@@ -397,7 +397,7 @@ namespace Dreetris
             Tetrimino ghost = currentTetrimino.clone();
             int oldY = currentTetrimino.position.Y;
 
-            while (!HasCollided())
+            while (!didCollide())
             {
                 currentTetrimino.position.Y++;
             }
@@ -414,7 +414,7 @@ namespace Dreetris
         /// <summary>
         /// Check for a collision of the Tetrimino with elements on the board or the board's borders.
         /// </summary>
-        private bool HasCollided()
+        private bool didCollide()
         {
             // for every element in the current tetrimino
             int[,] currentShape = currentTetrimino.GetCurrentShape();
@@ -476,7 +476,7 @@ namespace Dreetris
 
             foreach (var block in tmpBlocks)
             {
-                dissolvingBlocks.Add(new DissolveSprite(block));
+                dissolvingBlocks.Add(new DissolvingSprite(block, (float)DELETE_TIME, 0.5f * (float)DELETE_TIME, 40.0f, 40.0f, 4, 4));
             }
         }
 

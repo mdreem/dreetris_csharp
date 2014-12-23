@@ -17,7 +17,7 @@ namespace Dreetris.Animation
         protected Nullable<Rectangle> sourceRectangle = null;
         protected Color color = Color.White;
         protected Color originalColor = Color.White;
-        protected float rotation = 0;
+        public float rotation = 0;
         protected Vector2 origin = new Vector2(0, 0);
         protected Vector2 _scale = new Vector2(1, 1);
         protected Vector2 scale_original = new Vector2(1, 1);
@@ -105,6 +105,21 @@ namespace Dreetris.Animation
         public virtual Sprite Clone()
         {
             return new Sprite(this);
+        }
+
+        // sets the origin of the sprite to its center
+        public void centerCoordinates()
+        {
+            if (!sourceRectangle.HasValue)
+            {
+                origin.X = texture.Width / 2;
+                origin.Y = texture.Height / 2;
+            }
+            else
+            {
+                origin.X = sourceRectangle.Value.Width / 2;
+                origin.Y = sourceRectangle.Value.Height / 2;
+            }
         }
 
         #endregion
