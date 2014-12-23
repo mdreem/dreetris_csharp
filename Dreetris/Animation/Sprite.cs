@@ -62,6 +62,19 @@ namespace Dreetris.Animation
 
         #region public methods
 
+        public Rectangle getSourceRectangle()
+        {
+            if (sourceRectangle != null)
+                return (Rectangle) sourceRectangle;
+            else
+                return texture.Bounds;
+        }
+
+        public void setSourceRectangle(Rectangle? sourceRectangle)
+        {
+            this.sourceRectangle = sourceRectangle;
+        }
+
         public void setTransparency(float transparency = 1.0f)
         {
             this.transparency = transparency;
