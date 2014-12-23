@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 using Dreetris.Animation;
+using Dreetris.Particles;
 
 namespace Dreetris
 {
@@ -20,7 +21,7 @@ namespace Dreetris
 
         #region Fields
 
-        static double DELETE_TIME = 1000;
+        static double DELETE_TIME = 2000; //1000;
 
         Tetrimino.Type[,] board;
         Point position;
@@ -65,6 +66,7 @@ namespace Dreetris
 
         Sprite block_I, block_J, block_L, block_O, block_S, block_T, block_Z;
         List<Sprite> blocks = new List<Sprite>();
+        List<DissolveSprite> dissolvingBlocks = new List<DissolveSprite>();
 
         Rectangle drawRectangle;
 
@@ -257,6 +259,11 @@ namespace Dreetris
             {
                 b.draw(spriteBatch);
             }
+            
+            foreach (var b in dissolvingBlocks)
+            {
+                b.draw(spriteBatch);
+            }
 
             preview.draw(spriteBatch);
         }
@@ -304,6 +311,7 @@ namespace Dreetris
                     {
                         Console.WriteLine("Row full");
                         state = State.DELETING_ROWS;
+                        generateSpriteListDeletingRows();
                     }
                     else
                     {
@@ -323,7 +331,7 @@ namespace Dreetris
             double time = gameTime.ElapsedGameTime.TotalMilliseconds;
             double local_fall_delay = fallDelay;
 
-            generateSpriteListDeletingRows(); // TODO: not very efficient
+            //generateSpriteListDeletingRows(); // TODO: not very efficient
 
             timeSinceLastStep += time;
 
@@ -333,8 +341,13 @@ namespace Dreetris
                 b.update(gameTime);
             }
 
+            foreach (var b in dissolvingBlocks)
+            {
+                b.update(gameTime);
+            }
+
             //update the current Tetrimino
-            currentTetrimino.update(gameTime);
+            //currentTetrimino.update(gameTime);
 
             //update the preview-element
             preview.update(gameTime);
@@ -348,6 +361,8 @@ namespace Dreetris
                 _clearedLines += del_rows;
                 level = Gamedata.GetLevel(clearedLines);
                 CreateTetrimino(GetRandomType());
+
+                dissolvingBlocks.Clear();
 
                 state = State.RUNNING;
             }
@@ -445,7 +460,8 @@ namespace Dreetris
             {
                 if (IsRowFull(j))
                 {
-                    generateSpriteRow(j, 1.0f - transparency);
+                    //generateSpriteRow(j, 1.0f - transparency);
+                    generateDissolvingSpriteRow(j);
                 }
                 else
                 {
@@ -454,8 +470,24 @@ namespace Dreetris
             }
         }
 
+        private void generateDissolvingSpriteRow(int j)
+        {
+            List<Sprite> tmpBlocks = getBlockRow(j);
+
+            foreach (var block in tmpBlocks)
+            {
+                dissolvingBlocks.Add(new DissolveSprite(block));
+            }
+        }
+
         private void generateSpriteRow(int j, float transparency = 1.0f)
         {
+            blocks.AddRange(getBlockRow(j));
+        }
+
+        private List<Sprite> getBlockRow(int j, float transparency = 1.0f)
+        {
+            List<Sprite> tmpBlocks = new List<Sprite>();
 
             for (int i = 0; i < board.GetLength(0); i++)
             {
@@ -470,48 +502,50 @@ namespace Dreetris
                         tmp = block_I.Clone();
                         tmp.setTransparency(transparency);
                         tmp.position = new Vector2(x, y);
-                        blocks.Add(tmp);
+                        tmpBlocks.Add(tmp);
                         break;
                     case Tetrimino.Type.J:
                         tmp = block_J.Clone();
                         tmp.position = new Vector2(x, y);
                         tmp.setTransparency(transparency);
-                        blocks.Add(tmp);
+                        tmpBlocks.Add(tmp);
                         break;
                     case Tetrimino.Type.L:
                         tmp = block_L.Clone();
                         tmp.position = new Vector2(x, y);
                         tmp.setTransparency(transparency);
-                        blocks.Add(tmp);
+                        tmpBlocks.Add(tmp);
                         break;
                     case Tetrimino.Type.O:
                         tmp = block_O.Clone();
                         tmp.position = new Vector2(x, y);
                         tmp.setTransparency(transparency);
-                        blocks.Add(tmp);
+                        tmpBlocks.Add(tmp);
                         break;
                     case Tetrimino.Type.S:
                         tmp = block_S.Clone();
                         tmp.position = new Vector2(x, y);
                         tmp.setTransparency(transparency);
-                        blocks.Add(tmp);
+                        tmpBlocks.Add(tmp);
                         break;
                     case Tetrimino.Type.T:
                         tmp = block_T.Clone();
                         tmp.position = new Vector2(x, y);
                         tmp.setTransparency(transparency);
-                        blocks.Add(tmp);
+                        tmpBlocks.Add(tmp);
                         break;
                     case Tetrimino.Type.Z:
                         tmp = block_Z.Clone();
                         tmp.position = new Vector2(x, y);
                         tmp.setTransparency(transparency);
-                        blocks.Add(tmp);
+                        tmpBlocks.Add(tmp);
                         break;
                     default:
                         break;
                 }
             }
+
+            return tmpBlocks;
         }
 
         /// <summary>

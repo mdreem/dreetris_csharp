@@ -27,10 +27,10 @@ namespace Dreetris.Particles
                     newSprite.position.Y = newSprite.position.Y + j;
 
                     Vector2 velocity = new Vector2(
-                                    4f * (float)(random.NextDouble() * 2 - 1),
-                                    4f * (float)(random.NextDouble() * 2 - 1));
+                                    10f * (float)(random.NextDouble() * 2 - 1),
+                                    10f * (float)(random.NextDouble() * 2 - 1));
 
-                    Particle particle = new Particle(newSprite, velocity, new Vector2(0, 6.0f), 3000, this);
+                    Particle particle = new Particle(newSprite, velocity, new Vector2(0, 6.0f), 2000, this);
 
                     particles.Add(particle);
                 }
