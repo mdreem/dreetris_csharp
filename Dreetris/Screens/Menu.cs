@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 namespace Dreetris.Screens
 {
@@ -37,6 +39,22 @@ namespace Dreetris.Screens
             {
                 calls[position].Invoke();
             }
+        }
+
+        public float getWidth(SpriteFont font)
+        {
+            float max = 0;
+
+            foreach(var s in items)
+            {
+                max = Math.Max(max, font.MeasureString(s).X);
+            }
+            return max;
+        }
+
+        public int getSelected()
+        {
+            return position;
         }
     }
 }

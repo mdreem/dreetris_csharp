@@ -5,7 +5,12 @@
     <name>intro</name>
     <texture>intro</texture>
   </Sprite>
-  
+
+  <Sprite>
+    <name>button</name>
+    <texture>button</texture>
+  </Sprite>
+
   <Sprite>
     <type>animation</type>
     <name>block_I</name>

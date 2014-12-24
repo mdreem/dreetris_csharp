@@ -94,6 +94,9 @@ namespace Dreetris
             assetManager = new AssetManager(this.Content);
             screenManager = new ScreenManager(this, assetManager);
 
+            MenuScreen ms = new MenuScreen(this, screenManager, assetManager);
+            ms.Initialize();
+
             GameScreen gs = new GameScreen(this, screenManager, assetManager);
             gs.Initialize();
 
@@ -106,6 +109,8 @@ namespace Dreetris
             screenManager.push(gs);
             screenManager.push(fs);
             screenManager.push(ts);
+
+            screenManager.push(ms);
 
             base.Initialize();
         }
