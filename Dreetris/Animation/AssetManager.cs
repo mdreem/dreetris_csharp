@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -74,6 +75,11 @@ namespace Dreetris.Animation
         public SoundEffect getSoundEffect(string name)
         {
             return contentManager.Load<SoundEffect>(name);
+        }
+
+        public SpriteFont getFont(string name)
+        {
+            return contentManager.Load<SpriteFont>(name);
         }
     }
 }
