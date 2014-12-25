@@ -37,6 +37,7 @@ namespace Dreetris.Screens
         {
             if (calls.Count != 0)
             {
+                Console.WriteLine("Calling {0}", calls[position]);
                 calls[position].Invoke();
             }
         }

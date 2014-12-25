@@ -1,39 +1,29 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Dreetris.Animation;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Dreetris.Screens
 {
-    class PauseScreen : Screen
+    class PauseScreen : MenuScreen
     {
-        const int KEY_PRESSED_TIME = 150;
+        protected const int TITLE_X = 400;
+        protected const int TITLE_Y = 100;
 
-        SpriteBatch spriteBatch;
-        SpriteFont Font1;
-        Texture2D blank;
-        
-        public PauseScreen(Game game, ScreenManager screenManager) : base(game, screenManager) { }
+        SpriteFont titleFont;
 
-        protected override void LoadContent()
+        public PauseScreen(Game game, ScreenManager screenManager, AssetManager assetManager)
+            : base(game, screenManager, assetManager)
         {
-            ContentManager content = Game.Content;
+            menu.addItem("Resume", unpauseScreen);
+            menu.addItem("Options", openOptionsMenu);
+            menu.addItem("Restart", restartGame);
 
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            Font1 = content.Load<SpriteFont>("SpriteFont1");
-            blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
-            blank.SetData(new[] { Color.White });
+            originX = 400;
+            originY = 200;
 
-            base.LoadContent();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            screenManager.keyboard.Process(gameTime);
-            ProcessKeyboard(gameTime);
-
-            base.Update(gameTime);
+            titleFont = assetManager.getFont("TitleFont");
         }
 
         public override void Draw(GameTime gameTime)
@@ -41,12 +31,17 @@ namespace Dreetris.Screens
             if (!isActive)
                 return;
 
+            //draw the menu itself
+            base.Draw(gameTime);
+
             spriteBatch.Begin();
 
-            spriteBatch.Draw(blank, new Rectangle(0, 0, 800, 600), Color.Black * 0.75f);
+            Color col = new Color(180, 160, 190);
+            string s = "Game Paused";
 
-            spriteBatch.DrawString(Font1, "Paused", new Vector2(300, 120), Color.White);
-            spriteBatch.DrawString(Font1, "Press Enter to Continue", new Vector2(300, 150), Color.White);
+            var measurement = titleFont.MeasureString(s);
+            spriteBatch.DrawString(titleFont, s, new Vector2(TITLE_X - measurement.X / 2 + 2, TITLE_Y + 2), Color.Black); //Shadow
+            spriteBatch.DrawString(titleFont, s, new Vector2(TITLE_X - measurement.X / 2, TITLE_Y), col);
 
             spriteBatch.End();
         }
@@ -78,6 +73,39 @@ namespace Dreetris.Screens
 
             screenManager.pop();
             screenManager.push(fs);
+        }
+
+        private void openOptionsMenu()
+        {
+
+        }
+
+        private void restartGame()
+        {
+            //Remove alle screens
+            screenManager.pop();
+            screenManager.pop();
+
+            FadeScreen fs1 = new FadeScreen(Game, screenManager, FadeScreen.Type.FADE_OUT);
+            fs1.Initialize();
+
+            FadeScreen fs2 = new FadeScreen(Game, screenManager, FadeScreen.Type.FADE_IN);
+            fs2.Initialize();
+
+            GameScreen gs = new GameScreen(Game, screenManager, assetManager);
+            gs.Initialize();
+
+            FadeScreen fs3 = new FadeScreen(Game, screenManager, FadeScreen.Type.FADE_IN);
+            fs3.Initialize();
+
+            TitleScreen ts = new TitleScreen(Game, screenManager, assetManager);
+            ts.Initialize();
+
+            screenManager.push(gs);
+            screenManager.push(fs3);
+            screenManager.push(ts);
+            screenManager.push(fs2);
+            screenManager.push(fs1); //TODO: Working?
         }
     }
 }

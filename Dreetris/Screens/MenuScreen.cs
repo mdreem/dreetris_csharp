@@ -9,18 +9,22 @@ namespace Dreetris.Screens
 {
     public class MenuScreen : Screen
     {
-        const int KEY_PRESSED_TIME = 150;
+        protected const int KEY_PRESSED_TIME = 150;
 
-        SpriteFont font;
-        Menu menu;
-        SpriteBatch spriteBatch;
-        Sprite pointerLeft;
-        Sprite pointerRight;
+        protected SpriteFont font;
+        protected Menu menu;
+        protected SpriteBatch spriteBatch;
+        protected Sprite pointerLeft;
+        protected Sprite pointerRight;
 
-        SoundEffect move;
+        protected SoundEffect move;
 
-        private AssetManager assetManager;
-        private Texture2D blank;
+        //position of the menu
+        protected float originX = 400;
+        protected float originY = 120;
+
+        protected AssetManager assetManager;
+        protected Texture2D blank;
 
         public MenuScreen(Game game, ScreenManager screenManager, AssetManager assetManager)
             : base(game, screenManager)
@@ -41,9 +45,6 @@ namespace Dreetris.Screens
             pointerRight.centerCoordinates();
 
             menu = new Menu();
-            menu.addItem("Option1", doNothing);
-            menu.addItem("Option2", doNothing);
-            menu.addItem("Option3", doNothing);
 
             move = assetManager.getSoundEffect("selection");
         }
@@ -68,31 +69,42 @@ namespace Dreetris.Screens
         {
             spriteBatch.Begin();
 
+            //clear screen
             spriteBatch.Draw(blank, new Rectangle(0, 0, 800, 600), Color.Black * 0.75f);
 
-            float originX = 400;
-            float originY = 120;
+            Color col = new Color(180, 160, 190);
+            drawPointer();
+            drawItems(col);
+
+            spriteBatch.End();
+        }
+
+        private void drawPointer()
+        {
+            if (menu.items.Count == 0) return;
 
             float menuWidth = menu.getWidth(font);
             float itemHeight = font.MeasureString(menu.items[menu.getSelected()]).Y;
 
-
-            //TODO: genauer, falls Höhen Unterschiedlich
-            pointerLeft.position = new Vector2((originX - menuWidth * 1.20f), originY + itemHeight * menu.getSelected() + itemHeight / 2);
-            pointerRight.position = new Vector2((originX + menuWidth * 1.20f), originY + itemHeight * menu.getSelected() + itemHeight / 2);
-
-            foreach (var s in menu.items)
-            {
-                var measurement = font.MeasureString(s);
-                spriteBatch.DrawString(font, s, new Vector2(originX - measurement.X / 2, originY), Color.White);
-
-                originY += measurement.Y;
-            }
+            //TODO: genauer, falls Höhen unterschiedlich
+            pointerLeft.position = new Vector2((originX - menuWidth * 1.05f), originY + itemHeight * menu.getSelected() + itemHeight / 2);
+            pointerRight.position = new Vector2((originX + menuWidth * 1.05f), originY + itemHeight * menu.getSelected() + itemHeight / 2);
 
             pointerLeft.draw(spriteBatch);
             pointerRight.draw(spriteBatch);
+        }
 
-            spriteBatch.End();
+        private void drawItems(Color col)
+        {
+            var tmpOrigin = originY;
+            foreach (var s in menu.items)
+            {
+                var measurement = font.MeasureString(s);
+                spriteBatch.DrawString(font, s, new Vector2(originX - measurement.X / 2 + 2, tmpOrigin + 2), Color.Black); //Shadow
+                spriteBatch.DrawString(font, s, new Vector2(originX - measurement.X / 2, tmpOrigin), col);
+
+                tmpOrigin += measurement.Y;
+            }
         }
 
         private void ProcessKeyboard(GameTime gameTime)
@@ -126,6 +138,20 @@ namespace Dreetris.Screens
                     screenManager.keyboard.ResetTimer(Keys.Up, 3 * KEY_PRESSED_TIME);
                     menu.previousItem();
                     move.Play();
+                }
+            }
+
+            if (screenManager.keyboard.IsDown(Keys.Enter))
+            {
+                if (screenManager.keyboard.Changed(Keys.Enter))
+                {
+                    menu.callCurrentItem();
+                }
+
+                if (screenManager.keyboard.IsDownTime(Keys.Enter) > 3 * KEY_PRESSED_TIME)
+                {
+                    screenManager.keyboard.ResetTimer(Keys.Enter, 3 * KEY_PRESSED_TIME);
+                    menu.callCurrentItem();
                 }
             }
 

@@ -178,7 +178,7 @@ namespace Dreetris.Screens
 
         private void pushPauseScreen()
         {
-            PauseScreen ps = new PauseScreen(Game, screenManager);
+            PauseScreen ps = new PauseScreen(Game, screenManager, assetManager);
             ps.Initialize();
 
             FadeScreen fs = new FadeScreen(Game, screenManager, FadeScreen.Type.FADE_OUT, 0.75f, 250);
