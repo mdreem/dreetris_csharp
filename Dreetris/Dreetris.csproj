@@ -75,6 +75,7 @@
     <Compile Include="Dreetris\Gamedata.cs" />
     <Compile Include="Dreetris\RandomBlocks.cs" />
     <Compile Include="Dreetris\Score.cs" />
+    <Compile Include="Dreetris\ScoreBoard.cs" />
     <Compile Include="Dreetris\Tetrimino.cs" />
     <Compile Include="Dreetris\TetriminoPreview.cs" />
     <Compile Include="Dreetris\TetrisBoard.cs" />

@@ -9,8 +9,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-using Dreetris.Animation;
+
 using Dreetris.Screens;
+using Dreetris.Animation;
 
 namespace Dreetris
 {
@@ -27,7 +28,7 @@ namespace Dreetris
 
         Texture2D test_image;
         Rectangle test_rectangle;
-        Dreetris.Animation.Animation animation = new Dreetris.Animation.Animation();
+        KeyframeAnimation animation = new KeyframeAnimation();
 
         const int WINDOW_WIDTH = 800;
         const int WINDOW_HEIGHT = 600;

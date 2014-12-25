@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Dreetris.Animation
 {
-    class Animation
+    public class KeyframeAnimation
     {
         List<Keyframe> keyframes = new List<Keyframe>();
         int currentFrameIndex = 0;

@@ -1,4 +1,5 @@
 ﻿using Dreetris.Animation;
+using Dreetris.Dreetris;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,6 +21,7 @@ namespace Dreetris.Screens
         const int KEY_PRESSED_TIME = 150;
 
         TetrisBoard board;
+        ScoreBoard score;
         AssetManager assetManager;
 
         private Texture2D blank;
@@ -43,6 +45,8 @@ namespace Dreetris.Screens
 
             board = new TetrisBoard(assetManager, screenManager.keyboard, 10, 20, 80, 100);
             board.Initialize();
+
+            score = new ScoreBoard(board, assetManager);
 
             base.Initialize();
         }
@@ -69,8 +73,7 @@ namespace Dreetris.Screens
             // draw the board and the tetrimino
             spriteBatch.Draw(backgroundImage, backgroundRectangle, Color.White);
             board.Draw(spriteBatch);
-            spriteBatch.DrawString(Font1, "Score: " + board.GetScore().ToString(), new Vector2(500, 20), Color.White);
-            spriteBatch.DrawString(Font1, "Level: " + board.level.ToString(), new Vector2(500, 40), Color.White);
+            score.draw(spriteBatch);
 
             spriteBatch.End();
 
