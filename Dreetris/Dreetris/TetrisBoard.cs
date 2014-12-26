@@ -63,6 +63,7 @@ namespace Dreetris
 
         AssetManager assetManager;
         SoundEffect flip;
+        SoundEffect deleteLine;
 
         Sprite block_I, block_J, block_L, block_O, block_S, block_T, block_Z;
         List<Sprite> blocks = new List<Sprite>();
@@ -312,6 +313,7 @@ namespace Dreetris
                         Console.WriteLine("Row full");
                         state = State.DELETING_ROWS;
                         generateSpriteListDeletingRows();
+                        deleteLine.Play();
                     }
                     else
                     {
@@ -383,6 +385,7 @@ namespace Dreetris
             drawRectangle = new Rectangle(0, 0, 20, 20);
 
             flip = assetManager.getSoundEffect("flip");
+            deleteLine = assetManager.getSoundEffect("del");
         }
 
         /// <summary>
