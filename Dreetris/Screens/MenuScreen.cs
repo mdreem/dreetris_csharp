@@ -33,7 +33,7 @@ namespace Dreetris.Screens
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            font = assetManager.getFont("SpriteFont1");
+            font = assetManager.getFont("Font");
 
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });

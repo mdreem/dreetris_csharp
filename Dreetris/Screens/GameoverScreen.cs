@@ -32,7 +32,7 @@ namespace Dreetris.Screens
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Font1 = content.Load<SpriteFont>("SpriteFont1");
+            Font1 = content.Load<SpriteFont>("Font");
 
             base.LoadContent();
         }

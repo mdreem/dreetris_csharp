@@ -1,10 +1,6 @@
 ﻿using Dreetris.Animation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Dreetris.Dreetris
 {
@@ -23,7 +19,7 @@ namespace Dreetris.Dreetris
             this.board = board;
             this.assetManager = assetManager;
 
-            font = assetManager.getFont("SpriteFont1");
+            font = assetManager.getFont("Scoreboard");
         }
 
         public void update(GameTime gameTime)

@@ -12,7 +12,6 @@ namespace Dreetris.Screens
         AssetManager assetManager;
 
         SpriteBatch spriteBatch;
-        SpriteFont Font1;
         Sprite intro;
 
         public TitleScreen(Game game, ScreenManager screenManager, AssetManager assetManager) : base(game, screenManager) 
@@ -26,8 +25,6 @@ namespace Dreetris.Screens
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Font1 = content.Load<SpriteFont>("SpriteFont1");
-
             intro = assetManager.getSprite("intro");
 
             base.LoadContent();

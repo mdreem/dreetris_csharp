@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 
@@ -23,11 +19,6 @@ namespace Dreetris
         GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
-        Texture2D backgroundImage;
-        Rectangle backgroundRectangle;
-
-        Texture2D test_image;
-        Rectangle test_rectangle;
         KeyframeAnimation animation = new KeyframeAnimation();
 
         const int WINDOW_WIDTH = 800;
@@ -36,10 +27,7 @@ namespace Dreetris
 
         DKeyboard keyboard = new DKeyboard();
 
-        SpriteFont Font1;
-
         Writer writer = new Writer(500);
-        BezierCurve bz;
 
         ScreenManager screenManager;
         AssetManager assetManager;
@@ -64,32 +52,6 @@ namespace Dreetris
         /// </summary>
         protected override void Initialize()
         {
-            /*
-            animation.addKeyframe(new KeyframeStraight(new Vector2(600, 200),
-                                                new Vector2(650, 250),
-                                                1000));
-
-            animation.addKeyframe(new KeyframeStraight(new Vector2(650, 250),
-                                                new Vector2(450, 350),
-                                                2000));
-
-            animation.addKeyframe(new KeyframeStraight(new Vector2(450, 350),
-                                                new Vector2(600, 200),
-                                                1000));
-
-            bz = new BezierCurve(new Vector2(600, 200), new Vector2(650, 375),
-                                             new Vector2(750, 250),
-                                             new Vector2(750, 350)
-                                              );
-
-            Keyframe_Bezier kb = new Keyframe_Bezier(bz, 2000);
-
-            animation.addKeyframe(kb);
-
-            blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
-            blank.SetData(new[] { Color.White });
-            */
-
             SoundEffect.MasterVolume = 0.025f;
 
             assetManager = new AssetManager(this.Content);

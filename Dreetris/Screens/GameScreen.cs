@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 
 namespace Dreetris.Screens
 {
@@ -91,7 +90,7 @@ namespace Dreetris.Screens
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Font1 = content.Load<SpriteFont>("SpriteFont1");
+            Font1 = content.Load<SpriteFont>("Font");
 
             // load sprites and build draw rectangles
             backgroundImage = content.Load<Texture2D>("background");
