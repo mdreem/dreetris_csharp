@@ -13,6 +13,8 @@ namespace Dreetris.Animation
         ContentManager contentManager;
         private XDocument config;
 
+        Dictionary<string, Sprite> sprites = new Dictionary<string, Sprite>();
+
         public AssetManager(ContentManager contentManager)
         {
             this.contentManager = contentManager;
@@ -21,25 +23,34 @@ namespace Dreetris.Animation
 
         public Sprite getSprite(string name)
         {
-            // reads the data inside a <sprite> </sprite>-block containing the correct <name>-block
-            var data = (from sprite_data in config.Descendants("Sprite")
-                          where sprite_data.Element("name").Value == name
-                          select sprite_data).First();
-
-            var type = data.Element("type");
-
-            Sprite sprite = null;
-
-            if (type != null)
+            if (sprites.ContainsKey(name))
             {
-                if (type.Value.ToLower().Equals("animation"))
-                    sprite = getSpriteAnimationFromData(data);
+                return sprites[name].Clone();
             }
             else
             {
-                sprite = getSpriteFromData(data);
+                // reads the data inside a <sprite> </sprite>-block containing the correct <name>-block
+                var data = (from sprite_data in config.Descendants("Sprite")
+                            where sprite_data.Element("name").Value == name
+                            select sprite_data).First();
+
+                var type = data.Element("type");
+
+                Sprite sprite = null;
+
+                if (type != null)
+                {
+                    if (type.Value.ToLower().Equals("animation"))
+                        sprite = getSpriteAnimationFromData(data);
+                }
+                else
+                {
+                    sprite = getSpriteFromData(data);
+                }
+                sprites[name] = sprite;
+
+                return sprite.Clone();
             }
-            return sprite;
         }
 
         protected Sprite getSpriteFromData(XElement data)
