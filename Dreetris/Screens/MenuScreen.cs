@@ -26,6 +26,8 @@ namespace Dreetris.Screens
         protected AssetManager assetManager;
         protected Texture2D blank;
 
+        protected FloatSlider slider;
+
         public MenuScreen(Game game, ScreenManager screenManager, AssetManager assetManager)
             : base(game, screenManager)
         {
@@ -47,11 +49,13 @@ namespace Dreetris.Screens
             menu = new Menu();
 
             move = assetManager.getSoundEffect("selection");
+
+            slider = new FloatSlider(assetManager, 1.0f, 5.0f, 100);
         }
 
         protected void doNothing()
         {
-            Console.WriteLine("Test");
+            Console.WriteLine("doNothing");
         }
 
         public override void Update(GameTime gameTime)
@@ -72,19 +76,20 @@ namespace Dreetris.Screens
             //clear screen
             spriteBatch.Draw(blank, new Rectangle(0, 0, 800, 600), Color.Black * 0.75f);
 
-            Color col = new Color(180, 160, 190);
             drawPointer();
-            drawItems(col);
+            drawItems();
+
+            slider.draw(spriteBatch);
 
             spriteBatch.End();
         }
 
         private void drawPointer()
         {
-            if (menu.items.Count == 0) return;
+            if (menu.entries.Count == 0) return;
 
-            float menuWidth = menu.getWidth(font);
-            float itemHeight = font.MeasureString(menu.items[menu.getSelected()]).Y;
+            float menuWidth = menu.getWidth();
+            float itemHeight = menu.entries[menu.getSelected()].size.Y;
 
             //TODO: genauer, falls Höhen unterschiedlich
             pointerLeft.position = new Vector2((originX - menuWidth * 1.05f), originY + itemHeight * menu.getSelected() + itemHeight / 2);
@@ -94,16 +99,18 @@ namespace Dreetris.Screens
             pointerRight.draw(spriteBatch);
         }
 
-        private void drawItems(Color col)
+        private void drawItems()
         {
             var tmpOrigin = originY;
-            foreach (var s in menu.items)
+            foreach (var e in menu.entries)
             {
-                var measurement = font.MeasureString(s);
-                spriteBatch.DrawString(font, s, new Vector2(originX - measurement.X / 2 + 2, tmpOrigin + 2), Color.Black); //Shadow
-                spriteBatch.DrawString(font, s, new Vector2(originX - measurement.X / 2, tmpOrigin), col);
+                float width = e.size.X;
+                float height = e.size.Y;
 
-                tmpOrigin += measurement.Y;
+                e.position = new Vector2(originX - width / 2, tmpOrigin);
+                e.draw(spriteBatch);
+
+                tmpOrigin += height;
             }
         }
 

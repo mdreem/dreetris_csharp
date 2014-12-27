@@ -64,6 +64,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Animation\Animation.cs" />
+    <Compile Include="Animation\Drawing.cs" />
     <Compile Include="Animation\Keyframe.cs" />
     <Compile Include="Animation\Keyframe_Bezier.cs" />
     <Compile Include="Animation\Keyframe_Straight.cs" />
@@ -89,10 +90,14 @@
     <Compile Include="Screens\GameoverScreen.cs" />
     <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Screens\Menu.cs" />
+    <Compile Include="Screens\MenuEntry.cs" />
+    <Compile Include="Screens\MenuEntryText.cs" />
     <Compile Include="Screens\MenuScreen.cs" />
+    <Compile Include="Screens\OptionsScreen.cs" />
     <Compile Include="Screens\PauseScreen.cs" />
     <Compile Include="Screens\Screen.cs" />
     <Compile Include="Screens\ScreenManager.cs" />
+    <Compile Include="Screens\FloatSlider.cs" />
     <Compile Include="Screens\TitleScreen.cs" />
     <Compile Include="SingleRandom.cs" />
     <Compile Include="Writer.cs" />

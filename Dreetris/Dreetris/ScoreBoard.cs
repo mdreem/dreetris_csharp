@@ -7,7 +7,7 @@ namespace Dreetris.Dreetris
     public class ScoreBoard
     {
         protected static int POSITION_X = 500;
-        protected static int POSITION_Y = 40;
+        protected static int POSITION_Y = 50;
 
         protected AssetManager assetManager;
         protected SpriteFont font;
@@ -22,10 +22,7 @@ namespace Dreetris.Dreetris
             font = assetManager.getFont("Scoreboard");
         }
 
-        public void update(GameTime gameTime)
-        {
-
-        }
+        public void update(GameTime gameTime) { }
 
         public void draw(SpriteBatch spriteBatch)
         {
@@ -33,7 +30,7 @@ namespace Dreetris.Dreetris
             string levelString = "Level: " + board.level.ToString();
             string lines = "Lines: " + board.clearedLines.ToString();
             
-            Color col = new Color(180, 160, 190);
+            Color col = new Color(250, 120, 40);
 
             float posY = (float)POSITION_Y;
 

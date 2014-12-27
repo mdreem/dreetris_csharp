@@ -8,48 +8,44 @@ namespace Dreetris.Screens
     {
         public delegate void Call();
 
-        List<string> _items = new List<string>();
-        List<Call> calls = new List<Call>();
+        public List<MenuEntry> entries = new List<MenuEntry>();
 
         int position = 0;
 
-        public List<string> items { get { return _items;  } }
-
-        public void addItem(string name, Call call)
+        public void addItem(MenuEntry entry)
         {
-            _items.Add(name);
-            calls.Add(call);
+            entries.Add(entry);
         }
 
         public void nextItem()
         {
-            position = (position + 1) % _items.Count;
+            position = (position + 1) % entries.Count;
         }
 
         public void previousItem()
         {
             position--;
             if (position < 0)
-                position = _items.Count - 1;
+                position = entries.Count - 1;
         }
 
         public void callCurrentItem()
         {
-            if (calls.Count != 0)
+            if (entries.Count != 0)
             {
-                Console.WriteLine("Calling {0}", calls[position]);
-                calls[position].Invoke();
+                entries[position].call();
             }
         }
 
-        public float getWidth(SpriteFont font)
+        public float getWidth()
         {
             float max = 0;
 
-            foreach(var s in items)
+            foreach(var e in entries)
             {
-                max = Math.Max(max, font.MeasureString(s).X);
+                max = Math.Max(max, e.size.X);
             }
+
             return max;
         }
 

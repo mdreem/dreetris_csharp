@@ -79,6 +79,7 @@ namespace Dreetris
         /// </summary>
         protected override void LoadContent()
         {
+            Drawing.initialize(GraphicsDevice);
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);

@@ -15,9 +15,13 @@ namespace Dreetris.Screens
         public PauseScreen(Game game, ScreenManager screenManager, AssetManager assetManager)
             : base(game, screenManager, assetManager)
         {
-            menu.addItem("Resume", unpauseScreen);
-            menu.addItem("Options", openOptionsMenu);
-            menu.addItem("Restart", restartGame);
+            MenuEntryText me1 = new MenuEntryText(game, assetManager, "Resume", unpauseScreen);
+            MenuEntryText me2 = new MenuEntryText(game, assetManager, "Options", openOptionsMenu);
+            MenuEntryText me3 = new MenuEntryText(game, assetManager, "Restart", restartGame);
+
+            menu.addItem(me1);
+            menu.addItem(me2);
+            menu.addItem(me3);
 
             originX = 400;
             originY = 200;
@@ -76,7 +80,8 @@ namespace Dreetris.Screens
 
         private void openOptionsMenu()
         {
-
+            OptionsScreen os = new OptionsScreen(Game, screenManager, assetManager);
+            screenManager.push(os);
         }
 
         private void restartGame()
