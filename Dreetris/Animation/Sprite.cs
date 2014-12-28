@@ -13,7 +13,7 @@ namespace Dreetris.Animation
         #region fields and properties
 
         protected Texture2D texture;
-        public Vector2 position;
+        public Vector2 position = new Vector2();
         protected Nullable<Rectangle> sourceRectangle = null;
         protected Color color = Color.White;
         protected Color originalColor = Color.White;

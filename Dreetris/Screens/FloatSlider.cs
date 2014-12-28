@@ -22,6 +22,7 @@ namespace Dreetris.Screens
         Vector2 position;
 
         Sprite slider;
+        protected SpriteFont font;
 
         int sliderPosition;
 
@@ -38,11 +39,13 @@ namespace Dreetris.Screens
             width = 200;
             height = 10;
 
-            slider = assetManager.getSprite("button");
+            slider = assetManager.getSprite("slider");
             slider.centerCoordinates();
 
             slider.position.X = position.X;
             slider.position.Y = position.Y + height / 2;
+
+            font = assetManager.getFont("Font");
         }
 
         public FloatSlider(AssetManager assetManager, float min, float max, int steps)
@@ -76,6 +79,8 @@ namespace Dreetris.Screens
 
             slider.position.X = position.X + width * sliderPosition / (steps - 1);
             slider.draw(spriteBatch);
+
+            spriteBatch.DrawString(font, value().ToString(), new Vector2(position.X + width + 20, position.Y), Color.White);
         }
     }
 }

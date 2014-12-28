@@ -7,6 +7,11 @@
   </Sprite>
 
   <Sprite>
+    <name>slider</name>
+    <texture>button</texture>
+  </Sprite>
+
+  <Sprite>
     <name>button</name>
     <texture>button</texture>
   </Sprite>
@@ -708,4 +713,5 @@
     </frame>
 
   </Sprite>
+  
 </Sprites>

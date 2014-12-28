@@ -9,7 +9,7 @@ namespace Dreetris.Screens
 {
     public class MenuScreen : Screen
     {
-        protected const int KEY_PRESSED_TIME = 150;
+        protected static readonly int KEY_PRESSED_TIME = 150;
 
         protected SpriteFont font;
         protected Menu menu;
@@ -25,8 +25,6 @@ namespace Dreetris.Screens
 
         protected AssetManager assetManager;
         protected Texture2D blank;
-
-        protected FloatSlider slider;
 
         public MenuScreen(Game game, ScreenManager screenManager, AssetManager assetManager)
             : base(game, screenManager)
@@ -49,8 +47,6 @@ namespace Dreetris.Screens
             menu = new Menu();
 
             move = assetManager.getSoundEffect("selection");
-
-            slider = new FloatSlider(assetManager, 1.0f, 5.0f, 100);
         }
 
         protected void doNothing()
@@ -79,7 +75,6 @@ namespace Dreetris.Screens
             drawPointer();
             drawItems();
 
-            slider.draw(spriteBatch);
 
             spriteBatch.End();
         }
