@@ -81,6 +81,30 @@ namespace Dreetris
                 keyTimes[key] = 0;
         }
 
+        public bool downRepeated(Keys key, double time)
+        {
+            if (IsDown(key))
+            {
+                if (Changed(key))
+                {
+                    return true;
+                }
+                else if (IsDownTime(key) > time)
+                {
+                    ResetTimer(key, time);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         /// Processes the keyboard state.
         /// </summary>

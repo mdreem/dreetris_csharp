@@ -111,50 +111,21 @@ namespace Dreetris.Screens
 
         private void ProcessKeyboard(GameTime gameTime)
         {
-            if (screenManager.keyboard.IsDown(Keys.Down))
+            if (screenManager.keyboard.downRepeated(Keys.Down, 3 * KEY_PRESSED_TIME))
             {
-                if (screenManager.keyboard.Changed(Keys.Down))
-                {
-                    menu.nextItem();
-                    move.Play();
-                }
-
-                if (screenManager.keyboard.IsDownTime(Keys.Down) > 3 * KEY_PRESSED_TIME)
-                {
-                    screenManager.keyboard.ResetTimer(Keys.Down, 3 * KEY_PRESSED_TIME);
-                    menu.nextItem();
-                    move.Play();
-                }
+                menu.nextItem();
+                move.Play();
             }
 
-            if (screenManager.keyboard.IsDown(Keys.Up))
+            if (screenManager.keyboard.downRepeated(Keys.Up, 3 * KEY_PRESSED_TIME))
             {
-                if (screenManager.keyboard.Changed(Keys.Up))
-                {
-                    menu.previousItem();
-                    move.Play();
-                }
-
-                if (screenManager.keyboard.IsDownTime(Keys.Up) > 3 * KEY_PRESSED_TIME)
-                {
-                    screenManager.keyboard.ResetTimer(Keys.Up, 3 * KEY_PRESSED_TIME);
-                    menu.previousItem();
-                    move.Play();
-                }
+                menu.previousItem();
+                move.Play();
             }
 
-            if (screenManager.keyboard.IsDown(Keys.Enter))
+            if (screenManager.keyboard.downRepeated(Keys.Enter, 3 * KEY_PRESSED_TIME))
             {
-                if (screenManager.keyboard.Changed(Keys.Enter))
-                {
-                    menu.callCurrentItem();
-                }
-
-                if (screenManager.keyboard.IsDownTime(Keys.Enter) > 3 * KEY_PRESSED_TIME)
-                {
-                    screenManager.keyboard.ResetTimer(Keys.Enter, 3 * KEY_PRESSED_TIME);
-                    menu.callCurrentItem();
-                }
+                menu.callCurrentItem();
             }
 
             if (screenManager.keyboard.IsDown(Keys.Escape))

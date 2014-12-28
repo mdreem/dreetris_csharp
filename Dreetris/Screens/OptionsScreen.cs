@@ -44,32 +44,14 @@ namespace Dreetris.Screens
 
             if (menu.getSelected() == 0)
             {
-                if (screenManager.keyboard.IsDown(Keys.Left))
+                if (screenManager.keyboard.downRepeated(Keys.Left, 3 * KEY_PRESSED_TIME / 100))
                 {
-                    if (screenManager.keyboard.Changed(Keys.Left))
-                    {
-                        slider.moveLeft();
-                    }
-
-                    if (screenManager.keyboard.IsDownTime(Keys.Left) > 3 * KEY_PRESSED_TIME / 100)
-                    {
-                        screenManager.keyboard.ResetTimer(Keys.Left, 3 * KEY_PRESSED_TIME / 100);
-                        slider.moveLeft();
-                    }
+                    slider.moveLeft();
                 }
 
-                if (screenManager.keyboard.IsDown(Keys.Right))
+                if (screenManager.keyboard.downRepeated(Keys.Right, 3 * KEY_PRESSED_TIME / 100))
                 {
-                    if (screenManager.keyboard.Changed(Keys.Right))
-                    {
-                        slider.moveRight();
-                    }
-
-                    if (screenManager.keyboard.IsDownTime(Keys.Right) > 3 * KEY_PRESSED_TIME/100)
-                    {
-                        screenManager.keyboard.ResetTimer(Keys.Right, 3 * KEY_PRESSED_TIME / 100);
-                        slider.moveRight();
-                    }
+                    slider.moveRight();
                 }
             }
         }

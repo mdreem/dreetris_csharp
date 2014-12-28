@@ -57,6 +57,7 @@ namespace Dreetris.Screens
                 screenManager.push(fs);
                 screenManager.keyboard.LockKey(Keys.Space);
             }
+
             if (screenManager.keyboard.IsDown(Keys.Escape))
                 Game.Exit();
         }

@@ -101,75 +101,36 @@ namespace Dreetris.Screens
 
         private void ProcessKeyboard(GameTime gameTime)
         {
-            if (screenManager.keyboard.IsDown(Keys.Space))
+            if (screenManager.keyboard.downRepeated(Keys.Space, 3 * KEY_PRESSED_TIME))
             {
-                if (screenManager.keyboard.Changed(Keys.Space))
-                {
-                    board.FlipTetrimino();
-                }
-                if (screenManager.keyboard.IsDownTime(Keys.Space) > 3 * KEY_PRESSED_TIME)
-                {
-                    screenManager.keyboard.ResetTimer(Keys.Space, 3 * KEY_PRESSED_TIME);
-                    board.FlipTetrimino();
-                }
+                board.FlipTetrimino();
             }
             //else if so that it is not checked twice. Could flip faster this way
-            else if (screenManager.keyboard.IsDown(Keys.Up))
+            else if (screenManager.keyboard.downRepeated(Keys.Up, 3 * KEY_PRESSED_TIME))
             {
-                if (screenManager.keyboard.Changed(Keys.Up))
-                {
-                    board.FlipTetrimino();
-                }
-                if (screenManager.keyboard.IsDownTime(Keys.Up) > 3 * KEY_PRESSED_TIME)
-                {
-                    screenManager.keyboard.ResetTimer(Keys.Up, 3 * KEY_PRESSED_TIME);
-                    board.FlipTetrimino();
-                }
+                board.FlipTetrimino();
             }
 
-            if (screenManager.keyboard.IsDown(Keys.Left))
+            if (screenManager.keyboard.downRepeated(Keys.Left, KEY_PRESSED_TIME))
             {
-                if (screenManager.keyboard.Changed(Keys.Left))
-                {
-                    board.MoveLeft();
-                }
-                if (screenManager.keyboard.IsDownTime(Keys.Left) > KEY_PRESSED_TIME)
-                {
-                    screenManager.keyboard.ResetTimer(Keys.Left, KEY_PRESSED_TIME);
-                    board.MoveLeft();
-                }
+                board.MoveLeft();
             }
 
-            if (screenManager.keyboard.IsDown(Keys.Right))
+            if (screenManager.keyboard.downRepeated(Keys.Right, KEY_PRESSED_TIME))
             {
-                if (screenManager.keyboard.Changed(Keys.Right))
-                {
-                    board.MoveRight();
-                }
-                if (screenManager.keyboard.IsDownTime(Keys.Right) > KEY_PRESSED_TIME)
-                {
-                    screenManager.keyboard.ResetTimer(Keys.Right, KEY_PRESSED_TIME);
-                    board.MoveRight();
-                }
+                board.MoveRight();
             }
 
-            if (screenManager.keyboard.IsDown(Keys.Enter))
+            if (screenManager.keyboard.downRepeated(Keys.Enter, 3 * KEY_PRESSED_TIME))
             {
-                if (screenManager.keyboard.Changed(Keys.Enter))
-                {
-                    pushPauseScreen();
-                }
-                if (screenManager.keyboard.IsDownTime(Keys.Enter) > 3 * KEY_PRESSED_TIME)
-                {
-                    screenManager.keyboard.ResetTimer(Keys.Enter, 3 * KEY_PRESSED_TIME);
-                    pushPauseScreen();
-                }
+                pushPauseScreen();
             }
 
             if (screenManager.keyboard.IsDown(Keys.Down))
             {
                 board.Haste();
             }
+
             if (!screenManager.keyboard.IsDown(Keys.Down))
             {
                 board.Unhaste();

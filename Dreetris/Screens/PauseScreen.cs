@@ -51,18 +51,9 @@ namespace Dreetris.Screens
 
         private void ProcessKeyboard(GameTime gameTime)
         {
-            if (screenManager.keyboard.IsDown(Keys.Enter))
+            if (screenManager.keyboard.downRepeated(Keys.Enter, 3 * KEY_PRESSED_TIME))
             {
-                if (screenManager.keyboard.Changed(Keys.Enter))
-                {
-                    unpauseScreen();
-                }
-
-                if (screenManager.keyboard.IsDownTime(Keys.Enter) > 3 * KEY_PRESSED_TIME)
-                {
-                    screenManager.keyboard.ResetTimer(Keys.Enter, 3 * KEY_PRESSED_TIME);
-                    unpauseScreen();
-                }
+                unpauseScreen();
             }
 
             if (screenManager.keyboard.IsDown(Keys.Escape))
