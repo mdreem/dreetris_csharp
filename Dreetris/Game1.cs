@@ -32,6 +32,7 @@ namespace Dreetris
         ScreenManager screenManager;
         AssetManager assetManager;
         private Texture2D blank;
+        private GameObjects gameObjects;
 
         public Game1()
         {
@@ -57,13 +58,15 @@ namespace Dreetris
             assetManager = new AssetManager(this.Content);
             screenManager = new ScreenManager(this, assetManager);
 
-            GameScreen gs = new GameScreen(this, screenManager, assetManager);
+            gameObjects = new GameObjects(this, screenManager, assetManager);
+
+            GameScreen gs = new GameScreen(gameObjects);
             gs.Initialize();
 
-            FadeScreen fs = new FadeScreen(this, screenManager, FadeScreen.Type.FADE_IN);
+            FadeScreen fs = new FadeScreen(gameObjects, FadeScreen.Type.FADE_IN);
             fs.Initialize();
 
-            TitleScreen ts = new TitleScreen(this, screenManager, assetManager);
+            TitleScreen ts = new TitleScreen(gameObjects);
             ts.Initialize();
 
             screenManager.push(gs);

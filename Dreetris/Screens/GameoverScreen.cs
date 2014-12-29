@@ -14,13 +14,14 @@ namespace Dreetris.Screens
         Texture2D blank;
 
         TetrisBoard board;
-        AssetManager assetManager;
 
-        public GameoverScreen(Game game, ScreenManager screenManager, TetrisBoard board, AssetManager assetManager)
-            : base(game, screenManager)
+        GameObjects gameObjects;
+
+        public GameoverScreen(GameObjects gameObjects, TetrisBoard board)
+            : base(gameObjects)
         {
             this.board = board;
-            this.assetManager = assetManager;
+            this.gameObjects = gameObjects;
         }
 
         protected override void LoadContent()
@@ -52,10 +53,10 @@ namespace Dreetris.Screens
                 screenManager.pop();    // pop game over-screen
                 screenManager.pop();    // pop game screen
 
-                GameScreen gs = new GameScreen(Game, screenManager, assetManager);
+                GameScreen gs = new GameScreen(gameObjects);
                 gs.Initialize();
 
-                TitleScreen ts = new TitleScreen(Game, screenManager, assetManager);
+                TitleScreen ts = new TitleScreen(gameObjects);
                 ts.Initialize();
 
                 screenManager.push(gs);

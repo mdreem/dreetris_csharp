@@ -26,9 +26,9 @@ namespace Dreetris.Screens
 
         int sliderPosition;
 
-        public FloatSlider(AssetManager assetManager, float min, float max, int steps, int sliderPosition)
+        public FloatSlider(GameObjects gameObjects, float min, float max, int steps, int sliderPosition)
         {
-            this.assetManager = assetManager;
+            this.assetManager = gameObjects.assetManager;
 
             this.min = min;
             this.max = max;
@@ -48,8 +48,8 @@ namespace Dreetris.Screens
             font = assetManager.getFont("Font");
         }
 
-        public FloatSlider(AssetManager assetManager, float min, float max, int steps)
-            : this(assetManager, min, max, steps, 0)
+        public FloatSlider(GameObjects gameObjects, float min, float max, int steps)
+            : this(gameObjects, min, max, steps, 0)
         {
         }
 

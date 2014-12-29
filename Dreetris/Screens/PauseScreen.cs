@@ -12,12 +12,12 @@ namespace Dreetris.Screens
 
         SpriteFont titleFont;
 
-        public PauseScreen(Game game, ScreenManager screenManager, AssetManager assetManager)
-            : base(game, screenManager, assetManager)
+        public PauseScreen(GameObjects gameObjects)
+            : base(gameObjects)
         {
-            MenuEntryText me1 = new MenuEntryText(game, assetManager, "Resume", unpauseScreen);
-            MenuEntryText me2 = new MenuEntryText(game, assetManager, "Options", openOptionsMenu);
-            MenuEntryText me3 = new MenuEntryText(game, assetManager, "Restart", restartGame);
+            MenuEntryText me1 = new MenuEntryText(gameObjects, "Resume", unpauseScreen);
+            MenuEntryText me2 = new MenuEntryText(gameObjects, "Options", openOptionsMenu);
+            MenuEntryText me3 = new MenuEntryText(gameObjects, "Restart", restartGame);
 
             menu.addItem(me1);
             menu.addItem(me2);
@@ -62,7 +62,7 @@ namespace Dreetris.Screens
 
         private void unpauseScreen()
         {
-            FadeScreen fs = new FadeScreen(Game, screenManager, FadeScreen.Type.FADE_IN, 0.75f, 250);
+            FadeScreen fs = new FadeScreen(gameObjects, FadeScreen.Type.FADE_IN, 0.75f, 250);
             fs.Initialize();
 
             screenManager.pop();
@@ -71,7 +71,7 @@ namespace Dreetris.Screens
 
         private void openOptionsMenu()
         {
-            OptionsScreen os = new OptionsScreen(Game, screenManager, assetManager);
+            OptionsScreen os = new OptionsScreen(gameObjects);
             screenManager.push(os);
         }
 
@@ -81,19 +81,19 @@ namespace Dreetris.Screens
             screenManager.pop();
             screenManager.pop();
 
-            FadeScreen fs1 = new FadeScreen(Game, screenManager, FadeScreen.Type.FADE_OUT);
+            FadeScreen fs1 = new FadeScreen(gameObjects, FadeScreen.Type.FADE_OUT);
             fs1.Initialize();
 
-            FadeScreen fs2 = new FadeScreen(Game, screenManager, FadeScreen.Type.FADE_IN);
+            FadeScreen fs2 = new FadeScreen(gameObjects, FadeScreen.Type.FADE_IN);
             fs2.Initialize();
 
-            GameScreen gs = new GameScreen(Game, screenManager, assetManager);
+            GameScreen gs = new GameScreen(gameObjects);
             gs.Initialize();
 
-            FadeScreen fs3 = new FadeScreen(Game, screenManager, FadeScreen.Type.FADE_IN);
+            FadeScreen fs3 = new FadeScreen(gameObjects, FadeScreen.Type.FADE_IN);
             fs3.Initialize();
 
-            TitleScreen ts = new TitleScreen(Game, screenManager, assetManager);
+            TitleScreen ts = new TitleScreen(gameObjects);
             ts.Initialize();
 
             screenManager.push(gs);

@@ -8,18 +8,21 @@ namespace Dreetris.Screens
         protected bool _isActive = false;
         public bool isActive { get { return _isActive; } }
 
+        protected GameObjects gameObjects;
+
         public enum ScreenState
         {
         }
 
-        public ScreenManager screenManager { get; set;}
+        public ScreenManager screenManager { get { return gameObjects.screenManager;} }
 
         public Boolean visible { get; set; }
 
-        public Screen(Game game, ScreenManager screenManager)
-            : base(game)
+        public Screen(GameObjects gameObjects)
+            : base(gameObjects.game)
         {
-            this.screenManager = screenManager;
+            this.gameObjects = gameObjects;
+            //this.screenManager = screenManager;
             visible = true;
         }
 

@@ -26,10 +26,10 @@ namespace Dreetris.Screens
         protected AssetManager assetManager;
         protected Texture2D blank;
 
-        public MenuScreen(Game game, ScreenManager screenManager, AssetManager assetManager)
-            : base(game, screenManager)
+        public MenuScreen(GameObjects gameObjects)
+            : base(gameObjects)
         {
-            this.assetManager = assetManager;
+            this.assetManager = gameObjects.assetManager;
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
 

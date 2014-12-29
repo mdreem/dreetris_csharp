@@ -22,16 +22,16 @@ namespace Dreetris.Screens
 
         TetrisBoard board;
         ScoreBoard score;
-        AssetManager assetManager;
+        GameObjects gameObjects;
 
         private Texture2D blank;
 
         #endregion
 
-        public GameScreen(Game game, ScreenManager screenManager, AssetManager assetManager)
-            : base(game, screenManager)
+        public GameScreen(GameObjects gameObjects)
+            : base(gameObjects)
         {
-            this.assetManager = assetManager;
+            this.gameObjects = gameObjects;
         }
 
         #region public methods
@@ -43,10 +43,10 @@ namespace Dreetris.Screens
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });
 
-            board = new TetrisBoard(assetManager, screenManager.keyboard, 10, 20, 80, 100);
+            board = new TetrisBoard(gameObjects.assetManager, screenManager.keyboard, 10, 20, 80, 100);
             board.Initialize();
 
-            score = new ScoreBoard(board, assetManager);
+            score = new ScoreBoard(board, gameObjects.assetManager);
 
             base.Initialize();
         }
@@ -59,7 +59,7 @@ namespace Dreetris.Screens
             board.Update(gameTime);
             if (board.gameOver)
             {
-                GameoverScreen gos = new GameoverScreen(Game, screenManager, board, assetManager);
+                GameoverScreen gos = new GameoverScreen(gameObjects, board);
                 gos.Initialize();
                 screenManager.push(gos);
             }
@@ -142,10 +142,10 @@ namespace Dreetris.Screens
 
         private void pushPauseScreen()
         {
-            PauseScreen ps = new PauseScreen(Game, screenManager, assetManager);
+            PauseScreen ps = new PauseScreen(gameObjects);
             ps.Initialize();
 
-            FadeScreen fs = new FadeScreen(Game, screenManager, FadeScreen.Type.FADE_OUT, 0.75f, 250);
+            FadeScreen fs = new FadeScreen(gameObjects, FadeScreen.Type.FADE_OUT, 0.75f, 250);
             fs.Initialize();
 
             screenManager.push(ps);

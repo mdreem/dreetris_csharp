@@ -25,10 +25,10 @@ namespace Dreetris.Screens
 
         public Vector2 size { get { return _size; } }
 
-        public MenuEntry(Game game, AssetManager assetManager)
+        public MenuEntry(GameObjects gameObjects)
 
         {
-            this.assetManager = assetManager;
+            this.assetManager = gameObjects.assetManager;
             font = assetManager.getFont("Font");
 
             _position = new Vector2(0, 0);

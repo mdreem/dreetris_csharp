@@ -12,12 +12,12 @@ namespace Dreetris.Screens
     {
         protected FloatSlider slider;
 
-        public OptionsScreen(Game game, ScreenManager screenManager, AssetManager assetManager)
-            : base(game, screenManager, assetManager)
+        public OptionsScreen(GameObjects gameObjects)
+            : base(gameObjects)
         {
-            MenuEntryText me1 = new MenuEntryText(game, assetManager, "Volume", () => { });
-            MenuEntryText me2 = new MenuEntryText(game, assetManager, "Ghost", () => { });
-            MenuEntryText me3 = new MenuEntryText(game, assetManager, "Back", () => screenManager.pop().Dispose() );
+            MenuEntryText me1 = new MenuEntryText(gameObjects, "Volume", () => { });
+            MenuEntryText me2 = new MenuEntryText(gameObjects, "Ghost", () => { });
+            MenuEntryText me3 = new MenuEntryText(gameObjects, "Back", () => screenManager.pop().Dispose());
 
             menu.addItem(me1);
             menu.addItem(me2);
@@ -26,7 +26,7 @@ namespace Dreetris.Screens
             originX = 400;
             originY = 200;
 
-            slider = new FloatSlider(assetManager, 1.0f, 5.0f, 100);
+            slider = new FloatSlider(gameObjects, 1.0f, 5.0f, 100);
         }
 
         public override void Draw(GameTime gameTime)

@@ -29,8 +29,8 @@ namespace Dreetris.Screens
             }
         }
 
-        public MenuEntryText(Game game, AssetManager assetManager, string entry, Action call)
-            : base(game, assetManager)
+        public MenuEntryText(GameObjects gameObjects, string entry, Action call)
+            : base(gameObjects)
         {
             this.entry = entry;
             this.callFunction = call;

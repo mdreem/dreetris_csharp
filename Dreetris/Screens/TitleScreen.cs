@@ -14,9 +14,10 @@ namespace Dreetris.Screens
         SpriteBatch spriteBatch;
         Sprite intro;
 
-        public TitleScreen(Game game, ScreenManager screenManager, AssetManager assetManager) : base(game, screenManager) 
+        public TitleScreen(GameObjects gameObjects)
+            : base(gameObjects) 
         {
-            this.assetManager = assetManager;
+            this.assetManager = gameObjects.assetManager;
         }
 
         protected override void LoadContent()
@@ -52,7 +53,7 @@ namespace Dreetris.Screens
         {
             if (screenManager.keyboard.IsDown(Keys.Space))
             {
-                FadeScreen fs = new FadeScreen(Game, screenManager, FadeScreen.Type.FADE_OUT_POP);
+                FadeScreen fs = new FadeScreen(gameObjects, FadeScreen.Type.FADE_OUT_POP);
                 fs.Initialize();
                 screenManager.push(fs);
                 screenManager.keyboard.LockKey(Keys.Space);

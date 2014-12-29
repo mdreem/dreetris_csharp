@@ -39,12 +39,11 @@ namespace Dreetris.Screens
         /// <param name="transitionType"></param>
         /// <param name="maxFade">maximum transparency value for the fade</param>
         /// <param name="fadeDuration">duration of the transition in milliseconds</param>
-        public FadeScreen(Game game,
-                ScreenManager screenManager,
+        public FadeScreen(GameObjects gameObjects,
                 Type transitionType,
                 float maxFade = 1.0f,
                 float fadeDuration = 1000)
-            : base(game, screenManager)
+            : base(gameObjects)
         {
             this.maxFade = maxFade;
             this.transitionType = transitionType;
