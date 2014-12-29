@@ -81,6 +81,7 @@
     <Compile Include="Dreetris\TetriminoPreview.cs" />
     <Compile Include="Dreetris\TetrisBoard.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="GameObjects.cs" />
     <Compile Include="Particles\DissolvingSprite.cs" />
     <Compile Include="Particles\Particle.cs" />
     <Compile Include="Particles\ParticleSystem.cs" />

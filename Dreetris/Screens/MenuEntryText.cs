@@ -11,7 +11,8 @@ namespace Dreetris.Screens
     public class MenuEntryText : MenuEntry
     {
         string entry;
-        Menu.Call callFunction;
+        //Menu.Call callFunction;
+        Action callFunction;
 
         Vector2 shadowPosition;
 
@@ -28,7 +29,7 @@ namespace Dreetris.Screens
             }
         }
 
-        public MenuEntryText(Game game, AssetManager assetManager, string entry, Menu.Call call)
+        public MenuEntryText(Game game, AssetManager assetManager, string entry, Action call)
             : base(game, assetManager)
         {
             this.entry = entry;

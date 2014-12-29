@@ -145,7 +145,6 @@ namespace Dreetris
             coordinates = new Point();
             boardPosition = new Point();
             position = new Point();
-            flipState = 0;
 
             switch (type)
             {

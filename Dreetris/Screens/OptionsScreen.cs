@@ -15,9 +15,9 @@ namespace Dreetris.Screens
         public OptionsScreen(Game game, ScreenManager screenManager, AssetManager assetManager)
             : base(game, screenManager, assetManager)
         {
-            MenuEntryText me1 = new MenuEntryText(game, assetManager, "Volume", doNothing);
-            MenuEntryText me2 = new MenuEntryText(game, assetManager, "Ghost", doNothing);
-            MenuEntryText me3 = new MenuEntryText(game, assetManager, "Back", back);
+            MenuEntryText me1 = new MenuEntryText(game, assetManager, "Volume", () => { });
+            MenuEntryText me2 = new MenuEntryText(game, assetManager, "Ghost", () => { });
+            MenuEntryText me3 = new MenuEntryText(game, assetManager, "Back", () => screenManager.pop().Dispose() );
 
             menu.addItem(me1);
             menu.addItem(me2);
@@ -54,16 +54,6 @@ namespace Dreetris.Screens
                     slider.moveRight();
                 }
             }
-        }
-
-        private void doNothing()
-        {
-
-        }
-
-        private void back()
-        {
-            screenManager.pop().Dispose();
         }
     }
 }

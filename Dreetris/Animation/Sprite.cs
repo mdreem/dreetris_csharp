@@ -112,13 +112,13 @@ namespace Dreetris.Animation
         {
             if (!sourceRectangle.HasValue)
             {
-                origin.X = texture.Width / 2;
-                origin.Y = texture.Height / 2;
+                origin.X = (float) texture.Width / 2;
+                origin.Y = (float) texture.Height / 2;
             }
             else
             {
-                origin.X = sourceRectangle.Value.Width / 2;
-                origin.Y = sourceRectangle.Value.Height / 2;
+                origin.X = (float) sourceRectangle.Value.Width / 2;
+                origin.Y = (float) sourceRectangle.Value.Height / 2;
             }
         }
 

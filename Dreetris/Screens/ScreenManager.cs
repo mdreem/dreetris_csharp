@@ -37,16 +37,16 @@ namespace Dreetris.Screens
         {
             Console.WriteLine(string.Format("Push: {0}", screens.Count));
             if (screens.Count != 0)
-                screens.Last().deactivate();
+                screens[screens.Count - 1].deactivate();
             screens.Add(screen);
-            screens.Last().activate();
+            screens[screens.Count - 1].activate();
         }
 
         public Screen peek()
         {
             if (screens.Count != 0)
             {
-                Screen screen = screens.Last();
+                Screen screen = screens[screens.Count - 1];
                 return screen;
             }
             else
@@ -61,12 +61,12 @@ namespace Dreetris.Screens
 
             if (screens.Count != 0)
             {
-                Screen screen = screens.Last();
+                Screen screen = screens[screens.Count - 1];
                 screens.RemoveAt(screens.Count - 1);
 
                 screen.deactivate();
                 if (screens.Count != 0)
-                    screens.Last().activate();
+                    screens[screens.Count - 1].activate();
 
                 return screen;
             }
@@ -91,7 +91,7 @@ namespace Dreetris.Screens
 
         public override void Update(GameTime gameTime)
         {
-            screens.Last().Update(gameTime);
+            screens[screens.Count - 1].Update(gameTime);
 
             base.Update(gameTime);
         }
