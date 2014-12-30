@@ -39,7 +39,7 @@ namespace Dreetris.Screens
             this.entry = entry;
             this.callFunction = call;
 
-            slider = new FloatSlider(gameObjects, 1.0f, 5.0f, 100);
+            slider = new FloatSlider(gameObjects, 1.0f, 5.0f, 100, 200);
 
             padding = 20;
 
@@ -52,19 +52,23 @@ namespace Dreetris.Screens
             textSize = font.MeasureString(entry);
             Vector2 sliderSize = slider.size;
 
+            _size = new Vector2(textSize.X + shadowX + sliderSize.X + padding, Math.Max(sliderSize.Y, textSize.Y + shadowY));
+            /*
             _size = textSize + sliderSize;
             _size.X += padding;
-
+            */
+            /*
             _size.X += shadowX;
-            _size.Y += shadowY;
+            _size.Y += shadowY;*/
         }
 
         private void setPositions()
         {
-            Vector2 newPosition = new Vector2(
+            Vector2 newSliderPosition = new Vector2(
                         _position.X + textSize.X + padding,
-                        _position.Y);
-            slider.position = newPosition;
+                        _position.Y + slider.size.Y / 2);
+            slider.position = newSliderPosition;
+            //slider.position.Y += slider.size.Y / 2;
 
             shadowPosition = new Vector2(_position.X + shadowX, _position.Y + shadowY);
         }

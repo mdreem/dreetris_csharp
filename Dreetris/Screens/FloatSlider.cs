@@ -20,6 +20,11 @@ namespace Dreetris.Screens
         float height;
 
         Vector2 _position;
+
+        /// <summary>
+        /// If the slider is in the leftmost position the position of this widget is given
+        /// by the top left corner of the slider-sprite.
+        /// </summary>
         public Vector2 position
         {
             get { return _position; }
@@ -38,7 +43,7 @@ namespace Dreetris.Screens
         Vector2 _size;
         public Vector2 size { get { return _size; } }
 
-        public FloatSlider(GameObjects gameObjects, float min, float max, int steps, int sliderPosition)
+        public FloatSlider(GameObjects gameObjects, float min, float max, int steps, float width, int sliderPosition)
         {
             this.assetManager = gameObjects.assetManager;
 
@@ -46,13 +51,14 @@ namespace Dreetris.Screens
             this.max = max;
             this.steps = steps;
             this.sliderPosition = sliderPosition;
+            this.width = width;
 
             position = new Vector2(100, 450);
-            width = 200;
-            height = 10;
 
             slider = assetManager.getSprite("slider");
             slider.centerCoordinates();
+
+            height = slider.height;
 
             setPosition();
 
@@ -62,13 +68,14 @@ namespace Dreetris.Screens
             _size.Y = slider.height;
         }
 
-        public FloatSlider(GameObjects gameObjects, float min, float max, int steps)
-            : this(gameObjects, min, max, steps, 0)
+        public FloatSlider(GameObjects gameObjects, float min, float max, int steps, float width)
+            : this(gameObjects, min, max, steps, width, 0)
         {
         }
 
         private void setPosition()
         {
+            //TODO: Include height of line
             if (slider != null)
             {
                 slider.position.X = position.X;
@@ -100,10 +107,13 @@ namespace Dreetris.Screens
 
             Drawing.DrawLine(spriteBatch, 2, Color.Wheat, start, end);
 
+            slider.setTransparency(0.5f);
             slider.position.X = position.X + width * sliderPosition / (steps - 1);
             slider.draw(spriteBatch);
 
+#if DEBUG
             spriteBatch.DrawString(font, value().ToString(), new Vector2(position.X + width + 20, position.Y), Color.White);
+#endif
         }
     }
 }
