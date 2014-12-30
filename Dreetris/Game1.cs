@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
-
-
 using Dreetris.Screens;
 using Dreetris.Animation;
 
@@ -42,7 +38,6 @@ namespace Dreetris
             // Change resolution
             graphics.PreferredBackBufferWidth = WINDOW_WIDTH;
             graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
-
         }
 
         /// <summary>
@@ -121,22 +116,6 @@ namespace Dreetris
         {
             screenManager.Draw(gameTime);
             base.Draw(gameTime);
-        }
-
-        void DrawLongLine(List<Vector2> sublines, Color color)
-        {
-            for (int i = 0; i < sublines.Count - 1; i++)
-            {
-                DrawLine(1, color, sublines[i], sublines[i + 1]);
-            }
-        }
-
-        void DrawLine(float width, Color color, Vector2 point1, Vector2 point2)
-        {
-            float angle = (float)Math.Atan2(point2.Y - point1.Y, point2.X - point1.X);
-            float length = Vector2.Distance(point1, point2);
-
-            spriteBatch.Draw(blank, point1, null, color, angle, Vector2.Zero, new Vector2(length, width), SpriteEffects.None, 0);
         }
     }
 }

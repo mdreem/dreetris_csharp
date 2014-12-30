@@ -8,16 +8,20 @@ using System.Text;
 
 namespace Dreetris.Screens
 {
-    public class MenuEntryText : MenuEntry
+    class MenuEntrySlider : MenuEntry
     {
         string entry;
-        //Menu.Call callFunction;
         Action callFunction;
 
         Vector2 shadowPosition;
+        Vector2 textSize;
 
         float shadowX = 2f;
         float shadowY = 2f;
+
+        float padding;
+
+        protected FloatSlider slider;
 
         public override Vector2 position
         {
@@ -25,21 +29,44 @@ namespace Dreetris.Screens
             set
             {
                 _position = value;
-                shadowPosition = new Vector2(_position.X + shadowX, _position.Y + shadowY);
+                setPositions();
             }
         }
 
-        public MenuEntryText(GameObjects gameObjects, string entry, Action call)
+        public MenuEntrySlider(GameObjects gameObjects, string entry, Action call)
             : base(gameObjects)
         {
             this.entry = entry;
             this.callFunction = call;
 
-            _size = font.MeasureString(entry);
+            slider = new FloatSlider(gameObjects, 1.0f, 5.0f, 100);
+
+            padding = 20;
+
+            setSize();
+            setPositions();
+        }
+
+        private void setSize()
+        {
+            textSize = font.MeasureString(entry);
+            Vector2 sliderSize = slider.size;
+
+            _size = textSize + sliderSize;
+            _size.X += padding;
+
             _size.X += shadowX;
             _size.Y += shadowY;
+        }
 
-            //shadowPosition = new Vector2(_position.X + shadowX, _position.Y + shadowY)
+        private void setPositions()
+        {
+            Vector2 newPosition = new Vector2(
+                        _position.X + textSize.X + padding,
+                        _position.Y);
+            slider.position = newPosition;
+
+            shadowPosition = new Vector2(_position.X + shadowX, _position.Y + shadowY);
         }
 
         public override void call()
@@ -52,11 +79,23 @@ namespace Dreetris.Screens
             Color col = new Color(180, 160, 190);
             spriteBatch.DrawString(font, entry, shadowPosition, Color.Black); //Shadow
             spriteBatch.DrawString(font, entry, _position, col);
+
+            slider.draw(spriteBatch);
         }
 
         public override void update(GameTime gameTime)
         {
 
+        }
+
+        public void moveLeft()
+        {
+            slider.moveLeft();
+        }
+
+        public void moveRight()
+        {
+            slider.moveRight();
         }
     }
 }

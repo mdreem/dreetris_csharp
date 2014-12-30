@@ -26,6 +26,8 @@ namespace Dreetris.Screens
         protected AssetManager assetManager;
         protected Texture2D blank;
 
+        protected float pointerScale = 1.2f;
+
         public MenuScreen(GameObjects gameObjects)
             : base(gameObjects)
         {
@@ -87,8 +89,8 @@ namespace Dreetris.Screens
             float itemHeight = menu.entries[menu.getSelected()].size.Y;
 
             //TODO: genauer, falls Höhen unterschiedlich
-            pointerLeft.position = new Vector2((originX - menuWidth * 1.05f), originY + itemHeight * menu.getSelected() + itemHeight / 2);
-            pointerRight.position = new Vector2((originX + menuWidth * 1.05f), originY + itemHeight * menu.getSelected() + itemHeight / 2);
+            pointerLeft.position = new Vector2((originX - (menuWidth / 2) * pointerScale), originY + itemHeight * menu.getSelected() + itemHeight / 2);
+            pointerRight.position = new Vector2((originX + (menuWidth / 2) * pointerScale), originY + itemHeight * menu.getSelected() + itemHeight / 2);
 
             pointerLeft.draw(spriteBatch);
             pointerRight.draw(spriteBatch);

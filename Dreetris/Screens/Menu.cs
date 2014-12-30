@@ -41,7 +41,7 @@ namespace Dreetris.Screens
         {
             float max = 0;
 
-            foreach(var e in entries)
+            foreach (var e in entries)
             {
                 max = Math.Max(max, e.size.X);
             }

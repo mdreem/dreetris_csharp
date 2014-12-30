@@ -26,7 +26,6 @@ namespace Dreetris.Screens
         public Vector2 size { get { return _size; } }
 
         public MenuEntry(GameObjects gameObjects)
-
         {
             this.assetManager = gameObjects.assetManager;
             font = assetManager.getFont("Font");

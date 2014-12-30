@@ -19,12 +19,24 @@ namespace Dreetris.Screens
         float width;
         float height;
 
-        Vector2 position;
+        Vector2 _position;
+        public Vector2 position
+        {
+            get { return _position; }
+            set
+            {
+                _position = value;
+                setPosition();
+            }
+        }
 
         Sprite slider;
         protected SpriteFont font;
 
         int sliderPosition;
+
+        Vector2 _size;
+        public Vector2 size { get { return _size; } }
 
         public FloatSlider(GameObjects gameObjects, float min, float max, int steps, int sliderPosition)
         {
@@ -42,15 +54,26 @@ namespace Dreetris.Screens
             slider = assetManager.getSprite("slider");
             slider.centerCoordinates();
 
-            slider.position.X = position.X;
-            slider.position.Y = position.Y + height / 2;
+            setPosition();
 
             font = assetManager.getFont("Font");
+
+            _size.X = width + slider.width;
+            _size.Y = slider.height;
         }
 
         public FloatSlider(GameObjects gameObjects, float min, float max, int steps)
             : this(gameObjects, min, max, steps, 0)
         {
+        }
+
+        private void setPosition()
+        {
+            if (slider != null)
+            {
+                slider.position.X = position.X;
+                slider.position.Y = position.Y + height / 2;
+            }
         }
 
         public void moveLeft()

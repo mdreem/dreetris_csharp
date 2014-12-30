@@ -10,12 +10,12 @@ namespace Dreetris.Screens
 {
     public class OptionsScreen : MenuScreen
     {
-        protected FloatSlider slider;
+        private MenuEntrySlider me1;
 
         public OptionsScreen(GameObjects gameObjects)
             : base(gameObjects)
         {
-            MenuEntryText me1 = new MenuEntryText(gameObjects, "Volume", () => { });
+            me1 = new MenuEntrySlider(gameObjects, "Volume", () => { });
             MenuEntryText me2 = new MenuEntryText(gameObjects, "Ghost", () => { });
             MenuEntryText me3 = new MenuEntryText(gameObjects, "Back", () => screenManager.pop().Dispose());
 
@@ -25,8 +25,6 @@ namespace Dreetris.Screens
 
             originX = 400;
             originY = 200;
-
-            slider = new FloatSlider(gameObjects, 1.0f, 5.0f, 100);
         }
 
         public override void Draw(GameTime gameTime)
@@ -34,7 +32,6 @@ namespace Dreetris.Screens
             base.Draw(gameTime);
 
             spriteBatch.Begin();
-            slider.draw(spriteBatch);
             spriteBatch.End();
         }
 
@@ -46,12 +43,12 @@ namespace Dreetris.Screens
             {
                 if (screenManager.keyboard.downRepeated(Keys.Left, 3 * KEY_PRESSED_TIME / 100))
                 {
-                    slider.moveLeft();
+                    me1.moveLeft();
                 }
 
                 if (screenManager.keyboard.downRepeated(Keys.Right, 3 * KEY_PRESSED_TIME / 100))
                 {
-                    slider.moveRight();
+                    me1.moveRight();
                 }
             }
         }

@@ -15,8 +15,6 @@ namespace Dreetris.Screens
 
         TetrisBoard board;
 
-        GameObjects gameObjects;
-
         public GameoverScreen(GameObjects gameObjects, TetrisBoard board)
             : base(gameObjects)
         {

@@ -9,7 +9,7 @@ namespace Dreetris.Screens
 {
     class GameScreen : Screen
     {
-        #region fields 
+        #region fields
         SpriteBatch spriteBatch;
         SpriteFont Font1;
 
@@ -22,7 +22,6 @@ namespace Dreetris.Screens
 
         TetrisBoard board;
         ScoreBoard score;
-        GameObjects gameObjects;
 
         private Texture2D blank;
 
