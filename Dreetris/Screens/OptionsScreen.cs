@@ -16,7 +16,7 @@ namespace Dreetris.Screens
             : base(gameObjects)
         {
             me1 = new MenuEntrySlider(gameObjects, "Volume", () => { });
-            MenuEntryText me2 = new MenuEntryText(gameObjects, "Ghost", () => { });
+			MenuEntrySelector me2 = new MenuEntrySelector(gameObjects, "Ghost", () => { });
             MenuEntryText me3 = new MenuEntryText(gameObjects, "Back", () => screenManager.pop().Dispose());
 
             menu.addItem(me1);
