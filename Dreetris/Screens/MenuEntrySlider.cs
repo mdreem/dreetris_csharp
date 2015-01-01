@@ -53,13 +53,6 @@ namespace Dreetris.Screens
             Vector2 sliderSize = slider.size;
 
             _size = new Vector2(textSize.X + shadowX + sliderSize.X + padding, Math.Max(sliderSize.Y, textSize.Y + shadowY));
-            /*
-            _size = textSize + sliderSize;
-            _size.X += padding;
-            */
-            /*
-            _size.X += shadowX;
-            _size.Y += shadowY;*/
         }
 
         private void setPositions()

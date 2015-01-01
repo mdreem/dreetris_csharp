@@ -114,7 +114,6 @@ namespace Dreetris
         Tetrimino.Type _type;
 
         Sprite block;
-        List<Sprite> blocks = new List<Sprite>();
 
         public Tetrimino.Type type
         {

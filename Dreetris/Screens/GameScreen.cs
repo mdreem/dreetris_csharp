@@ -11,8 +11,7 @@ namespace Dreetris.Screens
     {
         #region fields
         SpriteBatch spriteBatch;
-        SpriteFont Font1;
-
+        
         Texture2D backgroundImage;
         Rectangle backgroundRectangle;
 
@@ -89,8 +88,7 @@ namespace Dreetris.Screens
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Font1 = content.Load<SpriteFont>("Font");
-
+            
             // load sprites and build draw rectangles
             backgroundImage = content.Load<Texture2D>("background");
             backgroundRectangle = new Rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);

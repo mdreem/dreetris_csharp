@@ -8,6 +8,9 @@ using System.Text;
 
 namespace Dreetris.Screens
 {
+	/// <summary>
+	/// This class implements a slider-widget.
+	/// </summary>
     public class FloatSlider
     {
         AssetManager assetManager;
@@ -21,28 +24,38 @@ namespace Dreetris.Screens
 
         Vector2 _position;
 
-        /// <summary>
-        /// If the slider is in the leftmost position the position of this widget is given
-        /// by the top left corner of the slider-sprite.
-        /// </summary>
-        public Vector2 position
-        {
-            get { return _position; }
-            set
-            {
-                _position = value;
-                setPosition();
-            }
-        }
-
         Sprite slider;
         protected SpriteFont font;
 
         int sliderPosition;
 
         Vector2 _size;
-        public Vector2 size { get { return _size; } }
+        
+		public Vector2 size { get { return _size; } }
 
+		/// <summary>
+		/// If the slider is in the leftmost position the position of this widget is given
+		/// by the top left corner of the slider-sprite.
+		/// </summary>
+		public Vector2 position
+		{
+			get { return _position; }
+			set
+			{
+				_position = value;
+				setPosition();
+			}
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Dreetris.Screens.FloatSlider"/> class.
+		/// </summary>
+		/// <param name="gameObjects">Game objects.</param>
+		/// <param name="min">Minimum value described by the slider</param>
+		/// <param name="max">Maxium value described by the slider</param>
+		/// <param name="steps">Number of steps in which the slider is divided.</param>
+		/// <param name="width">Width of the slider in pixels</param>
+		/// <param name="sliderPosition">Position of the slider on the scale.</param>
         public FloatSlider(GameObjects gameObjects, float min, float max, int steps, float width, int sliderPosition)
         {
             this.assetManager = gameObjects.assetManager;
@@ -68,7 +81,16 @@ namespace Dreetris.Screens
             _size.Y = slider.height;
         }
 
-        public FloatSlider(GameObjects gameObjects, float min, float max, int steps, float width)
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Dreetris.Screens.FloatSlider"/> class.
+		/// The slider will be initialized in the leftmost position.
+		/// </summary>
+		/// <param name="gameObjects">Game objects.</param>
+		/// <param name="min">Minimum value described by the slider</param>
+		/// <param name="max">Maxium value described by the slider</param>
+		/// <param name="steps">Number of steps in which the slider is divided.</param>
+		/// <param name="width">Width of the slider in pixels</param>
+		public FloatSlider(GameObjects gameObjects, float min, float max, int steps, float width)
             : this(gameObjects, min, max, steps, width, 0)
         {
         }

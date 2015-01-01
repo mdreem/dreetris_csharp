@@ -15,15 +15,15 @@ namespace Dreetris
         GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
-        KeyframeAnimation animation = new KeyframeAnimation();
+        //KeyframeAnimation animation = new KeyframeAnimation();
 
         const int WINDOW_WIDTH = 800;
         const int WINDOW_HEIGHT = 600;
         const int KEY_PRESSED_TIME = 150;
 
-        DKeyboard keyboard = new DKeyboard();
+        //DKeyboard keyboard = new DKeyboard();
 
-        Writer writer = new Writer(500);
+        //Writer writer = new Writer(500);
 
         ScreenManager screenManager;
         AssetManager assetManager;
@@ -51,7 +51,7 @@ namespace Dreetris
             SoundEffect.MasterVolume = 0.025f;
 
             assetManager = new AssetManager(this.Content);
-            screenManager = new ScreenManager(this, assetManager);
+            screenManager = new ScreenManager(this);
 
             gameObjects = new GameObjects(this, screenManager, assetManager);
 
@@ -83,9 +83,9 @@ namespace Dreetris
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });
 
-            Song song = Content.Load<Song>("music");
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Play(song);
+            //Song song = Content.Load<Song>("music");
+            //MediaPlayer.IsRepeating = true;
+            //MediaPlayer.Play(song);
         }
 
         /// <summary>

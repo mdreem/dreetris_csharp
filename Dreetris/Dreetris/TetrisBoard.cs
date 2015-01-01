@@ -69,9 +69,6 @@ namespace Dreetris
         List<Sprite> blocks = new List<Sprite>();
         List<DissolvingSprite> dissolvingBlocks = new List<DissolvingSprite>();
 
-        Rectangle drawRectangle;
-
-        Random random = new Random();
         RandomBlocks randomBlocks;
         Score score = new Score();
 
@@ -89,8 +86,6 @@ namespace Dreetris
             this.height = height;
             this.keyboard = keyboard;
             assetManager = am;
-
-            drawRectangle = new Rectangle(0, 0, Tetrimino.BLOCK_WIDTH, Tetrimino.BLOCK_HEIGHT);
 
             randomBlocks = new RandomBlocks();
 
@@ -382,9 +377,7 @@ namespace Dreetris
             block_T = assetManager.getSprite("block_T");
             block_Z = assetManager.getSprite("block_Z");
 
-            drawRectangle = new Rectangle(0, 0, 20, 20);
-
-            flip = assetManager.getSoundEffect("flip");
+			flip = assetManager.getSoundEffect("flip");
             deleteLine = assetManager.getSoundEffect("del");
         }
 
@@ -457,13 +450,11 @@ namespace Dreetris
         {
             Console.WriteLine("Generate Spritelist - Deleting");
             blocks.Clear();
-            float transparency = Math.Min((float) (timeSinceLastStep / DELETE_TIME), 1.0f);
-
+            
             for (int j = 0; j < board.GetLength(1); j++)
             {
                 if (IsRowFull(j))
                 {
-                    //generateSpriteRow(j, 1.0f - transparency);
                     generateDissolvingSpriteRow(j);
                 }
                 else

@@ -13,22 +13,11 @@ namespace Dreetris.Particles
         public DissolvingSprite(Sprite sprite, float timeToLive = 0.0f, float timeToLiveDelta = 0.0f, float Xdelta = 0.0f, float Ydelta = 0.0f, int sizeX = 1, int sizeY = 1)
             : base()
         {
-/*
-            sizeX = 5;
-            sizeY = 11;
-            */
             Rectangle bounds = sprite.getSourceRectangle();
             int width = bounds.Width / sizeX;
             int height = bounds.Height / sizeY;
 
-            int origWidth = bounds.Width % sizeX;
-            int origHeight = bounds.Height % sizeY;
-
-            random = SingleRandom.random; //new Random();
-            /*
-            timeToLiveDelta = 0;
-            Xdelta = 1.5f;
-            Ydelta = 1.5f;*/
+            random = SingleRandom.random;
 
             for (int i = 0; i <= width; i++)
             {

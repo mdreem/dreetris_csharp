@@ -8,25 +8,24 @@ namespace Dreetris.Screens
 {
     /// <summary>
     /// This class manages the various Screens. Only the Screen at the top of the Stack will be active.
+	/// <see cref="Dreetris.Screens.Screen"/>
     /// </summary>
     public class ScreenManager : DrawableGameComponent
     {
         #region fields and properties
 
         private List<Screen> screens = new List<Screen>();
-
         DKeyboard _keyboard = new DKeyboard();
-        public DKeyboard keyboard { get { return _keyboard; } }
-        AssetManager assetManager;
 
+        public DKeyboard keyboard { get { return _keyboard; } }
+     
         #endregion
 
         #region constructors
 
-        public ScreenManager(Game game, AssetManager assetManager)
+        public ScreenManager(Game game)
             : base(game)
         {
-            this.assetManager = assetManager;
         }
 
         #endregion
@@ -42,6 +41,9 @@ namespace Dreetris.Screens
             screens[screens.Count - 1].activate();
         }
 
+		/// <summary>
+		/// returns the topmost screen without removing it from the stack.
+		/// </summary>
         public Screen peek()
         {
             if (screens.Count != 0)
@@ -55,6 +57,9 @@ namespace Dreetris.Screens
             }
         }
 
+		/// <summary>
+		/// returns the topmost screen and removes it from the stack.
+		/// </summary>
         public Screen pop()
         {
             Console.WriteLine(string.Format("Pop: {0}", screens.Count));
@@ -85,14 +90,12 @@ namespace Dreetris.Screens
                     s.Draw(gameTime);
                 }
             }
-
             base.Draw(gameTime);
         }
 
         public override void Update(GameTime gameTime)
         {
             screens[screens.Count - 1].Update(gameTime);
-
             base.Update(gameTime);
         }
 
