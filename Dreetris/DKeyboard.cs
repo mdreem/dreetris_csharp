@@ -69,7 +69,7 @@ namespace Dreetris
         }
 
         /// <summary>
-        /// Changes the times of the keypress. It substracts the time and sets the value to
+        /// Changes the times of the keypress. It subtracts the time and sets the value to
         /// zero if the time becomes negative.
         /// </summary>
         /// <param name="key"></param>

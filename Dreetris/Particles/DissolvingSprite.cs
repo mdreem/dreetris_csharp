@@ -52,7 +52,7 @@ namespace Dreetris.Particles
             //cut out part of the sprite
             Rectangle newSpriteSection = new Rectangle(bounds.X + sizeX * i, bounds.Y + sizeY * j, tileWidth, tileHeight);
             newSprite.setSourceRectangle(newSpriteSection);
-            //put the new sprite so that it will overlap with the original positon
+            //put the new sprite so that it will overlap with the original position
             newSprite.position.X = newSprite.position.X + sizeX * i;
             newSprite.position.Y = newSprite.position.Y + sizeY * j;
 
