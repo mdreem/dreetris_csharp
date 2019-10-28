@@ -18,7 +18,7 @@ namespace Dreetris.Animation
         public AssetManager(ContentManager contentManager)
         {
             this.contentManager = contentManager;
-            config = XDocument.Load("Sprites.xml");
+            config = XDocument.Load("Content/Sprites.xml");
         }
 
         public Sprite getSprite(string name)

@@ -1,0 +1,717 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sprites>
+
+  <Sprite>
+    <name>intro</name>
+    <texture>intro</texture>
+  </Sprite>
+
+  <Sprite>
+    <name>slider</name>
+    <texture>button</texture>
+  </Sprite>
+
+  <Sprite>
+    <name>button</name>
+    <texture>button</texture>
+  </Sprite>
+
+  <Sprite>
+    <type>animation</type>
+    <name>block_I</name>
+    <texture>block</texture>
+    <fps>6</fps>
+
+    <frame>
+      <x>0</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>20</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>60</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>80</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>100</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>120</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>140</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+    
+    <!-- and back -->
+
+    <frame>
+      <x>80</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>0</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+  </Sprite>
+
+  <Sprite>
+    <type>animation</type>
+    <name>block_J</name>
+    <texture>block</texture>
+    <fps>6</fps>
+
+    <frame>
+      <x>0</x>
+      <y>20</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>20</x>
+      <y>20</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>20</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>60</x>
+      <y>20</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>80</x>
+      <y>20</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>100</x>
+      <y>20</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>120</x>
+      <y>20</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>140</x>
+      <y>20</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <!-- and back -->
+
+    <frame>
+      <x>80</x>
+      <y>20</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>20</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>0</x>
+      <y>20</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+
+  </Sprite>
+
+  <Sprite>
+    <type>animation</type>
+    <name>block_L</name>
+    <texture>block</texture>
+    <fps>6</fps>
+
+    <frame>
+      <x>0</x>
+      <y>40</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>20</x>
+      <y>40</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>40</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>60</x>
+      <y>40</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>80</x>
+      <y>40</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>100</x>
+      <y>40</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>120</x>
+      <y>40</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>140</x>
+      <y>40</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <!-- and back -->
+
+    <frame>
+      <x>80</x>
+      <y>40</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>40</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>0</x>
+      <y>40</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+  </Sprite>
+
+  <Sprite>
+    <type>animation</type>
+    <name>block_O</name>
+    <texture>block</texture>
+    <fps>6</fps>
+
+    <frame>
+      <x>0</x>
+      <y>60</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>20</x>
+      <y>60</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>60</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>60</x>
+      <y>60</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>80</x>
+      <y>60</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>100</x>
+      <y>60</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>120</x>
+      <y>60</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>140</x>
+      <y>60</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <!-- and back -->
+
+    <frame>
+      <x>80</x>
+      <y>60</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>60</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>0</x>
+      <y>60</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+  </Sprite>
+
+  <Sprite>
+    <type>animation</type>
+    <name>block_S</name>
+    <texture>block</texture>
+    <fps>6</fps>
+
+    <frame>
+      <x>0</x>
+      <y>80</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>20</x>
+      <y>80</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>80</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>60</x>
+      <y>80</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>80</x>
+      <y>80</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>100</x>
+      <y>80</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>120</x>
+      <y>80</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>140</x>
+      <y>80</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <!-- and back -->
+
+    <frame>
+      <x>80</x>
+      <y>80</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>80</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>0</x>
+      <y>80</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+  </Sprite>
+
+  <Sprite>
+    <type>animation</type>
+    <name>block_T</name>
+    <texture>block</texture>
+    <fps>6</fps>
+
+    <frame>
+      <x>0</x>
+      <y>100</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>20</x>
+      <y>100</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>100</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>60</x>
+      <y>100</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>80</x>
+      <y>100</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>100</x>
+      <y>100</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>120</x>
+      <y>100</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>140</x>
+      <y>100</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <!-- and back -->
+
+    <frame>
+      <x>80</x>
+      <y>100</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>100</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>0</x>
+      <y>100</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+  </Sprite>
+
+  <Sprite>
+    <type>animation</type>
+    <name>block_Z</name>
+    <texture>block</texture>
+    <fps>6</fps>
+
+    <frame>
+      <x>0</x>
+      <y>120</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>20</x>
+      <y>120</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>120</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>60</x>
+      <y>120</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>80</x>
+      <y>120</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>100</x>
+      <y>120</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>120</x>
+      <y>120</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>140</x>
+      <y>120</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <!-- and back -->
+
+    <frame>
+      <x>80</x>
+      <y>120</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>120</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>0</x>
+      <y>120</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+
+  </Sprite>
+  
+  <Sprite>
+    <type>animation</type>
+    <name>testanim</name>
+    <texture>block_sheet_J</texture>
+    <fps>6</fps>
+
+    <frame>
+      <x>0</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>20</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>60</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>80</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>100</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>120</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>140</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <!-- and back -->
+
+    <frame>
+      <x>80</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>40</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+    <frame>
+      <x>0</x>
+      <y>0</y>
+      <width>20</width>
+      <height>20</height>
+    </frame>
+
+  </Sprite>
+  
+</Sprites>
