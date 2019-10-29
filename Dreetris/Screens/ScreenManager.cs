@@ -1,15 +1,9 @@
-﻿using Dreetris.Animation;
-using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using Microsoft.Xna.Framework;
 
 namespace Dreetris.Screens
 {
-    /// <summary>
-    /// This class manages the various Screens. Only the Screen at the top of the Stack will be active.
-	/// <see cref="Dreetris.Screens.Screen"/>
-    /// </summary>
     public class ScreenManager : DrawableGameComponent
     {
         #region fields and properties
@@ -18,7 +12,7 @@ namespace Dreetris.Screens
         DKeyboard _keyboard = new DKeyboard();
 
         public DKeyboard keyboard { get { return _keyboard; } }
-     
+
         #endregion
 
         #region constructors
@@ -32,19 +26,16 @@ namespace Dreetris.Screens
 
         #region public methods
 
-        public void push(Screen screen)
+        public void Push(Screen screen)
         {
             Console.WriteLine(string.Format("Push: {0}", screens.Count));
             if (screens.Count != 0)
-                screens[screens.Count - 1].deactivate();
+                screens[screens.Count - 1].Deactivate();
             screens.Add(screen);
-            screens[screens.Count - 1].activate();
+            screens[screens.Count - 1].Activate();
         }
 
-		/// <summary>
-		/// returns the topmost screen without removing it from the stack.
-		/// </summary>
-        public Screen peek()
+        public Screen Peek()
         {
             if (screens.Count != 0)
             {
@@ -57,10 +48,7 @@ namespace Dreetris.Screens
             }
         }
 
-		/// <summary>
-		/// returns the topmost screen and removes it from the stack.
-		/// </summary>
-        public Screen pop()
+        public Screen Pop()
         {
             Console.WriteLine(string.Format("Pop: {0}", screens.Count));
 
@@ -69,9 +57,9 @@ namespace Dreetris.Screens
                 Screen screen = screens[screens.Count - 1];
                 screens.RemoveAt(screens.Count - 1);
 
-                screen.deactivate();
+                screen.Deactivate();
                 if (screens.Count != 0)
-                    screens[screens.Count - 1].activate();
+                    screens[screens.Count - 1].Activate();
 
                 return screen;
             }

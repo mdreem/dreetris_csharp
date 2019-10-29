@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Dreetris
+﻿namespace Dreetris
 {
-    /// <summary>
-    /// Used for holding the current score and computing the correct changes depending on what happened
-    /// </summary>
     class Score
     {
         int currentScore;
@@ -25,7 +17,7 @@ namespace Dreetris
 
         public Score()
         {
-            
+
         }
 
         public int GetScore()
@@ -39,15 +31,11 @@ namespace Dreetris
         Triple	500 x level
         Tetris	800 x level; difficult
          */
-        /// <summary>
-        /// Adding the correct value to the current score dependent on the amount of rows deleted.
-        /// </summary>
-        /// <param name="n">number of deleted rows</param>
         public void RowsDeleted(int n)
         {
             int multiplicator = 0;
 
-            switch(n)
+            switch (n)
             {
                 case 1:
                     multiplicator = 100;

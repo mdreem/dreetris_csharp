@@ -1,10 +1,5 @@
-﻿using Dreetris.Animation;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Dreetris.Screens
 {
@@ -16,12 +11,12 @@ namespace Dreetris.Screens
             : base(gameObjects)
         {
             me1 = new MenuEntrySlider(gameObjects, "Volume", () => { });
-			MenuEntrySelector me2 = new MenuEntrySelector(gameObjects, "Ghost", () => { });
-            MenuEntryText me3 = new MenuEntryText(gameObjects, "Back", () => screenManager.pop().Dispose());
+            MenuEntrySelector me2 = new MenuEntrySelector(gameObjects, "Ghost", () => { });
+            MenuEntryText me3 = new MenuEntryText(gameObjects, "Back", () => screenManager.Pop().Dispose());
 
-            menu.addItem(me1);
-            menu.addItem(me2);
-            menu.addItem(me3);
+            menu.AddItem(me1);
+            menu.AddItem(me2);
+            menu.AddItem(me3);
 
             originX = 400;
             originY = 200;
@@ -39,16 +34,16 @@ namespace Dreetris.Screens
         {
             base.Update(gameTime);
 
-            if (menu.getSelected() == 0)
+            if (menu.GetSelected() == 0)
             {
                 if (screenManager.keyboard.downRepeated(Keys.Left, 3 * KEY_PRESSED_TIME / 100))
                 {
-                    me1.moveLeft();
+                    me1.MoveLeft();
                 }
 
                 if (screenManager.keyboard.downRepeated(Keys.Right, 3 * KEY_PRESSED_TIME / 100))
                 {
-                    me1.moveRight();
+                    me1.MoveRight();
                 }
             }
         }

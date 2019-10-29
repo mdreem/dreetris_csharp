@@ -19,7 +19,7 @@ namespace Dreetris.Dreetris
             this.board = board;
             this.assetManager = assetManager;
 
-            font = assetManager.getFont("Scoreboard");
+            font = assetManager.GetFont("Scoreboard");
         }
 
         public void update(GameTime gameTime) { }
@@ -27,7 +27,7 @@ namespace Dreetris.Dreetris
         public void draw(SpriteBatch spriteBatch)
         {
             string scoreString = "Score: " + board.GetScore().ToString();
-            string levelString = "Level: " + board.level.ToString();
+            string levelString = "Level: " + board.Level.ToString();
             string lines = "Lines: " + board.clearedLines.ToString();
             
             Color col = new Color(250, 120, 40);

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace Dreetris.Animation
 {
     class KeyframeStraight : Keyframe
     {
-        float velocityScalar = 0;
+        float velocityScalar;
 
         public KeyframeStraight(Vector2 start, Vector2 end, float duration)
         {
@@ -32,7 +29,7 @@ namespace Dreetris.Animation
 
         public override void Reset()
         {
-            _current = start;
+            _current = Start;
         }
 
         public override void Update(GameTime gameTime)
@@ -40,13 +37,13 @@ namespace Dreetris.Animation
             double time_passed = gameTime.ElapsedGameTime.TotalMilliseconds; ;
             _runningTime -= time_passed;
 
-            if (runningTime < 0)
+            if (RunningTime < 0)
             {
-                _current = end;
+                _current = End;
                 return;
             }
 
-            Vector2 diff = end - start;
+            Vector2 diff = End - Start;
             diff.Normalize();
             float distance = velocityScalar * (float)time_passed;
 
@@ -57,8 +54,8 @@ namespace Dreetris.Animation
         {
             List<Vector2> res = new List<Vector2>();
 
-            res.Add(start);
-            res.Add(end);
+            res.Add(Start);
+            res.Add(End);
 
             return res;
         }

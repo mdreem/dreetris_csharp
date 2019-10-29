@@ -1,9 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Dreetris.Animation
 {
@@ -11,7 +9,7 @@ namespace Dreetris.Animation
     {
         public static Texture2D blank;
 
-        public static void initialize(GraphicsDevice gd)
+        public static void Initialize(GraphicsDevice gd)
         {
             blank = new Texture2D(gd, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });

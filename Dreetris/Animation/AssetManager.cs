@@ -1,10 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Linq;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
 
 namespace Dreetris.Animation
 {
@@ -12,7 +12,6 @@ namespace Dreetris.Animation
     {
         ContentManager contentManager;
         private XDocument config;
-
         Dictionary<string, Sprite> sprites = new Dictionary<string, Sprite>();
 
         public AssetManager(ContentManager contentManager)
@@ -21,7 +20,7 @@ namespace Dreetris.Animation
             config = XDocument.Load("Content/Sprites.xml");
         }
 
-        public Sprite getSprite(string name)
+        public Sprite GetSprite(string name)
         {
             if (sprites.ContainsKey(name))
             {
@@ -41,11 +40,11 @@ namespace Dreetris.Animation
                 if (type != null)
                 {
                     if (type.Value.ToLower().Equals("animation"))
-                        sprite = getSpriteAnimationFromData(data);
+                        sprite = GetSpriteAnimationFromData(data);
                 }
                 else
                 {
-                    sprite = getSpriteFromData(data);
+                    sprite = GetSpriteFromData(data);
                 }
                 sprites[name] = sprite;
 
@@ -53,18 +52,18 @@ namespace Dreetris.Animation
             }
         }
 
-        protected Sprite getSpriteFromData(XElement data)
+        protected Sprite GetSpriteFromData(XElement data)
         {
             Sprite sprite = new Sprite();
             string textureName = data.Element("texture").Value;
-            sprite.initialize(contentManager, textureName);
+            sprite.Initialize(contentManager, textureName);
             return sprite;
         }
 
-        protected SpriteAnimation getSpriteAnimationFromData(XElement data)
+        protected SpriteAnimation GetSpriteAnimationFromData(XElement data)
         {
             List<Rectangle> rectangles = new List<Rectangle>();
-            string textureName = data.Element("texture").Value;;
+            string textureName = data.Element("texture").Value; ;
             int fps = int.Parse(data.Element("fps").Value);
 
             foreach (var frame in data.Elements("frame"))
@@ -78,17 +77,17 @@ namespace Dreetris.Animation
             }
 
             SpriteAnimation spriteAnimation = new SpriteAnimation();
-            spriteAnimation.initialize(contentManager, textureName, rectangles.ToArray(), fps, rectangles.Count);
+            spriteAnimation.Initialize(contentManager, textureName, rectangles.ToArray(), fps, rectangles.Count);
 
             return spriteAnimation;
         }
 
-        public SoundEffect getSoundEffect(string name)
+        public SoundEffect GetSoundEffect(string name)
         {
             return contentManager.Load<SoundEffect>(name);
         }
 
-        public SpriteFont getFont(string name)
+        public SpriteFont GetFont(string name)
         {
             return contentManager.Load<SpriteFont>(name);
         }

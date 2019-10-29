@@ -1,17 +1,12 @@
-﻿using Dreetris.Animation;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Dreetris.Screens
 {
     public class MenuEntryText : MenuEntry
     {
         string entry;
-        //Menu.Call callFunction;
         Action callFunction;
 
         Vector2 shadowPosition;
@@ -19,7 +14,7 @@ namespace Dreetris.Screens
         float shadowX = 2f;
         float shadowY = 2f;
 
-        public override Vector2 position
+        public override Vector2 Position
         {
             get { return _position; }
             set
@@ -38,8 +33,6 @@ namespace Dreetris.Screens
             _size = font.MeasureString(entry);
             _size.X += shadowX;
             _size.Y += shadowY;
-
-            //shadowPosition = new Vector2(_position.X + shadowX, _position.Y + shadowY)
         }
 
         public override void call()

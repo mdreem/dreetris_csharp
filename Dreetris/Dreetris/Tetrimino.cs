@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-
+﻿
+using Dreetris.Animation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Dreetris.Animation;
 
 namespace Dreetris
 {
@@ -10,7 +9,7 @@ namespace Dreetris
     {
         #region Shape definitions
 
-        static int[, ,] Ishape = {{{1,0,0,0},
+        static int[,,] Ishape = {{{1,0,0,0},
                                    {1,0,0,0},
                                    {1,0,0,0},
                                    {1,0,0,0}},
@@ -19,7 +18,7 @@ namespace Dreetris
                                    {0,0,0,0},
                                    {0,0,0,0}}};
 
-        static int[, ,] Jshape = {{{0,1,0,0},
+        static int[,,] Jshape = {{{0,1,0,0},
                                     {0,1,0,0},
                                     {1,1,0,0},
                                     {0,0,0,0}},
@@ -36,7 +35,7 @@ namespace Dreetris
                                    {0,0,0,0},
                                    {0,0,0,0}}};
 
-        static int[, ,] Lshape = {{{0,1,0,0},
+        static int[,,] Lshape = {{{0,1,0,0},
                                     {0,1,0,0},
                                     {0,1,1,0},
                                     {0,0,0,0}},
@@ -53,13 +52,13 @@ namespace Dreetris
                                    {1,0,0,0},
                                    {0,0,0,0}}};
 
-        static int[, ,] Oshape = {{{1,1,0,0},
+        static int[,,] Oshape = {{{1,1,0,0},
                                     {1,1,0,0},
                                     {0,0,0,0},
                                     {0,0,0,0}},
                                    };
 
-        static int[, ,] Sshape = {{{0,1,1,0},
+        static int[,,] Sshape = {{{0,1,1,0},
                                     {1,1,0,0},
                                     {0,0,0,0},
                                     {0,0,0,0}},
@@ -68,7 +67,7 @@ namespace Dreetris
                                    {0,0,1,0},
                                    {0,0,0,0}}};
 
-        static int[, ,] Tshape = {{{0,1,0,0},
+        static int[,,] Tshape = {{{0,1,0,0},
                                     {1,1,1,0},
                                     {0,0,0,0},
                                     {0,0,0,0}},
@@ -85,7 +84,7 @@ namespace Dreetris
                                    {0,1,0,0},
                                    {0,0,0,0}}};
 
-        static int[, ,] Zshape = {{{1,1,0,0},
+        static int[,,] Zshape = {{{1,1,0,0},
                                     {0,1,1,0},
                                     {0,0,0,0},
                                     {0,0,0,0}},
@@ -120,22 +119,17 @@ namespace Dreetris
             get { return _type; }
         }
 
-        private Point coordinates; // coordinates on the screen om terms of pixels
-        public Point boardPosition; // coordinates of the board on the screen in terms of pixel
-        public Point position; // position on the board in terms of blocks
+        private Point coordinates;
+        public Point boardPosition;
+        public Point position;
 
         #endregion
 
         #region Constructors
 
-        /// <summary>
-        ///  Handles a Tetrimino
-        /// </summary>
-        /// <param name="contentManager">the content manager for loading content</param>
-        /// <param name="type">the tetrimino type</param>
         public Tetrimino(AssetManager am, Tetrimino.Type type)
         {
-            this.block = am.getSprite("block_" + type.ToString());
+            this.block = am.GetSprite("block_" + type.ToString());
 
             blockWidth = BLOCK_WIDTH;
             blockHeight = BLOCK_HEIGHT;
@@ -179,31 +173,24 @@ namespace Dreetris
 
         #region Public methods
 
-        public void setTransparency(float transparency = 1.0f)
+        public void SetTransparency(float transparency = 1.0f)
         {
             this.transparency = transparency;
         }
 
-        public void scale(float scale = 1.0f)
+        public void Scale(float scale = 1.0f)
         {
             blockWidth = (int)((float)BLOCK_WIDTH * scale);
             blockHeight = (int)((float)BLOCK_HEIGHT * scale);
 
-            block.scale(scale);
+            block.Scale(scale);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
-            // complete Tetromino will be build out of this. Hence the updated state carries over.
-            block.update(gameTime);
+            block.Update(gameTime);
         }
 
-        /// <summary>
-        /// ...
-        /// </summary>
         public void UpdateShape()
         {
             switch (_type)
@@ -234,13 +221,8 @@ namespace Dreetris
             }
         }
 
-        /// <summary>
-        /// Draws the tetrimino
-        /// </summary>
-        /// <param name="spriteBatch">the sprite batch to use</param>
-        public void draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            // origin of the Tetrimino
             coordinates.X = boardPosition.X + blockWidth * position.X;
             coordinates.Y = boardPosition.Y + blockHeight * position.Y;
 
@@ -249,13 +231,12 @@ namespace Dreetris
                 {
                     if (currentShape[i, j] == 1)
                     {
-                        // TODO: maybe it is better to use blockWidth instead of block.width etc.
                         int X = coordinates.X + i * block.height;
                         int Y = coordinates.Y + j * block.width;
 
-                        block.setTransparency(transparency);
+                        block.SetTransparency(transparency);
                         block.position = new Vector2(X, Y);
-                        block.draw(spriteBatch);
+                        block.Draw(spriteBatch);
                     }
                 }
         }
@@ -268,7 +249,6 @@ namespace Dreetris
 
         public void Unflip()
         {
-            // Flip back, but stay at positive values
             flipState = (flipState + numStates - 1) % numStates;
             UpdateShape();
         }
@@ -287,13 +267,11 @@ namespace Dreetris
 
         #region Private methods
 
-        private void SetCurrentShape(int[, ,] shape)
+        private void SetCurrentShape(int[,,] shape)
         {
             for (int i = 0; i < shape.GetLength(1); i++)
                 for (int j = 0; j < shape.GetLength(2); j++)
                 {
-                    //System.Diagnostics.Debug.WriteLine("Flip: " + flip_state.ToString());
-                    // i,j flipped?
                     currentShape[i, j] = shape[flipState, j, i];
                 }
         }

@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace Dreetris.Animation
 {
-    class Keyframe_Bezier : Keyframe
+    class KeyframeBezier : Keyframe
     {
-        float velocityScalar = 0;
+        float velocityScalar;
         List<BezierCurve> curves = new List<BezierCurve>();
 
-        public Keyframe_Bezier(BezierCurve curve, float duration)
+        public KeyframeBezier(BezierCurve curve, float duration)
         {
             curves.Add(curve);
 
             _start = curve.start;
             _end = curve.end;
-            _current = start;
+            _current = Start;
             this.velocityScalar = curve.length / duration;
             this.duration = duration;
             _runningTime = duration;
@@ -34,7 +31,7 @@ namespace Dreetris.Animation
 
         public override void Reset()
         {
-            _current = start;
+            _current = Start;
         }
 
         public override void Update(GameTime gameTime)
@@ -42,9 +39,9 @@ namespace Dreetris.Animation
             double timePassed = gameTime.ElapsedGameTime.TotalMilliseconds; ;
             _runningTime -= timePassed;
 
-            if (runningTime < 0)
+            if (RunningTime < 0)
             {
-                _current = end;
+                _current = End;
                 return;
             }
 
@@ -58,7 +55,7 @@ namespace Dreetris.Animation
         {
             List<Vector2> res = new List<Vector2>();
 
-            foreach(var curve in curves)
+            foreach (var curve in curves)
             {
                 res.AddRange(curve.GetHull());
             }

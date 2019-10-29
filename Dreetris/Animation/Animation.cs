@@ -6,10 +6,10 @@ namespace Dreetris.Animation
     public class KeyframeAnimation
     {
         List<Keyframe> keyframes = new List<Keyframe>();
-        int currentFrameIndex = 0;
-        bool _finished = false;
+        private int currentFrameIndex;
+        bool _finished;
 
-        public Keyframe currentFrame
+        public Keyframe CurrentFrame
         {
             get
             {
@@ -17,32 +17,32 @@ namespace Dreetris.Animation
             }
         }
 
-        public int index
+        public int Index
         {
             get { return currentFrameIndex; }
         }
 
-        public void addKeyframe(Keyframe keyframe)
+        public void AddKeyframe(Keyframe keyframe)
         {
             keyframes.Add(keyframe);
         }
 
-        public int getX()
+        public int GetX()
         {
-            return (int)currentFrame.current.X;
+            return (int)CurrentFrame.Current.X;
         }
 
-        public int getY()
+        public int GetY()
         {
-            return (int)currentFrame.current.Y;
+            return (int)CurrentFrame.Current.Y;
         }
 
         public void Update(GameTime gameTime)
         {
             if (!_finished)
             {
-                currentFrame.Update(gameTime);
-                var time = currentFrame.runningTime;
+                CurrentFrame.Update(gameTime);
+                var time = CurrentFrame.RunningTime;
                 if (time <= 0)
                 {
                     currentFrameIndex++;
@@ -50,11 +50,12 @@ namespace Dreetris.Animation
                     {
                         _finished = true;
                         currentFrameIndex = 0;
-                        currentFrame.Reset();
+                        CurrentFrame.Reset();
                     }
                     else
                     {
-                        currentFrame.Delay(time); //TODO: As long as necessary. Maybe more than one keyframe has to be skipped
+                        //TODO: As long as necessary. Maybe more than one keyframe has to be skipped
+                        CurrentFrame.Delay(time);
                     }
                 }
             }

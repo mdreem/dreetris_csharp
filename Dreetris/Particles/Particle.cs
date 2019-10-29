@@ -1,13 +1,11 @@
 ﻿using Dreetris.Animation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace Dreetris.Particles
 {
     public class Particle
     {
-        //Vector2 position;
         protected Vector2 velocity;
         protected Vector2 acceleration;
 
@@ -20,16 +18,16 @@ namespace Dreetris.Particles
 
         protected Sprite sprite;
         protected ParticleSystem particleSystem;
-        private bool _endOfLife = false;
+        private bool _endOfLife;
 
         public Particle(Sprite sprite, Vector2 velocity, Vector2 acceleration, float timeToLive, ParticleSystem particleSystem)
             : this(sprite, velocity, acceleration, 0.0f, timeToLive, particleSystem)
-        {  }
+        { }
 
         public Particle(Sprite sprite, Vector2 velocity, Vector2 acceleration, float angularVelocity, float timeToLive, ParticleSystem particleSystem)
-            
+
         {
-            this.sprite = sprite; //.Clone();
+            this.sprite = sprite;
             this.velocity = velocity;
             this.acceleration = acceleration;
             this.timeToLive = timeToLive;
@@ -39,7 +37,7 @@ namespace Dreetris.Particles
             this.angularVelocity = angularVelocity;
         }
 
-        public virtual void update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             float circle = MathHelper.Pi * 2;
             float t = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000;
@@ -53,7 +51,7 @@ namespace Dreetris.Particles
 
             sprite.rotation = (sprite.rotation + angularVelocity * t) % circle;
 
-            sprite.setTransparency(1.0f - ttlPercentage);
+            sprite.SetTransparency(1.0f - ttlPercentage);
 
             sprite.position = acceleration * t * t * 0.5f + velocity * t + sprite.position;
             velocity = acceleration * t + velocity;
@@ -61,7 +59,7 @@ namespace Dreetris.Particles
 
         public virtual void draw(SpriteBatch spriteBatch)
         {
-            sprite.draw(spriteBatch);
+            sprite.Draw(spriteBatch);
         }
 
         public bool endOfLife { get { return _endOfLife; } }

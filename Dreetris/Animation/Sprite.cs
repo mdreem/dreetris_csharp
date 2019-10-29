@@ -1,29 +1,26 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace Dreetris.Animation
 {
-    /// <summary>
-    /// Encapsulates all the properties used by SpriteBatch.Draw 
-    /// </summary>
     public class Sprite
     {
         #region fields and properties
 
         protected Texture2D texture;
         public Vector2 position = new Vector2();
-        protected Nullable<Rectangle> sourceRectangle = null;
+        protected Nullable<Rectangle> sourceRectangle;
         protected Color color = Color.White;
         protected Color originalColor = Color.White;
-        public float rotation = 0;
+        public float rotation;
         protected Vector2 origin = new Vector2(0, 0);
         protected Vector2 _scale = new Vector2(1, 1);
         protected Vector2 scale_original = new Vector2(1, 1);
 
         protected SpriteEffects effects = SpriteEffects.None;
-        protected float layerDepth = 0;
+        protected float layerDepth;
 
         protected int _width;
         protected int _height;
@@ -62,42 +59,42 @@ namespace Dreetris.Animation
 
         #region public methods
 
-        public Rectangle getSourceRectangle()
+        public Rectangle GetSourceRectangle()
         {
             if (sourceRectangle != null)
-                return (Rectangle) sourceRectangle;
+                return (Rectangle)sourceRectangle;
             else
                 return texture.Bounds;
         }
 
-        public void setSourceRectangle(Rectangle? sourceRectangle)
+        public void SetSourceRectangle(Rectangle? sourceRectangle)
         {
             this.sourceRectangle = sourceRectangle;
         }
 
-        public void setTransparency(float transparency = 1.0f)
+        public void SetTransparency(float transparency = 1.0f)
         {
             this.transparency = transparency;
             color = originalColor * transparency;
         }
 
-        public virtual void initialize(ContentManager cm, string name)
+        public virtual void Initialize(ContentManager cm, string name)
         {
             texture = cm.Load<Texture2D>(name);
             _height = texture.Bounds.Height;
             _width = texture.Bounds.Width;
         }
 
-        public virtual void scale(float scalefactor = 1.0f)
+        public virtual void Scale(float scalefactor = 1.0f)
         {
             _scale = scale_original * scalefactor;
             _height = (int)(texture.Bounds.Height * scalefactor);
             _width = (int)(texture.Bounds.Width * scalefactor);
         }
 
-        public virtual void update(GameTime gameTime) { }
+        public virtual void Update(GameTime gameTime) { }
 
-        public virtual void draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, sourceRectangle, color, rotation, origin, _scale, effects, layerDepth);
         }
@@ -107,18 +104,17 @@ namespace Dreetris.Animation
             return new Sprite(this);
         }
 
-        // sets the origin of the sprite to its center
-        public void centerCoordinates()
+        public void CenterCoordinates()
         {
             if (!sourceRectangle.HasValue)
             {
-                origin.X = (float) texture.Width / 2;
-                origin.Y = (float) texture.Height / 2;
+                origin.X = (float)texture.Width / 2;
+                origin.Y = (float)texture.Height / 2;
             }
             else
             {
-                origin.X = (float) sourceRectangle.Value.Width / 2;
-                origin.Y = (float) sourceRectangle.Value.Height / 2;
+                origin.X = (float)sourceRectangle.Value.Width / 2;
+                origin.Y = (float)sourceRectangle.Value.Height / 2;
             }
         }
 

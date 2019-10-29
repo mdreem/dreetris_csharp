@@ -1,9 +1,8 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
-
+﻿using Dreetris.Animation;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Dreetris.Animation;
 
 namespace Dreetris.Screens
 {
@@ -17,16 +16,15 @@ namespace Dreetris.Screens
         public TitleScreen(GameObjects gameObjects)
             : base(gameObjects) 
         {
-            this.assetManager = gameObjects.assetManager;
+            this.assetManager = gameObjects.AssetManager;
         }
 
         protected override void LoadContent()
         {
             ContentManager content = Game.Content;
 
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            intro = assetManager.getSprite("intro");
+            intro = assetManager.GetSprite("intro");
 
             base.LoadContent();
         }
@@ -43,7 +41,7 @@ namespace Dreetris.Screens
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            intro.draw(spriteBatch);
+            intro.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -55,7 +53,7 @@ namespace Dreetris.Screens
             {
                 FadeScreen fs = new FadeScreen(gameObjects, FadeScreen.Type.FADE_OUT_POP);
                 fs.Initialize();
-                screenManager.push(fs);
+                screenManager.Push(fs);
                 screenManager.keyboard.LockKey(Keys.Space);
             }
 

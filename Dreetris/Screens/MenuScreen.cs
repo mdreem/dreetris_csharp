@@ -1,9 +1,9 @@
-﻿using Dreetris.Animation;
+﻿using System;
+using Dreetris.Animation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 
 namespace Dreetris.Screens
 {
@@ -19,7 +19,6 @@ namespace Dreetris.Screens
 
         protected SoundEffect move;
 
-        //position of the menu
         protected float originX = 400;
         protected float originY = 120;
 
@@ -31,27 +30,27 @@ namespace Dreetris.Screens
         public MenuScreen(GameObjects gameObjects)
             : base(gameObjects)
         {
-            this.assetManager = gameObjects.assetManager;
+            this.assetManager = gameObjects.AssetManager;
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            font = assetManager.getFont("Font");
+            font = assetManager.GetFont("Font");
 
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });
 
-            pointerLeft = assetManager.getSprite("button");
-            pointerRight = assetManager.getSprite("button");
+            pointerLeft = assetManager.GetSprite("button");
+            pointerRight = assetManager.GetSprite("button");
 
-            pointerLeft.centerCoordinates();
-            pointerRight.centerCoordinates();
+            pointerLeft.CenterCoordinates();
+            pointerRight.CenterCoordinates();
 
             menu = new Menu();
 
-            move = assetManager.getSoundEffect("selection");
+            move = assetManager.GetSoundEffect("selection");
         }
 
-        protected void doNothing()
+        protected void DoNothing()
         {
             Console.WriteLine("doNothing");
         }
@@ -61,8 +60,8 @@ namespace Dreetris.Screens
             screenManager.keyboard.Process(gameTime);
             ProcessKeyboard(gameTime);
 
-            pointerLeft.update(gameTime);
-            pointerRight.update(gameTime);
+            pointerLeft.Update(gameTime);
+            pointerRight.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -71,42 +70,41 @@ namespace Dreetris.Screens
         {
             spriteBatch.Begin();
 
-            //clear screen
             spriteBatch.Draw(blank, new Rectangle(0, 0, 800, 600), Color.Black * 0.75f);
 
-            drawPointer();
-            drawItems();
+            DrawPointer();
+            DrawItems();
 
 
             spriteBatch.End();
         }
 
-        private void drawPointer()
+        private void DrawPointer()
         {
             if (menu.entries.Count == 0) return;
 
-            float menuWidth = menu.getWidth();
-            float itemHeight = menu.entries[menu.getSelected()].size.Y;
+            float menuWidth = menu.GetWidth();
+            float itemHeight = menu.entries[menu.GetSelected()].Size.Y;
 
-            //TODO: genauer, falls Höhen unterschiedlich
+            //TODO: different height. Be more specific
             pointerLeft.position = new Vector2((originX - (menuWidth / 2) * pointerScale),
-                originY + itemHeight * menu.getSelected() + itemHeight / 2);
+                originY + itemHeight * menu.GetSelected() + itemHeight / 2);
             pointerRight.position = new Vector2((originX + (menuWidth / 2) * pointerScale),
-                originY + itemHeight * menu.getSelected() + itemHeight / 2);
+                originY + itemHeight * menu.GetSelected() + itemHeight / 2);
 
-            pointerLeft.draw(spriteBatch);
-            pointerRight.draw(spriteBatch);
+            pointerLeft.Draw(spriteBatch);
+            pointerRight.Draw(spriteBatch);
         }
 
-        private void drawItems()
+        private void DrawItems()
         {
             var tmpOrigin = originY;
             foreach (var e in menu.entries)
             {
-                float width = e.size.X;
-                float height = e.size.Y;
+                float width = e.Size.X;
+                float height = e.Size.Y;
 
-                e.position = new Vector2(originX - width / 2, tmpOrigin);
+                e.Position = new Vector2(originX - width / 2, tmpOrigin);
                 e.draw(spriteBatch);
 
                 tmpOrigin += height;
@@ -117,19 +115,19 @@ namespace Dreetris.Screens
         {
             if (screenManager.keyboard.downRepeated(Keys.Down, 3 * KEY_PRESSED_TIME))
             {
-                menu.nextItem();
+                menu.NextItem();
                 move.Play();
             }
 
             if (screenManager.keyboard.downRepeated(Keys.Up, 3 * KEY_PRESSED_TIME))
             {
-                menu.previousItem();
+                menu.PreviousItem();
                 move.Play();
             }
 
             if (screenManager.keyboard.downRepeated(Keys.Enter, 3 * KEY_PRESSED_TIME))
             {
-                menu.callCurrentItem();
+                menu.CallCurrentItem();
             }
 
             if (screenManager.keyboard.IsDown(Keys.Escape))

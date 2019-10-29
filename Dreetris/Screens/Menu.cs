@@ -1,7 +1,6 @@
-﻿
-using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using System;
 using System.Collections.Generic;
+
 namespace Dreetris.Screens
 {
     public class Menu
@@ -10,26 +9,26 @@ namespace Dreetris.Screens
 
         public List<MenuEntry> entries = new List<MenuEntry>();
 
-        int position = 0;
+        int position;
 
-        public void addItem(MenuEntry entry)
+        public void AddItem(MenuEntry entry)
         {
             entries.Add(entry);
         }
 
-        public void nextItem()
+        public void NextItem()
         {
             position = (position + 1) % entries.Count;
         }
 
-        public void previousItem()
+        public void PreviousItem()
         {
             position--;
             if (position < 0)
                 position = entries.Count - 1;
         }
 
-        public void callCurrentItem()
+        public void CallCurrentItem()
         {
             if (entries.Count != 0)
             {
@@ -37,19 +36,19 @@ namespace Dreetris.Screens
             }
         }
 
-        public float getWidth()
+        public float GetWidth()
         {
             float max = 0;
 
             foreach (var e in entries)
             {
-                max = Math.Max(max, e.size.X);
+                max = Math.Max(max, e.Size.X);
             }
 
             return max;
         }
 
-        public int getSelected()
+        public int GetSelected()
         {
             return position;
         }

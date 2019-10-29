@@ -3,16 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Dreetris.Screens
 {
-    /// <summary>
-    /// This class is used for transitioning between two Screens via a simple fade in or fade out
-    /// </summary>
     public class FadeScreen : Screen
     {
         public enum Type
         {
             FADE_IN,
             FADE_OUT,
-            FADE_OUT_POP    //do not only pop the FadeScreen but also the Screen below it
+            FADE_OUT_POP
         }
 
         Type transitionType;
@@ -20,7 +17,7 @@ namespace Dreetris.Screens
         Rectangle backgroundRectangle;
 
         const int WINDOW_WIDTH = 800;
-        const int WINDOW_HEIGHT = 600; //TODO: Übergeben!
+        const int WINDOW_HEIGHT = 600;
 
         private double fadeDuration = 1500;
 
@@ -31,14 +28,6 @@ namespace Dreetris.Screens
         SpriteBatch spriteBatch;
         private float maxFade;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="game"></param>
-        /// <param name="screenManager"></param>
-        /// <param name="transitionType"></param>
-        /// <param name="maxFade">maximum transparency value for the fade</param>
-        /// <param name="fadeDuration">duration of the transition in milliseconds</param>
         public FadeScreen(GameObjects gameObjects,
                 Type transitionType,
                 float maxFade = 1.0f,
@@ -69,15 +58,13 @@ namespace Dreetris.Screens
             if (transitionDuration > fadeDuration)
             {
                 transitionPercentange = 1.0f;
-                screenManager.pop();
+                screenManager.Pop();
 
-                //pop not only the fade out, but also the screen which we want to fade out of
                 if (transitionType == Type.FADE_OUT_POP)
-                    screenManager.pop();
+                    screenManager.Pop();
             }
             else
             {
-                // compute the portion of the transition that already has passed as a percentage.
                 transitionPercentange = (float)(transitionDuration / fadeDuration);
             }
 

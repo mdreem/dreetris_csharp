@@ -1,10 +1,6 @@
-﻿using Dreetris.Animation;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Dreetris.Screens
 {
@@ -23,13 +19,13 @@ namespace Dreetris.Screens
 
         protected FloatSlider slider;
 
-        public override Vector2 position
+        public override Vector2 Position
         {
             get { return _position; }
             set
             {
                 _position = value;
-                setPositions();
+                SetPositions();
             }
         }
 
@@ -43,11 +39,11 @@ namespace Dreetris.Screens
 
             padding = 20;
 
-            setSize();
-            setPositions();
+            SetSize();
+            SetPositions();
         }
 
-        private void setSize()
+        private void SetSize()
         {
             textSize = font.MeasureString(entry);
             Vector2 sliderSize = slider.size;
@@ -55,7 +51,7 @@ namespace Dreetris.Screens
             _size = new Vector2(textSize.X + shadowX + sliderSize.X + padding, Math.Max(sliderSize.Y, textSize.Y + shadowY));
         }
 
-        private void setPositions()
+        private void SetPositions()
         {
             Vector2 newSliderPosition = new Vector2(
                         _position.X + textSize.X + padding,
@@ -77,7 +73,7 @@ namespace Dreetris.Screens
             spriteBatch.DrawString(font, entry, shadowPosition, Color.Black); //Shadow
             spriteBatch.DrawString(font, entry, _position, col);
 
-            slider.draw(spriteBatch);
+            slider.Draw(spriteBatch);
         }
 
         public override void update(GameTime gameTime)
@@ -85,14 +81,14 @@ namespace Dreetris.Screens
 
         }
 
-        public void moveLeft()
+        public void MoveLeft()
         {
-            slider.moveLeft();
+            slider.MoveLeft();
         }
 
-        public void moveRight()
+        public void MoveRight()
         {
-            slider.moveRight();
+            slider.MoveRight();
         }
     }
 }

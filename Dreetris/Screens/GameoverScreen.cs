@@ -1,9 +1,8 @@
-﻿using Dreetris.Animation;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 
 namespace Dreetris.Screens
 {
@@ -29,7 +28,6 @@ namespace Dreetris.Screens
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });
 
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Font1 = content.Load<SpriteFont>("Font");
 
@@ -48,8 +46,8 @@ namespace Dreetris.Screens
         {
             if (screenManager.keyboard.IsDown(Keys.Space))
             {
-                screenManager.pop();    // pop game over-screen
-                screenManager.pop();    // pop game screen
+                screenManager.Pop(); // pop game over-screen
+                screenManager.Pop(); // pop game screen
 
                 GameScreen gs = new GameScreen(gameObjects);
                 gs.Initialize();
@@ -57,8 +55,8 @@ namespace Dreetris.Screens
                 TitleScreen ts = new TitleScreen(gameObjects);
                 ts.Initialize();
 
-                screenManager.push(gs);
-                screenManager.push(ts);
+                screenManager.Push(gs);
+                screenManager.Push(ts);
 
                 screenManager.keyboard.LockKey(Keys.Space);
             }

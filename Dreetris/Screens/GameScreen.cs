@@ -1,5 +1,4 @@
-﻿using Dreetris.Animation;
-using Dreetris.Dreetris;
+﻿using Dreetris.Dreetris;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,7 +10,7 @@ namespace Dreetris.Screens
     {
         #region fields
         SpriteBatch spriteBatch;
-        
+
         Texture2D backgroundImage;
         Rectangle backgroundRectangle;
 
@@ -41,10 +40,10 @@ namespace Dreetris.Screens
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });
 
-            board = new TetrisBoard(gameObjects.assetManager, screenManager.keyboard, 10, 20, 80, 100);
+            board = new TetrisBoard(gameObjects.AssetManager, screenManager.keyboard, 10, 20, 80, 100);
             board.Initialize();
 
-            score = new ScoreBoard(board, gameObjects.assetManager);
+            score = new ScoreBoard(board, gameObjects.AssetManager);
 
             base.Initialize();
         }
@@ -55,11 +54,11 @@ namespace Dreetris.Screens
             ProcessKeyboard(gameTime);
 
             board.Update(gameTime);
-            if (board.gameOver)
+            if (board.GameOver)
             {
                 GameoverScreen gos = new GameoverScreen(gameObjects, board);
                 gos.Initialize();
-                screenManager.push(gos);
+                screenManager.Push(gos);
             }
             base.Update(gameTime);
         }
@@ -86,10 +85,8 @@ namespace Dreetris.Screens
         {
             ContentManager content = Game.Content;
 
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
-            // load sprites and build draw rectangles
+
             backgroundImage = content.Load<Texture2D>("background");
             backgroundRectangle = new Rectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
@@ -102,7 +99,6 @@ namespace Dreetris.Screens
             {
                 board.FlipTetrimino();
             }
-            //else if so that it is not checked twice. Could flip faster this way
             else if (screenManager.keyboard.downRepeated(Keys.Up, 3 * KEY_PRESSED_TIME))
             {
                 board.FlipTetrimino();
@@ -145,8 +141,8 @@ namespace Dreetris.Screens
             FadeScreen fs = new FadeScreen(gameObjects, FadeScreen.Type.FADE_OUT, 0.75f, 250);
             fs.Initialize();
 
-            screenManager.push(ps);
-            screenManager.push(fs);
+            screenManager.Push(ps);
+            screenManager.Push(fs);
         }
 
         #endregion

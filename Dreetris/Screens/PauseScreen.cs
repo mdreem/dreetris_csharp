@@ -1,5 +1,4 @@
-﻿using Dreetris.Animation;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -15,18 +14,18 @@ namespace Dreetris.Screens
         public PauseScreen(GameObjects gameObjects)
             : base(gameObjects)
         {
-            MenuEntryText me1 = new MenuEntryText(gameObjects, "Resume", unpauseScreen);
-            MenuEntryText me2 = new MenuEntryText(gameObjects, "Options", openOptionsMenu);
-            MenuEntryText me3 = new MenuEntryText(gameObjects, "Restart", restartGame);
+            MenuEntryText me1 = new MenuEntryText(gameObjects, "Resume", UnpauseScreen);
+            MenuEntryText me2 = new MenuEntryText(gameObjects, "Options", OpenOptionsMenu);
+            MenuEntryText me3 = new MenuEntryText(gameObjects, "Restart", RestartGame);
 
-            menu.addItem(me1);
-            menu.addItem(me2);
-            menu.addItem(me3);
+            menu.AddItem(me1);
+            menu.AddItem(me2);
+            menu.AddItem(me3);
 
             originX = 400;
             originY = 200;
 
-            titleFont = assetManager.getFont("TitleFont");
+            titleFont = assetManager.GetFont("TitleFont");
         }
 
         public override void Draw(GameTime gameTime)
@@ -34,7 +33,6 @@ namespace Dreetris.Screens
             if (!isActive)
                 return;
 
-            //draw the menu itself
             base.Draw(gameTime);
 
             spriteBatch.Begin();
@@ -53,33 +51,33 @@ namespace Dreetris.Screens
         {
             if (screenManager.keyboard.downRepeated(Keys.Enter, 3 * KEY_PRESSED_TIME))
             {
-                unpauseScreen();
+                UnpauseScreen();
             }
 
             if (screenManager.keyboard.IsDown(Keys.Escape))
                 Game.Exit();
         }
 
-        private void unpauseScreen()
+        private void UnpauseScreen()
         {
             FadeScreen fs = new FadeScreen(gameObjects, FadeScreen.Type.FADE_IN, 0.75f, 250);
             fs.Initialize();
 
-            screenManager.pop();
-            screenManager.push(fs);
+            screenManager.Pop();
+            screenManager.Push(fs);
         }
 
-        private void openOptionsMenu()
+        private void OpenOptionsMenu()
         {
             OptionsScreen os = new OptionsScreen(gameObjects);
-            screenManager.push(os);
+            screenManager.Push(os);
         }
 
-        private void restartGame()
+        private void RestartGame()
         {
             //Remove alle screens
-            screenManager.pop();
-            screenManager.pop();
+            screenManager.Pop();
+            screenManager.Pop();
 
             FadeScreen fs1 = new FadeScreen(gameObjects, FadeScreen.Type.FADE_OUT);
             fs1.Initialize();
@@ -96,11 +94,11 @@ namespace Dreetris.Screens
             TitleScreen ts = new TitleScreen(gameObjects);
             ts.Initialize();
 
-            screenManager.push(gs);
-            screenManager.push(fs3);
-            screenManager.push(ts);
-            screenManager.push(fs2);
-            screenManager.push(fs1); //TODO: Working?
+            screenManager.Push(gs);
+            screenManager.Push(fs3);
+            screenManager.Push(ts);
+            screenManager.Push(fs2);
+            screenManager.Push(fs1); //TODO: Working?
         }
     }
 }

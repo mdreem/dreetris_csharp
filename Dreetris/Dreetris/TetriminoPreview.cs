@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Dreetris.Animation;
 using Microsoft.Xna.Framework;
-using Dreetris.Animation;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Dreetris
 {
@@ -10,8 +10,6 @@ namespace Dreetris
         Point position;
         AssetManager assetManager;
 
-        // has a copy of all Tetriminos loaded and moves them to the right part
-        // of the screen when draw(...) is called.
         Tetrimino block_I, block_J, block_L, block_O,
                block_S, block_T, block_Z;
 
@@ -26,8 +24,6 @@ namespace Dreetris
 
         protected void LoadContent()
         {
-            // load content and set remainder of draw rectangle
-
             block_I = new Tetrimino(assetManager, Tetrimino.Type.I);
             block_J = new Tetrimino(assetManager, Tetrimino.Type.J);
             block_L = new Tetrimino(assetManager, Tetrimino.Type.L);
@@ -37,7 +33,7 @@ namespace Dreetris
             block_Z = new Tetrimino(assetManager, Tetrimino.Type.Z);
         }
 
-        protected Tetrimino getTetrimino(Tetrimino.Type type)
+        protected Tetrimino GetTetrimino(Tetrimino.Type type)
         {
             switch (type)
             {
@@ -60,48 +56,43 @@ namespace Dreetris
             }
         }
 
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
-            //needed for animating the blocks
-            block_I.update(gameTime);
-            block_J.update(gameTime);
-            block_L.update(gameTime);
-            block_O.update(gameTime);
-            block_S.update(gameTime);
-            block_T.update(gameTime);
-            block_Z.update(gameTime);
+            block_I.Update(gameTime);
+            block_J.Update(gameTime);
+            block_L.Update(gameTime);
+            block_O.Update(gameTime);
+            block_S.Update(gameTime);
+            block_T.Update(gameTime);
+            block_Z.Update(gameTime);
         }
 
-        public void draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            // the next four Tetriminos
-            Tetrimino current = getTetrimino(randomBlocks.GetBlock(0));
-            Tetrimino next1 = getTetrimino(randomBlocks.GetBlock(1));
-            Tetrimino next2 = getTetrimino(randomBlocks.GetBlock(2));
-            Tetrimino next3 = getTetrimino(randomBlocks.GetBlock(3));
+            Tetrimino current = GetTetrimino(randomBlocks.GetBlock(0));
+            Tetrimino next1 = GetTetrimino(randomBlocks.GetBlock(1));
+            Tetrimino next2 = GetTetrimino(randomBlocks.GetBlock(2));
+            Tetrimino next3 = GetTetrimino(randomBlocks.GetBlock(3));
 
             current.boardPosition = position;
 
             current.position.X = 0;
             current.position.Y = 0;
 
-            current.scale();
-            current.draw(spriteBatch);
+            current.Scale();
+            current.Draw(spriteBatch);
 
             Point position2 = new Point();
             position2.X = position.X;
             position2.Y = position.Y + Tetrimino.BLOCK_HEIGHT * 5;
 
-            // relative position of the scaled Tetriminos
             next1.boardPosition = position2;
             next2.boardPosition = position2;
             next3.boardPosition = position2;
 
-            // draw the scaled Tritriminos onto the screen
-
-            next1.scale(0.75f);
-            next2.scale(0.75f);
-            next3.scale(0.75f);
+            next1.Scale(0.75f);
+            next2.Scale(0.75f);
+            next3.Scale(0.75f);
 
             next1.position.X = 0;
             next1.position.Y = 0;
@@ -112,9 +103,9 @@ namespace Dreetris
             next3.position.X = 0;
             next3.position.Y = 10;
 
-            next1.draw(spriteBatch);
-            next2.draw(spriteBatch);
-            next3.draw(spriteBatch);
+            next1.Draw(spriteBatch);
+            next2.Draw(spriteBatch);
+            next3.Draw(spriteBatch);
         }
     }
 }

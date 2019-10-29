@@ -4,10 +4,9 @@ namespace Dreetris
 {
     public class RandomBlocks
     {
-        Random random = new Random();
         Tetrimino.Type[] blocks;
         Tetrimino.Type[] nextBlocks;
-        int currentPos = 0;
+        int currentPos;
 
         public RandomBlocks()
         {
@@ -17,10 +16,6 @@ namespace Dreetris
             Randomize();
         }
 
-        /// <summary>
-        /// Constructs an array with all Tetriminos
-        /// </summary>
-        /// <returns></returns>
         private Tetrimino.Type[] InitBlocks()
         {
             Tetrimino.Type[] array = new Tetrimino.Type[7];
@@ -41,15 +36,11 @@ namespace Dreetris
             nextBlocks = InitBlocks();
         }
 
-        /// <summary>
-        /// Returns a block at position n in the queue.
-        /// <param name="n">position in the queue</param>
-        /// </summary>
         public Tetrimino.Type GetBlock(int n)
         {
             int pos = currentPos + n;
 
-            if(pos >= blocks.Length && pos < blocks.Length + nextBlocks.Length)
+            if (pos >= blocks.Length && pos < blocks.Length + nextBlocks.Length)
             {
                 return nextBlocks[pos - blocks.Length];
             }
@@ -64,9 +55,6 @@ namespace Dreetris
             }
         }
 
-        /// <summary>
-        /// Returns the block that is scheduled to be used next and randomize.
-        /// </summary>
         public Tetrimino.Type GetCurrentBlock()
         {
             Tetrimino.Type block;
@@ -80,9 +68,6 @@ namespace Dreetris
             return block;
         }
 
-        /// <summary>
-        /// Deletes the first block, shifts the others up and creates a new one in the queue.
-        /// </summary>
         public void Randomize()
         {
             InitBag();
@@ -92,6 +77,7 @@ namespace Dreetris
 
         private Tetrimino.Type GetRandomType()
         {
+            Random random = new Random();
             Array values = Enum.GetValues(typeof(Tetrimino.Type));
             values.GetValue(random.Next(values.Length));
             Tetrimino.Type random_type = Tetrimino.Type.None;

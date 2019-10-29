@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace Dreetris.Animation
 {
@@ -11,7 +11,7 @@ namespace Dreetris.Animation
 
         int fps;
         double timePerFrame;
-        private double timeSinceLastStep = 0;
+        private double timeSinceLastStep;
         private int frameCount;
         private int currentFrame;
         private Rectangle[] sheets;
@@ -37,7 +37,7 @@ namespace Dreetris.Animation
 
         #region public methods
 
-        public void initialize(ContentManager cm, string name, Rectangle[] sheets, int fps, int frameCount)
+        public void Initialize(ContentManager cm, string name, Rectangle[] sheets, int fps, int frameCount)
         {
             texture = cm.Load<Texture2D>(name);
             this.fps = fps;
@@ -45,18 +45,18 @@ namespace Dreetris.Animation
             this.frameCount = frameCount;
             this.sheets = sheets;
 
-            setSourceRectangle(0);
+            SetSourceRectangle(0);
 
             Console.WriteLine("Animation.FPS: {0} -> {1}", fps, timePerFrame);
         }
 
-        public void nextFrame()
+        public void NextFrame()
         {
             currentFrame = (currentFrame + 1) % frameCount;
-            setSourceRectangle(currentFrame);
+            SetSourceRectangle(currentFrame);
         }
 
-        private void setSourceRectangle(int frame)
+        private void SetSourceRectangle(int frame)
         {
             sourceRectangle = sheets[frame];
 
@@ -64,14 +64,14 @@ namespace Dreetris.Animation
             _height = sheets[frame].Height;
         }
 
-        public override void scale(float scalefactor = 1.0f)
+        public override void Scale(float scalefactor = 1.0f)
         {
             _scale = scale_original * scalefactor;
             _height = (int)(sheets[currentFrame].Height * scalefactor);
             _width = (int)(sheets[currentFrame].Width * scalefactor);
         }
 
-        public override void update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             double time = gameTime.ElapsedGameTime.TotalMilliseconds;
 
@@ -79,12 +79,12 @@ namespace Dreetris.Animation
 
             if (timeSinceLastStep > timePerFrame)
             {
-                nextFrame();
+                NextFrame();
                 timeSinceLastStep = timeSinceLastStep - timePerFrame;
             }
         }
 
-        public override void draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, sourceRectangle, color, rotation, origin, _scale, effects, layerDepth);
         }

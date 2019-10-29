@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace Dreetris.Animation
@@ -12,25 +9,25 @@ namespace Dreetris.Animation
         protected Vector2 _end;
         protected Vector2 _current;
 
-        protected double duration = 0;
-        protected double _runningTime = 0;
+        protected double duration;
+        protected double _runningTime;
 
-        public Vector2 start
+        public Vector2 Start
         {
             get { return _start; }
         }
 
-        public Vector2 end
+        public Vector2 End
         {
             get { return _end; }
         }
 
-        public Vector2 current
+        public Vector2 Current
         {
             get { return _current; }
         }
 
-        public double runningTime
+        public double RunningTime
         {
             get { return _runningTime; }
         }

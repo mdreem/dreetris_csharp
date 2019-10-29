@@ -1,7 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
 
 namespace Dreetris.Particles
 {
@@ -13,19 +12,19 @@ namespace Dreetris.Particles
         {
             foreach (var particle in particles)
             {
-                particle.update(gameTime);
+                particle.Update(gameTime);
             }
         }
 
-        public virtual void draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
-            foreach(var particle in particles)
+            foreach (var particle in particles)
             {
                 particle.draw(spriteBatch);
             }
         }
 
-        public void remove(Particle particle)
+        public void Remove(Particle particle)
         {
             particles.Remove(particle);
         }
