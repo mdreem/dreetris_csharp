@@ -9,6 +9,10 @@ env:
 install:
   - wget -O MonoGame.pkg "http://teamcity.monogame.net/guestAuth/repository/download/MonoGame_PackageMacAndLinux/.lastSuccessful/MonoGame.pkg?branch_MonoGame=%3Cdefault%3E"
   - sudo installer -pkg "MonoGame.pkg" -target /
+  - sudo mkdir /Library/Frameworks/Mono.framework/External/xbuild/MonoGame/v3.0/Tools/osx
+  - sudo cp /Library/Frameworks/Mono.framework/External/xbuild/MonoGame/v3.0/Tools/ffprobe /Library/Frameworks/Mono.framework/External/xbuild/MonoGame/v3.0/Tools/osx/ffprobe
+  - sudo cp /Library/Frameworks/Mono.framework/External/xbuild/MonoGame/v3.0/Tools/ffmpeg /Library/Frameworks/Mono.framework/External/xbuild/MonoGame/v3.0/Tools/osx/ffmpeg
+  - sudo cp -r /Library/Frameworks/Mono.framework/External/xbuild/MonoGame/v3.0/Tools/osx /Users/travis/build/mdreem/dreetris_csharp/Dreetris/Content/
 
 script:
   - msbuild ./Dreetris/Dreetris.csproj /p:Configuration=Release /v:d /t:Build
