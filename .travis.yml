@@ -16,3 +16,14 @@ install:
 
 script:
   - msbuild ./Dreetris/Dreetris.csproj /p:Configuration=Release /v:d /t:Build
+
+after_success:
+  - zip dreetris -r ./Dreetris/bin/Release/
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_OAUTH_TOKEN
+  file: dreetris.zip
+  skip_cleanup: true
+  on:
+    tags: true
