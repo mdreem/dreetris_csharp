@@ -80,11 +80,11 @@
 /processorParam:TextureFormat=Color
 /build:intro.png
 
-#begin music.wma
-/importer:WmaImporter
+#begin music.ogg
+/importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:music.wma
+/build:music.ogg
 
 #begin Scoreboard.spritefont
 /importer:FontDescriptionImporter
