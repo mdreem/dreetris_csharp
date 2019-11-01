@@ -3,6 +3,7 @@ using Dreetris.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace Dreetris
 {
@@ -60,6 +61,10 @@ namespace Dreetris
 
             blank = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });
+
+            Song song = Content.Load<Song>("music");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(song);
         }
 
         protected override void UnloadContent()
