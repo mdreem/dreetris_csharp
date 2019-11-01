@@ -15,7 +15,7 @@ install:
   - sudo cp -r /Library/Frameworks/Mono.framework/External/xbuild/MonoGame/v3.0/Tools/osx /Users/travis/build/mdreem/dreetris_csharp/Dreetris/Content/
 
 script:
-  - msbuild ./Dreetris/Dreetris.csproj /p:Configuration=Release /v:d /t:Build
+  - ./build.sh
 
 after_success:
   - zip dreetris -r ./Dreetris/bin/Release/
